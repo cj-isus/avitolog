@@ -17,7 +17,13 @@ const navigation = [
     { Component: Component.Darkmode() },
     { Component: Component.ReaderMode() },
   ] }),
-  Component.Explorer({ title: "База знаний", folderDefaultState: "collapsed", folderClickBehavior: "link", useSavedState: true }),
+  Component.Explorer({
+    title: "База знаний", folderDefaultState: "collapsed", folderClickBehavior: "link", useSavedState: true,
+    mapFn: node => {
+      const labels: Record<string, string> = { capabilities: "Возможности", categories: "Направления", projects: "Проекты", research: "Исследования", notes: "Заметки", methodology: "Метод и лицензии", reconciliation: "Сверка исследования", reuse: "Переиспользование" }
+      if (node.isFolder && labels[node.slugSegment]) node.displayName = labels[node.slugSegment]
+    },
+  }),
 ]
 
 export const sharedPageComponents: SharedLayout = {
@@ -29,7 +35,7 @@ export const defaultContentPageLayout: PageLayout = {
   beforeBody: [
     Component.ConditionalRender({ component: Component.Breadcrumbs(), condition: page => !isHome(page) }),
     Component.ArticleTitle(),
-    SourceLink(),
+    Component.ConditionalRender({ component: SourceLink(), condition: page => !isHome(page) }),
     Component.ConditionalRender({ component: KnowledgeHome(), condition: isHome }),
   ],
   left: navigation,
