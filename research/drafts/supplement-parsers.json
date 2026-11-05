@@ -1,0 +1,130 @@
+{
+  "checked_on": "2026-11-05",
+  "scope": "Five candidates supplied in supplementary user research; documentation, repository metadata and selected sources reviewed without installation or runtime",
+  "pinning": "default_branch_at_check",
+  "runtime_verification": "not_run",
+  "metadata_note": "pushed_at denotes repository push time only. Null means not verified. API/raw fetch failures are recorded rather than inferred as repository deletion.",
+  "entries": [
+    {
+      "repo": "Egor01KKK/avito-parser",
+      "url": "https://github.com/Egor01KKK/avito-parser",
+      "kind": "http_parser_monitor_with_agent_jsonl_interface_and_rule_based_goods_price_analysis",
+      "license": "No root project LICENSE found in checked tree; GitHub license=null. Vendored GeekedTest/LICENSE does not establish license for the whole project.",
+      "transport": "Python CLI and curl_cffi HTTP sessions using Avito web/JSON endpoints; not an extension and not attached to a user's existing browser tab",
+      "reads": ["saved Avito search URLs and filters", "catalog listing records", "listing pages for freshness/republication checks", "seller and goods fields used by profiles"],
+      "writes": ["local JSON search configuration and listing state", "JSONL events and alert records", "Excel exports", "Telegram notifications; seller-message sending not identified in reviewed contour"],
+      "scoring": "goods.py groups offers by model and storage parsed from title, excludes regex-marked defects, removes prices outside 0.5 to 1.8 times initial group median, requires at least 3 retained items, calculates median/quartiles and marks cheap offers; no LLM in reviewed scoring module",
+      "parts": ["actual argparse --json flag", "say() emits flushed JSONL event/time objects", "fail() emits FATAL and exits 1", "saved-search scan/watch/table flows", "resumable listing state", "rule-based comparable grouping and median statistics", "main watch loop primes current records before new-listing alerts"],
+      "limits": ["JSON agent interface is verified in source, not live protocol execution", "Goods grouping is tailored to structured phone model/storage titles; bicycle frame, drivetrain, wear and repair normalization not implemented in reviewed module", "No confirmed root reuse license", "HTTP client contains anti-bot/session recovery code and does not reuse manually authenticated browser session", "CalmClient removes proxy environment variables and creates sessions with trust_env=False, so it would not automatically respect environment proxy routing", "Runtime, current Avito compatibility, Windows tests and price accuracy not verified"],
+      "sources": [
+        {"path": "README.md", "url": "https://github.com/Egor01KKK/avito-parser/blob/master/README.md"},
+        {"path": "avito.py", "url": "https://github.com/Egor01KKK/avito-parser/blob/master/avito.py"},
+        {"path": "goods.py", "url": "https://github.com/Egor01KKK/avito-parser/blob/master/goods.py"},
+        {"path": "avito_client.py", "url": "https://github.com/Egor01KKK/avito-parser/blob/master/avito_client.py"},
+        {"path": "repository metadata", "url": "https://api.github.com/repos/Egor01KKK/avito-parser"},
+        {"path": "repository tree", "url": "https://api.github.com/repos/Egor01KKK/avito-parser/git/trees/HEAD?recursive=1"}
+      ],
+      "review_level": "selected_source_review",
+      "checked_on": "2026-11-05",
+      "runtime_verification": "not_run",
+      "pinning": "default_branch_at_check",
+      "pushed_at": "2026-10-07T07:55:17Z"
+    },
+    {
+      "repo": "xailiry/avito-parser-sdk",
+      "url": "https://github.com/xailiry/avito-parser-sdk",
+      "kind": "standalone_async_browser_parser_template",
+      "license": "No LICENSE file or explicit license statement found in reviewed README and tree; GitHub license=null",
+      "transport": "Python asyncio and Playwright Chromium; BeautifulSoup parses rendered HTML; one launched browser/context/page reused within the parser object's lifetime",
+      "reads": ["first search-results page for query and city", "listing description and parameter fields", "seller name/rating fields and image URLs per AvitoItem model and fetch_details"],
+      "writes": ["in-memory AvitoItem objects; no account mutations identified in reviewed files"],
+      "scoring": "None identified; README calls it a starting point for analysis systems rather than an implemented market-price estimator",
+      "parts": ["search()/fetch_details() separation", "AvitoItem dataclass", "city/price helper interface", "explicit browser start/stop lifecycle"],
+      "limits": ["README persistent browser means runtime object reuse; source uses chromium.launch plus new_context, not launch_persistent_context, userDataDir, CDP attach or saved storage state", "Not a browser extension and not an adapter to an already authenticated tab", "No pagination loop identified in reviewed search()", "No deal/condition scoring or seller messaging identified", "Reuse license unconfirmed", "No runtime/current selector verification"],
+      "sources": [
+        {"path": "README.md", "url": "https://github.com/xailiry/avito-parser-sdk/blob/main/README.md"},
+        {"path": "avito_parser/core.py", "url": "https://github.com/xailiry/avito-parser-sdk/blob/main/avito_parser/core.py"},
+        {"path": "avito_parser/models.py", "url": "https://github.com/xailiry/avito-parser-sdk/blob/main/avito_parser/models.py"},
+        {"path": "repository metadata", "url": "https://api.github.com/repos/xailiry/avito-parser-sdk"},
+        {"path": "repository tree", "url": "https://api.github.com/repos/xailiry/avito-parser-sdk/git/trees/HEAD?recursive=1"}
+      ],
+      "review_level": "selected_source_review",
+      "checked_on": "2026-11-05",
+      "runtime_verification": "not_run",
+      "pinning": "default_branch_at_check",
+      "pushed_at": "2026-05-05T09:09:41Z"
+    },
+    {
+      "repo": "sc0urged/avito_parser",
+      "url": "https://github.com/sc0urged/avito_parser",
+      "kind": "telegram_new_listing_monitor",
+      "license": "MIT License stated in README, but no separate LICENSE file in checked tree; GitHub license=null",
+      "transport": "Python Telegram/aiogram monitor; README specifies Playwright browser, selected parser uses BeautifulSoup on browser-supplied HTML",
+      "reads": ["search result title, listing date, price, URL and image URL", "per-user tracked search links"],
+      "writes": ["Telegram text/photo notifications", "in-memory seen URL sets and tracked links; no seller/account messages identified"],
+      "scoring": "No price normalization, condition scoring or LLM use identified in reviewed parser/tracker",
+      "parts": ["per-chat tracking state", "HTML extraction with multiple selectors", "deduplication by listing URL", "photo notification with text fallback", "retry loop for page reads"],
+      "limits": ["Dedup state is held in Python dictionaries and replaced with current result URLs, so durable history is not established", "README clone URL and author refer to typewriter9000; relationship/provenance not investigated", "Runtime and current selector compatibility not verified", "License grant is a README statement only", "Not an extension or valuation assistant"],
+      "sources": [
+        {"path": "README.md", "url": "https://github.com/sc0urged/avito_parser/blob/main/README.md"},
+        {"path": "services/parser.py", "url": "https://github.com/sc0urged/avito_parser/blob/main/services/parser.py"},
+        {"path": "services/tracker.py", "url": "https://github.com/sc0urged/avito_parser/blob/main/services/tracker.py"},
+        {"path": "repository metadata", "url": "https://api.github.com/repos/sc0urged/avito_parser"},
+        {"path": "repository tree", "url": "https://api.github.com/repos/sc0urged/avito_parser/git/trees/HEAD?recursive=1"}
+      ],
+      "review_level": "selected_source_review",
+      "checked_on": "2026-11-05",
+      "runtime_verification": "not_run",
+      "pinning": "default_branch_at_check",
+      "pushed_at": "2024-12-09T19:07:19Z"
+    },
+    {
+      "repo": "Mak-os-sourse/AvScan",
+      "url": "https://github.com/Mak-os-sourse/AvScan",
+      "kind": "queued_multiuser_telegram_parser",
+      "license": "GPL-3.0 LICENSE file reviewed; only versus or-later not established",
+      "transport": "Python aiogram bot with PostgreSQL/SQLAlchemy, Redis and Taskiq; README specifies Playwright/stealth and BeautifulSoup; scraper uses SiteManager to load pages",
+      "reads": ["paginated Avito search result cards scoped to catalog-serp", "product name, price, snippet, image and URL", "queued scheduled parse tasks"],
+      "writes": ["database task state", "Redis queue state", "Telegram document tasks; seller account mutations not identified"],
+      "scoring": "No deal valuation or LLM analysis identified in reviewed parser/task code",
+      "parts": ["queue-oriented parsing", "separate page loading and HTML parser", "scheduled interval task bookkeeping", "catalog-serp scoping", "PostgreSQL/Redis/Taskiq integration"],
+      "limits": ["Source-level readiness concern: ParserTask.parse calls _update_task with products=products, while the reviewed _update_task signature accepts only session and task_queue; not executed to reproduce", "README identifies priority queues but exact priority algorithm not reviewed", "Not an extension or authenticated-tab adapter", "Current Avito compatibility not checked", "Metadata request timed out; repository push time remains unknown"],
+      "sources": [
+        {"path": "README.md", "url": "https://github.com/Mak-os-sourse/AvScan/blob/main/README.md"},
+        {"path": "LICENSE", "url": "https://github.com/Mak-os-sourse/AvScan/blob/main/LICENSE"},
+        {"path": "src/app/services/parser/scraper.py", "url": "https://github.com/Mak-os-sourse/AvScan/blob/main/src/app/services/parser/scraper.py"},
+        {"path": "src/app/services/parser/parser.py", "url": "https://github.com/Mak-os-sourse/AvScan/blob/main/src/app/services/parser/parser.py"},
+        {"path": "src/app/tasks/parser.py", "url": "https://github.com/Mak-os-sourse/AvScan/blob/main/src/app/tasks/parser.py"},
+        {"path": "repository tree", "url": "https://api.github.com/repos/Mak-os-sourse/AvScan/git/trees/HEAD?recursive=1"}
+      ],
+      "review_level": "selected_source_review",
+      "checked_on": "2026-11-05",
+      "runtime_verification": "not_run",
+      "pinning": "default_branch_at_check",
+      "pushed_at": null
+    },
+    {
+      "repo": "6oT9lpa/parser-avito",
+      "url": "https://github.com/6oT9lpa/parser-avito",
+      "kind": "unverified_parser_candidate_source_unavailable",
+      "license": "Unknown; license/source could not be retrieved",
+      "transport": "Unknown",
+      "reads": ["Unknown"],
+      "writes": ["Unknown"],
+      "scoring": "Unknown",
+      "parts": ["Indexed GitHub repository page lists an avito_parser directory, README.md, articles.json and requirements.txt; contents not verified"],
+      "limits": ["GitHub search/open index shows a repository snapshot but live REST metadata returned 404", "Raw main/README.md and GitHub README blob returned 404", "No selected source, README content or LICENSE reviewed", "Current public availability and implementation claims remain unverified; reason for 404 unknown"],
+      "sources": [
+        {"path": "indexed repository page", "url": "https://github.com/6oT9lpa/parser-avito"},
+        {"path": "repository metadata attempt returned 404", "url": "https://api.github.com/repos/6oT9lpa/parser-avito"},
+        {"path": "README attempt returned 404", "url": "https://github.com/6oT9lpa/parser-avito/blob/main/README.md"}
+      ],
+      "review_level": "repository_index_only_source_unavailable",
+      "checked_on": "2026-11-05",
+      "runtime_verification": "not_run",
+      "pinning": "source_unavailable",
+      "pushed_at": null
+    }
+  ],
+  "adjacent_entries": []
+}

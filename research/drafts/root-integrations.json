@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-11-05",
+  "entries": [
+    {
+      "repo": "ilyautov/marketplaces-mcp-ru",
+      "kind": "MCP официальных seller API",
+      "license": "MIT, LICENSE прочитан",
+      "transport": "Сторонний MCP через HTTP к официальным API кабинетов продавцов; Avito использует api.avito.ru и API credentials.",
+      "reads": "В avito_mcp/endpoints.yaml описаны 64 операции: свои объявления, чаты, сообщения, статистика и другие account-scoped методы.",
+      "writes": "Отправка в существующий chat_id, операции объявлений и продвижения. core/safety.py требует confirm_write для write, два флага для destructive.",
+      "scoring": "Оценщика справедливой цены покупательских объявлений не обнаружено в проверенном контуре.",
+      "parts": "Schema-driven каталог endpoint, единый клиент, классификация read/write/destructive и проверка флагов до HTTP.",
+      "limits": "Это сторонний клиент официального API, а не официальный SDK Avito и не чтение пользовательской вкладки. Наличие sendMessage не даёт произвольный поиск чужих объявлений. Safety-флаги не являются связанным с текстом одноразовым разрешением.",
+      "deps": "Python/MCP; точная совместимость версий не проверялась.",
+      "claims": "README заявляет MCP для кабинетов WB/Ozon/Яндекс Маркета/Avito. Число64 получено подсчётом operation_id в Avito YAML, не проверкой64сетевых вызовов.",
+      "head_sha": "a633bb802008c9fa42cbdda19646102d766596c1",
+      "head_commit_date_utc": "2026-10-07T09:36:42Z",
+      "evidence": [
+        "avito_mcp/endpoints.yaml",
+        "core/safety.py",
+        "LICENSE"
+      ],
+      "review_level": "selected_source_review",
+      "sources": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/ilyautov/marketplaces-mcp-ru/blob/a633bb802008c9fa42cbdda19646102d766596c1/README.md"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://github.com/ilyautov/marketplaces-mcp-ru/blob/a633bb802008c9fa42cbdda19646102d766596c1/LICENSE"
+        },
+        {
+          "path": "avito_mcp/endpoints.yaml",
+          "url": "https://github.com/ilyautov/marketplaces-mcp-ru/blob/a633bb802008c9fa42cbdda19646102d766596c1/avito_mcp/endpoints.yaml"
+        },
+        {
+          "path": "core/safety.py",
+          "url": "https://github.com/ilyautov/marketplaces-mcp-ru/blob/a633bb802008c9fa42cbdda19646102d766596c1/core/safety.py"
+        }
+      ],
+      "url": "https://github.com/ilyautov/marketplaces-mcp-ru",
+      "default_branch": "main",
+      "archived": false,
+      "github_detected_license": "MIT",
+      "pushed_at": "2026-11-01T03:45:05Z",
+      "checked_on": "2026-11-05",
+      "runtime_verification": "not_run",
+      "metadata_source": "https://api.github.com/repos/ilyautov/marketplaces-mcp-ru",
+      "commit_source": "https://api.github.com/repos/ilyautov/marketplaces-mcp-ru/commits?per_page=1",
+      "source_pinning": "commit_sha"
+    },
+    {
+      "repo": "prog-time/tg-support-bot",
+      "kind": "Поддержка и диалоги продавца",
+      "license": "MIT, LICENSE прочитан",
+      "transport": "Laravel/PHP; модуль Avito обращается к официальному Messenger API, OAuth2 client_credentials; Telegram используется как интерфейс менеджеров.",
+      "reads": "Входящие диалоги поддержки; README описывает Avito webhook и перенос общения в Telegram. Полный inbound pipeline не аудирован.",
+      "writes": "В AvitoMethods.php есть отправка текста в существующий chat_id, подписка/отписка webhook; accessToken кэширует OAuth token.",
+      "scoring": "Рыночного оценщика нет; README описывает AI ответы поддержки при выбранном Telegram group интерфейсе.",
+      "parts": "Модульный transport, единый интерфейс менеджера, изоляция Avito API методов и менеджерских сообщений.",
+      "limits": "Seller-side support, не покупательский поиск или автономный торг. README и исходник требуют сверять Messenger endpoint с актуальной спецификацией; runtime не проверен. Для Avito в README v1 ограничен текстовыми сообщениями.",
+      "deps": "PHP/Laravel, Telegram; точные версии и развёртывание не проверялись.",
+      "claims": "README описывает многоканальную поддержку и optional AI; наличие Avito transport проверено по AvitoMethods.php.",
+      "head_sha": "e6ee069e0aa2ebad29a3fb5b28f6e94d055a2177",
+      "head_commit_date_utc": "2026-11-01T20:16:46Z",
+      "evidence": [
+        "app/Modules/Avito/Api/AvitoMethods.php",
+        "LICENSE"
+      ],
+      "review_level": "selected_source_review",
+      "sources": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/prog-time/tg-support-bot/blob/e6ee069e0aa2ebad29a3fb5b28f6e94d055a2177/README.md"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://github.com/prog-time/tg-support-bot/blob/e6ee069e0aa2ebad29a3fb5b28f6e94d055a2177/LICENSE"
+        },
+        {
+          "path": "app/Modules/Avito/Api/AvitoMethods.php",
+          "url": "https://github.com/prog-time/tg-support-bot/blob/e6ee069e0aa2ebad29a3fb5b28f6e94d055a2177/app/Modules/Avito/Api/AvitoMethods.php"
+        }
+      ],
+      "url": "https://github.com/prog-time/tg-support-bot",
+      "default_branch": "main",
+      "archived": false,
+      "github_detected_license": "MIT",
+      "pushed_at": "2026-11-01T21:17:40Z",
+      "checked_on": "2026-11-05",
+      "runtime_verification": "not_run",
+      "metadata_source": "https://api.github.com/repos/prog-time/tg-support-bot",
+      "commit_source": "https://api.github.com/repos/prog-time/tg-support-bot/commits?per_page=1",
+      "source_pinning": "commit_sha"
+    }
+  ],
+  "adjacent_entries": [
+    {
+      "repo": "Artem-229/avito-queue-dreamteam",
+      "url": "https://github.com/Artem-229/avito-queue-dreamteam",
+      "kind": "Учебный Avito Start case",
+      "review_level": "readme_review",
+      "license": "GitHub license=null; файл LICENSE не проверялся",
+      "checked_on": "2026-11-05",
+      "runtime_verification": "not_run",
+      "parts": "Учебная очередь дефицитных товаров; README описывает pgvector/GigaChat для рекомендаций альтернатив.",
+      "limits": "Собственный сервис с mock данными, а не интеграция с реальным Avito. По README текстовые AI-рекомендации доступны через Vite dev plugin, не production static.",
+      "sources": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/Artem-229/avito-queue-dreamteam/blob/main/README.md"
+        }
+      ],
+      "source_pinning": "default_branch_at_check"
+    }
+  ]
+}

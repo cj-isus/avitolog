@@ -1,0 +1,9 @@
+.artifacts/
+node_modules/
+knowledge-site/runtime/node_modules/
+avito-negotiations.json
+evidence/
+.env
+.env.*
+!.env.example
+*.log

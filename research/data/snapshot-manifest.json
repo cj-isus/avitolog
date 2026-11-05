@@ -1,0 +1,28 @@
+{
+  "snapshot_id": "github-avito-search-discovered-2026-11-05-1811",
+  "sealed_at_utc": "2026-11-05T12:01:49.9407368Z",
+  "record_count": 1811,
+  "meaning": "Search-discovered metadata snapshot only. Curated evidence can contain additional repositories separately. Do not append curated records to this snapshot.",
+  "files": [
+    {
+      "file": "github-repositories.json",
+      "sha256": "92c97822004ebd056615321d4cde3354aff9b9becb37ea524d11191b5f7ddaa9",
+      "bytes": 2068843
+    },
+    {
+      "file": "github-repositories.csv",
+      "sha256": "bc29f3e3ce850821d7c9ad5687adbdadc739b7dbf90781fa221751338ed0149e",
+      "bytes": 603485
+    },
+    {
+      "file": "search-coverage.json",
+      "sha256": "449027e374ffa9eabb1ebe9d4e27eac9d2fee932980570fbfdcc953451d6ec7e",
+      "bytes": 13669
+    },
+    {
+      "file": "inventory-validation.json",
+      "sha256": "570a15ed115f6d19a693e76248598635e6f1fc06ee8bc2d52dabe9bc86e7eb5b",
+      "bytes": 1661
+    }
+  ]
+}

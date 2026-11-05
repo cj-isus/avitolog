@@ -1,0 +1,235 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-11-05",
+  "runtime_verification": "not_run",
+  "scope": "Five candidates supplied by an external research report; selected primary-source review only.",
+  "method": "GitHub connector: metadata, latest default-branch commit, tree, pinned README/LICENSE and selected source files. No installation, execution, account access or Avito requests.",
+  "entries": [
+    {
+      "repo": "elchin92/avito-mcp",
+      "kind": "MCP поверх официальных Avito API для аккаунта продавца",
+      "license": "MIT; полный LICENSE прочитан",
+      "license_status": "permissive_license_file_verified",
+      "transport": "Node/TypeScript MCP; HTTP к официальному API с OAuth/Bearer; README описывает stdio и optional Streamable HTTP, не браузерную сессию.",
+      "reads": "В messenger.ts подтверждены чтение чатов, истории, голосовых сообщений, webhook subscriptions; остальные домены видны в дереве, вся заявленная поверхность не пересчитывалась.",
+      "writes": "В исходниках Messenger подтверждены отправка текста/изображений, удаление, read mark, blacklist и управление webhooks. tool-factory содержит dryRun, pending confirmation и idempotency обработку.",
+      "scoring": "Рыночный скоринг товаров и стратегия покупательского торга в просмотренных файлах отсутствуют.",
+      "parts": "MCP описание account-инструментов, preview/confirmation/idempotency слой и разделение чтения/изменений; MIT.",
+      "limits": "Нужны официальные credentials и полномочия аккаунта. Заявление README о 148 инструментах/18 API целиком не верифицировано пересчётом. Две agent-вызова confirmation сами не доказывают человеческое одобрение; это прямо признаёт README. SDK/API совместимость и обработка всех retries не испытаны.",
+      "review_level": "selected_source_review",
+      "url": "https://github.com/elchin92/avito-mcp",
+      "checked_on": "2026-11-05",
+      "runtime_verification": "not_run",
+      "head_sha": "047b21e6b787c88313255b86e44279f6eb5d1de0",
+      "head_commit_date_utc": "2026-09-07T14:50:47Z",
+      "archived": false,
+      "github_detected_license": "MIT",
+      "sources": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/elchin92/avito-mcp/blob/047b21e6b787c88313255b86e44279f6eb5d1de0/README.md"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://github.com/elchin92/avito-mcp/blob/047b21e6b787c88313255b86e44279f6eb5d1de0/LICENSE"
+        },
+        {
+          "path": "package.json",
+          "url": "https://github.com/elchin92/avito-mcp/blob/047b21e6b787c88313255b86e44279f6eb5d1de0/package.json"
+        },
+        {
+          "path": "src/domains/messenger.ts",
+          "url": "https://github.com/elchin92/avito-mcp/blob/047b21e6b787c88313255b86e44279f6eb5d1de0/src/domains/messenger.ts"
+        },
+        {
+          "path": "src/core/tool-factory.ts",
+          "url": "https://github.com/elchin92/avito-mcp/blob/047b21e6b787c88313255b86e44279f6eb5d1de0/src/core/tool-factory.ts"
+        },
+        {
+          "path": "src/core/client.ts",
+          "url": "https://github.com/elchin92/avito-mcp/blob/047b21e6b787c88313255b86e44279f6eb5d1de0/src/core/client.ts"
+        }
+      ]
+    },
+    {
+      "repo": "MissiaL/avito-api",
+      "kind": "Agent Skill и локальная база официальных API-схем",
+      "license": "Смешанный режим: оригинальные scripts/SKILL/README — MIT; bundled OpenAPI и исходные guides Avito исключены из MIT и принадлежат Avito",
+      "license_status": "mixed_original_mit_third_party_materials",
+      "transport": "lookup_endpoint.py читает локальный OpenAPI JSON; get_token.py делает urllib POST к api.avito.ru/token. Это документационный skill с CLI, не готовый MCP/SDK и не браузерный парсер.",
+      "reads": "Локальный search/show/tags по схеме; references документируют Business API, но live данные объявлений эти просмотренные CLI не собирают.",
+      "writes": "OAuth Client Credentials token request в helper; произвольные операции аккаунта предполагают отдельный HTTP-клиент и разрешения пользователя.",
+      "scoring": "Оценки выгодности товара и переговорной логики нет.",
+      "parts": "CLI для компактного поиска endpoint/security/schema, provenance/date notes, helper получения токена; оригинальные части MIT.",
+      "limits": "README/source notes датируют snapshot 03.10.2026; refresh 18.10 не состоялся, свежесть на сегодня не установлена. Нельзя автоматически перелицензировать все references под MIT; официальный API доступ не появляется от установки skill. Количество endpoint из README независимо не пересчитано.",
+      "review_level": "selected_source_review",
+      "url": "https://github.com/MissiaL/avito-api",
+      "checked_on": "2026-11-05",
+      "runtime_verification": "not_run",
+      "head_sha": "9dac805f6887c2a21fba7a7c71e4ca6ece8d0bbc",
+      "head_commit_date_utc": "2026-10-18T08:23:40Z",
+      "archived": false,
+      "github_detected_license": "NOASSERTION",
+      "sources": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/MissiaL/avito-api/blob/9dac805f6887c2a21fba7a7c71e4ca6ece8d0bbc/README.md"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://github.com/MissiaL/avito-api/blob/9dac805f6887c2a21fba7a7c71e4ca6ece8d0bbc/LICENSE"
+        },
+        {
+          "path": "scripts/lookup_endpoint.py",
+          "url": "https://github.com/MissiaL/avito-api/blob/9dac805f6887c2a21fba7a7c71e4ca6ece8d0bbc/scripts/lookup_endpoint.py"
+        },
+        {
+          "path": "scripts/get_token.py",
+          "url": "https://github.com/MissiaL/avito-api/blob/9dac805f6887c2a21fba7a7c71e4ca6ece8d0bbc/scripts/get_token.py"
+        },
+        {
+          "path": "references/sources.md",
+          "url": "https://github.com/MissiaL/avito-api/blob/9dac805f6887c2a21fba7a7c71e4ca6ece8d0bbc/references/sources.md"
+        }
+      ]
+    },
+    {
+      "repo": "jabukaservice/avito-mcp",
+      "kind": "Компактный Python MCP официальных Messenger/Items API",
+      "license": "MIT заявлена в README; отдельный LICENSE в дереве не найден, GitHub license=null",
+      "license_status": "readme_declaration_only",
+      "transport": "Python FastMCP + httpx к api.avito.ru с OAuth credentials; поддерживает два аккаунта, rate limiting/cache. Не browser/current-tab transport.",
+      "reads": "Чаты, сообщения, свои items, item details, account profiles; 11 @mcp.tool действительно присутствуют в avito_mcp.py.",
+      "writes": "send_message напрямую делает POST; отдельные tools mark-read, subscribe/unsubscribe webhook, blacklist. Guarded preview/confirmation в просмотренном send handler отсутствует.",
+      "scoring": "Товарного valuation и buyer поиска по всему каталогу не найдено.",
+      "parts": "Небольшой reference multi-account orchestration и MCP Pydantic inputs.",
+      "limits": "README MIT declaration не равнозначна проверенному тексту LICENSE; условия перед распространением стоит уточнить. Нужны Avito API credentials. README утверждения о бесплатности чтения/доступности отправки не проверялись. В коде есть opt-out TLS verification AVITO_SSL_VERIFY=false; это не настройка, которую переносим в готовую интеграцию.",
+      "review_level": "selected_source_review",
+      "url": "https://github.com/jabukaservice/avito-mcp",
+      "checked_on": "2026-11-05",
+      "runtime_verification": "not_run",
+      "head_sha": "4ca361dd2f1ba58381634f1ac8f5ea99a3a6d35d",
+      "head_commit_date_utc": "2026-04-10T02:09:27Z",
+      "archived": false,
+      "github_detected_license": null,
+      "sources": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/jabukaservice/avito-mcp/blob/4ca361dd2f1ba58381634f1ac8f5ea99a3a6d35d/README.md"
+        },
+        {
+          "path": "requirements.txt",
+          "url": "https://github.com/jabukaservice/avito-mcp/blob/4ca361dd2f1ba58381634f1ac8f5ea99a3a6d35d/requirements.txt"
+        },
+        {
+          "path": "avito_mcp.py",
+          "url": "https://github.com/jabukaservice/avito-mcp/blob/4ca361dd2f1ba58381634f1ac8f5ea99a3a6d35d/avito_mcp.py"
+        }
+      ]
+    },
+    {
+      "repo": "ikermy/air_avito",
+      "kind": "Go сервис AI-интеграции Avito Messenger",
+      "license": "MIT; полный LICENSE прочитан",
+      "license_status": "permissive_license_file_verified",
+      "transport": "Go HTTP REST/OAuth/webhooks к Avito; Fiber HTTP service, MySQL/Redis, внешние AiR orchestrator/common/CRM/operator компоненты. Не браузерный parser.",
+      "reads": "OAuth token/account identity; чаты и сообщения; обработка incoming webhook и восстановление клиентов.",
+      "writes": "В avito.go подтверждены SendTextMessage/SendImageMessage/MarkChatAsRead; oauth.go содержит subscription management; ответы идут через внешний AiR pipeline.",
+      "scoring": "Ответы AI-router/CRM, но market-price valuation и выгодность объявлений не подтверждены.",
+      "parts": "Messenger transport/OAuth lifecycle, webhook routing, операторский режим и метрики — при готовности развернуть зависимые сервисы.",
+      "limits": "README обещание 'все пользовательские данные защищены от администрации' не подтверждено. repository.go шифрует tokenJSON только при nonzero MasterKey; zero-key ветка оставляет JSON, а helpers.go допускает zero-key при ошибке получения. Достижимость опасной ветки и безопасность всей системы отдельно не аудировались. Go.mod требует внешнюю air-common; криптореализацию и инфраструктуру не проверяли.",
+      "review_level": "selected_source_review",
+      "url": "https://github.com/ikermy/air_avito",
+      "checked_on": "2026-11-05",
+      "runtime_verification": "not_run",
+      "head_sha": "69e3e6269e9dc24e2003e23931204a3ed83bc5d6",
+      "head_commit_date_utc": "2026-09-24T19:42:45Z",
+      "archived": false,
+      "github_detected_license": "MIT",
+      "sources": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/ikermy/air_avito/blob/69e3e6269e9dc24e2003e23931204a3ed83bc5d6/README.md"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://github.com/ikermy/air_avito/blob/69e3e6269e9dc24e2003e23931204a3ed83bc5d6/LICENSE"
+        },
+        {
+          "path": "go.mod",
+          "url": "https://github.com/ikermy/air_avito/blob/69e3e6269e9dc24e2003e23931204a3ed83bc5d6/go.mod"
+        },
+        {
+          "path": "internal/avito/avito.go",
+          "url": "https://github.com/ikermy/air_avito/blob/69e3e6269e9dc24e2003e23931204a3ed83bc5d6/internal/avito/avito.go"
+        },
+        {
+          "path": "internal/avito/oauth.go",
+          "url": "https://github.com/ikermy/air_avito/blob/69e3e6269e9dc24e2003e23931204a3ed83bc5d6/internal/avito/oauth.go"
+        },
+        {
+          "path": "internal/repository/mysql/repository.go",
+          "url": "https://github.com/ikermy/air_avito/blob/69e3e6269e9dc24e2003e23931204a3ed83bc5d6/internal/repository/mysql/repository.go"
+        },
+        {
+          "path": "internal/avito/helpers.go",
+          "url": "https://github.com/ikermy/air_avito/blob/69e3e6269e9dc24e2003e23931204a3ed83bc5d6/internal/avito/helpers.go"
+        }
+      ]
+    },
+    {
+      "repo": "alex-polezhaev/myalert-case",
+      "kind": "Seller notification SaaS showcase: Avito→Telegram и автоответы",
+      "license": "MIT; полный LICENSE прочитан",
+      "license_status": "permissive_license_file_verified",
+      "transport": "Официальные Avito webhook/OAuth/REST; Node/Express сервисы, Mongo task queue, Telegram, отдельный Python sentiment HTTP service; React UI.",
+      "reads": "webhookController принимает события и сохраняет chats/messages; formatWebHMessage вызывает mood detection для текста; Python MessageMood использует Dostoevsky/FastText.",
+      "writes": "replyController формирует задачи автоответа с business-hours/marks; TaskManager вызывает Avito send_message; messageController отправляет POST на официальный Messenger endpoint. Telegram alerts предусмотрены dispatcher.",
+      "scoring": "Sentiment сообщений, не рыночная оценка цены/состояния товара и не переговорный агент покупателя.",
+      "parts": "Понятный пример webhook→детектор→Mongo task→доставка, правила first/lost message, хранение готового mood, seller UX.",
+      "limits": "README live-status — утверждение автора, нами не подтверждено. В public snapshot getMessageDataController возвращает пустой массив: часть кода удалена для showcase. Гарантия exactly-once маркировкой правил не доказана транзакционной проверкой; Conductor/TaskManager используют частые loops. Нужны отдельные credentials/модельные веса/инфраструктура.",
+      "review_level": "selected_source_review",
+      "url": "https://github.com/alex-polezhaev/myalert-case",
+      "checked_on": "2026-11-05",
+      "runtime_verification": "not_run",
+      "head_sha": "f60c2acbf930bbecab14777c86dc7012958d540a",
+      "head_commit_date_utc": "2026-06-26T22:22:35Z",
+      "archived": false,
+      "github_detected_license": "MIT",
+      "sources": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/alex-polezhaev/myalert-case/blob/f60c2acbf930bbecab14777c86dc7012958d540a/README.md"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://github.com/alex-polezhaev/myalert-case/blob/f60c2acbf930bbecab14777c86dc7012958d540a/LICENSE"
+        },
+        {
+          "path": "backend/Avito/server/controllers/webhookController.js",
+          "url": "https://github.com/alex-polezhaev/myalert-case/blob/f60c2acbf930bbecab14777c86dc7012958d540a/backend/Avito/server/controllers/webhookController.js"
+        },
+        {
+          "path": "backend/Avito/server/controllers/replyController.js",
+          "url": "https://github.com/alex-polezhaev/myalert-case/blob/f60c2acbf930bbecab14777c86dc7012958d540a/backend/Avito/server/controllers/replyController.js"
+        },
+        {
+          "path": "backend/Avito/server/controllers/messageController.js",
+          "url": "https://github.com/alex-polezhaev/myalert-case/blob/f60c2acbf930bbecab14777c86dc7012958d540a/backend/Avito/server/controllers/messageController.js"
+        },
+        {
+          "path": "backend/TaskManager/server/src/taskManager.js",
+          "url": "https://github.com/alex-polezhaev/myalert-case/blob/f60c2acbf930bbecab14777c86dc7012958d540a/backend/TaskManager/server/src/taskManager.js"
+        },
+        {
+          "path": "backend/Avito/server/src/helpers/formatWebHMessage.js",
+          "url": "https://github.com/alex-polezhaev/myalert-case/blob/f60c2acbf930bbecab14777c86dc7012958d540a/backend/Avito/server/src/helpers/formatWebHMessage.js"
+        },
+        {
+          "path": "backend/MessageMood/main.py",
+          "url": "https://github.com/alex-polezhaev/myalert-case/blob/f60c2acbf930bbecab14777c86dc7012958d540a/backend/MessageMood/main.py"
+        }
+      ]
+    }
+  ]
+}

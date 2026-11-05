@@ -1,0 +1,76 @@
+{
+  "checked_at_utc": "2026-11-05T12:00:41.4146004Z",
+  "json_repository_count": 1811,
+  "declared_count": 1811,
+  "csv_row_count": 1811,
+  "unique_id_count": 1811,
+  "unique_full_name_count": 1811,
+  "non_metadata_only_count": 0,
+  "runtime_tested_count": 0,
+  "license_status_counts": [
+    {
+      "Name": "github_detected_spdx_not_audit",
+      "Count": 198
+    },
+    {
+      "Name": "missing_license_metadata",
+      "Count": 1604
+    },
+    {
+      "Name": "noassertion_review_required",
+      "Count": 9
+    }
+  ],
+  "inferred_category_counts": [
+    {
+      "Name": "unclassified_metadata",
+      "Count": 1040
+    },
+    {
+      "Name": "training_or_clone",
+      "Count": 174
+    },
+    {
+      "Name": "data_extraction",
+      "Count": 117
+    },
+    {
+      "Name": "bot_unspecified",
+      "Count": 104
+    },
+    {
+      "Name": "ai_related",
+      "Count": 97
+    },
+    {
+      "Name": "monitoring_or_alerts",
+      "Count": 90
+    },
+    {
+      "Name": "avito_organization_infrastructure_or_training",
+      "Count": 77
+    },
+    {
+      "Name": "browser_extension_or_userscript",
+      "Count": 36
+    },
+    {
+      "Name": "ml_competition_or_research",
+      "Count": 36
+    },
+    {
+      "Name": "mcp_integration",
+      "Count": 29
+    },
+    {
+      "Name": "api_or_sdk",
+      "Count": 11
+    }
+  ],
+  "search_successes": 22,
+  "historical_search_errors": 1,
+  "schema_validation": "PASS: counts, unique ids, unique names, CSV rows, metadata-only flags checked; code/runtime not reviewed",
+  "archived_count": 36,
+  "fork_count": 0,
+  "disabled_count": 0
+}

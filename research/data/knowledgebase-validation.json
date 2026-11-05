@@ -1,0 +1,142 @@
+{
+  "checked_at_utc": "2026-11-05T12:23:14.445Z",
+  "status": "pass",
+  "scope": "Local data, links, counts, hashes and evidence labels; not live Avito/runtime/valuation validation",
+  "checks": [
+    {
+      "name": "broad_unique_count",
+      "result": "pass",
+      "detail": {
+        "records": 1811,
+        "unique_names": 1811
+      }
+    },
+    {
+      "name": "broad_csv_json",
+      "result": "pass",
+      "detail": {
+        "csv_records": 1811
+      }
+    },
+    {
+      "name": "broad_csv_identity",
+      "result": "pass",
+      "detail": "CSV names match JSON"
+    },
+    {
+      "name": "metadata_evidence_boundary",
+      "result": "pass",
+      "detail": "All broad records are metadata-only and unexecuted"
+    },
+    {
+      "name": "curated_counts",
+      "result": "pass",
+      "detail": {
+        "entries": 37,
+        "adjacent": 6,
+        "unresolved": 1
+      }
+    },
+    {
+      "name": "curated_csv_json",
+      "result": "pass",
+      "detail": {
+        "csv_records": 37
+      }
+    },
+    {
+      "name": "curated_csv_identity",
+      "result": "pass",
+      "detail": "CSV order and repo names match JSON"
+    },
+    {
+      "name": "review_levels",
+      "result": "pass",
+      "detail": {
+        "selected_source_review": 35,
+        "repository_index_only_source_unavailable": 1,
+        "readme_review": 1
+      }
+    },
+    {
+      "name": "curated_evidence_fields",
+      "result": "pass",
+      "detail": "All cards have date, license description, source URLs and no-runtime status"
+    },
+    {
+      "name": "pinned_sha_consistency",
+      "result": "pass",
+      "detail": []
+    },
+    {
+      "name": "coverage_counts",
+      "result": "pass",
+      "detail": {
+        "successful_pages": 22
+      }
+    },
+    {
+      "name": "sealed_snapshot_hashes",
+      "result": "pass",
+      "detail": [
+        {
+          "file": "github-repositories.json",
+          "matches": true,
+          "bytes_match": true
+        },
+        {
+          "file": "github-repositories.csv",
+          "matches": true,
+          "bytes_match": true
+        },
+        {
+          "file": "search-coverage.json",
+          "matches": true,
+          "bytes_match": true
+        },
+        {
+          "file": "inventory-validation.json",
+          "matches": true,
+          "bytes_match": true
+        }
+      ]
+    },
+    {
+      "name": "user_input_integrity",
+      "result": "pass",
+      "detail": "e7b0b5cde98d4f68db1220516272aeef1b66950a744f37a845e8487c720a285f"
+    },
+    {
+      "name": "local_markdown_links",
+      "result": "pass",
+      "detail": {
+        "markdown_files": 8,
+        "checked_local_links": 33,
+        "missing": []
+      }
+    },
+    {
+      "name": "snapshot_membership_flags",
+      "result": "pass",
+      "detail": {
+        "curated_outside_broad": [
+          "zlexdev/avitoapi",
+          "kozandlov/avito-python-sdk",
+          "dontsovcmc/antihlam_bot",
+          "marko1olo/avito-dental-ai-bot",
+          "Deshazior/avito-parser",
+          "prog-time/tg-support-bot",
+          "alex-polezhaev/myalert-case",
+          "xailiry/avito-parser-sdk",
+          "sc0urged/avito_parser",
+          "6oT9lpa/parser-avito",
+          "l0af-t0mcat/avito_renovation",
+          "Daniil-Solo/Avito-analytics",
+          "Zzema/avito_nedvizhimost_analyse"
+        ]
+      }
+    }
+  ],
+  "known_unavailable_candidate": "6oT9lpa/parser-avito: indexed only, live API/README404 per source review",
+  "network_link_checks": "Key primary sources were read during research; this validator checks URL syntax and local link existence, not HTTP reachability of every external URL."
+}

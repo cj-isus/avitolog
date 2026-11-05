@@ -1,0 +1,6 @@
+* text=auto eol=lf
+research/data/github-repositories.json -text
+research/data/github-repositories.csv -text
+research/data/search-coverage.json -text
+research/data/inventory-validation.json -text
+research/inputs/user-research-2026-11-05.txt -text

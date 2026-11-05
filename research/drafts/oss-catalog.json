@@ -1,0 +1,703 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-11-05",
+  "scope": "Public Avito-related repositories; first source-level catalog, not exhaustive.",
+  "verification": {
+    "method": "GitHub connector GET metadata, latest default-branch commit, recursive tree, pinned README/source/manifests/LICENSE. Web search used only for discovery.",
+    "runtime": "None. No repositories installed, no dependencies resolved, no third-party code executed, no Avito requests/account actions performed.",
+    "date_semantics": "head_commit_date_utc is commit.committer.date from commits?per_page=1, not repository pushed_at. Author date is recorded separately.",
+    "archive_semantics": "All twelve archived=false when checked; this does not establish maintenance or runtime compatibility.",
+    "license_semantics": "A public GitHub repository without a verified permissive license is kept as public-source research, not automatically reusable open source."
+  },
+  "entries": [
+    {
+      "repo": "AlexButiev/avito-personal-mcp",
+      "kind": "Персональный MCP",
+      "license": "MIT, LICENSE прочитан",
+      "transport": "Подключается Playwright connect_over_cdp к уже запущенному пользователем отдельному Chrome; не открытая вкладка Codex/IAB автоматически.",
+      "reads": "Поиск, карточка, свои объявления, избранное, профили, чаты и история.",
+      "writes": "avito_send_message: preview, одноразовый токен, затем одна попытка отправки в существующий chat_id; не полноценное открытие нового диалога из любой карточки.",
+      "scoring": "Оценки справедливой цены и стратегии переговоров в проверенных модулях нет.",
+      "parts": "MCP-контракты; привязка к наблюдаемой UI-сессии; двухфазная отправка и обработка неопределённого исхода.",
+      "limits": "Experimental 0.1.0rc3; извлекатель карточки не возвращает фото; категория/география/пагинация отложены в README; чтение чата может отметить его прочитанным.",
+      "deps": "Python>=3.11; mcp[cli]>=2,<3; Playwright>=1.54,<2; Pydantic>=2.11,<3.",
+      "claims": "README описывает local-first персональный аккаунт, ручной вход, чтение и guarded send.",
+      "evidence": [
+        "pyproject.toml",
+        "LICENSE",
+        "src/avito_personal_mcp/browser.py",
+        "src/avito_personal_mcp/listing_detail.py",
+        "src/avito_personal_mcp/send_message.py",
+        "src/avito_personal_mcp/server.py"
+      ],
+      "url": "https://github.com/AlexButiev/avito-personal-mcp",
+      "head_sha": "58c072557c699370591f922d165d39b0ecf86885",
+      "head_commit_date_utc": "2026-09-05T20:47:35Z",
+      "head_author_date_utc": "2026-09-05T20:47:35Z",
+      "commit_url": "https://github.com/AlexButiev/avito-personal-mcp/commit/58c072557c699370591f922d165d39b0ecf86885",
+      "default_branch": "main",
+      "archived": false,
+      "github_detected_license": "MIT",
+      "runtime_verification": "not_run",
+      "sources": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/AlexButiev/avito-personal-mcp/blob/58c072557c699370591f922d165d39b0ecf86885/README.md"
+        },
+        {
+          "path": "pyproject.toml",
+          "url": "https://github.com/AlexButiev/avito-personal-mcp/blob/58c072557c699370591f922d165d39b0ecf86885/pyproject.toml"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://github.com/AlexButiev/avito-personal-mcp/blob/58c072557c699370591f922d165d39b0ecf86885/LICENSE"
+        },
+        {
+          "path": "src/avito_personal_mcp/browser.py",
+          "url": "https://github.com/AlexButiev/avito-personal-mcp/blob/58c072557c699370591f922d165d39b0ecf86885/src/avito_personal_mcp/browser.py"
+        },
+        {
+          "path": "src/avito_personal_mcp/listing_detail.py",
+          "url": "https://github.com/AlexButiev/avito-personal-mcp/blob/58c072557c699370591f922d165d39b0ecf86885/src/avito_personal_mcp/listing_detail.py"
+        },
+        {
+          "path": "src/avito_personal_mcp/send_message.py",
+          "url": "https://github.com/AlexButiev/avito-personal-mcp/blob/58c072557c699370591f922d165d39b0ecf86885/src/avito_personal_mcp/send_message.py"
+        },
+        {
+          "path": "src/avito_personal_mcp/server.py",
+          "url": "https://github.com/AlexButiev/avito-personal-mcp/blob/58c072557c699370591f922d165d39b0ecf86885/src/avito_personal_mcp/server.py"
+        }
+      ],
+      "metadata_source": "https://api.github.com/repos/AlexButiev/avito-personal-mcp",
+      "commit_source": "https://api.github.com/repos/AlexButiev/avito-personal-mcp/commits?per_page=1"
+    },
+    {
+      "repo": "ermizin/avito-mcp",
+      "kind": "Универсальный browser MCP",
+      "license": "MIT, LICENSE прочитан",
+      "transport": "Сам запускает отдельный Google Chrome с собственным профилем и CDP, затем подключается Playwright.",
+      "reads": "Поиск с городом/ценой; карточка/фотогалерея; свои объявления и статистика; профили; generic DOM snapshot.",
+      "writes": "Generic click/type/upload/keypress, включая отправку сообщений и формы; confirm=true для распознанных рискованных действий.",
+      "scoring": "Готового рыночного оценщика нет; LLM-клиент выполняет рассуждения отдельно.",
+      "parts": "Компактные DOM-извлекатели, чтение полноразмерных фото, ref-based generic UI инструменты.",
+      "limits": "Защита confirm эвристическая; это не связанный с текстом одноразовый токен. OS classifiers macOS/Linux, путь Chrome по умолчанию macOS; Windows не проверен. Не доказана устойчивость к смене DOM.",
+      "deps": "Python>=3.12; mcp[cli]>=1.12,<2; Playwright>=1.50; uv.lock.",
+      "claims": "README заявляет личный кабинет, Авито Pro, формы и Ozon/WB; source подтверждает универсальные UI-команды и фотогалерею.",
+      "evidence": [
+        "pyproject.toml",
+        "LICENSE",
+        "src/avito_mcp/config.py",
+        "src/avito_mcp/browser.py",
+        "src/avito_mcp/server.py",
+        "src/avito_mcp/extract.py"
+      ],
+      "url": "https://github.com/ermizin/avito-mcp",
+      "head_sha": "99a37a0497088d8f5ae73d19694f92568b18350f",
+      "head_commit_date_utc": "2026-10-13T08:23:07Z",
+      "head_author_date_utc": "2026-10-13T08:23:07Z",
+      "commit_url": "https://github.com/ermizin/avito-mcp/commit/99a37a0497088d8f5ae73d19694f92568b18350f",
+      "default_branch": "main",
+      "archived": false,
+      "github_detected_license": "MIT",
+      "runtime_verification": "not_run",
+      "sources": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/ermizin/avito-mcp/blob/99a37a0497088d8f5ae73d19694f92568b18350f/README.md"
+        },
+        {
+          "path": "pyproject.toml",
+          "url": "https://github.com/ermizin/avito-mcp/blob/99a37a0497088d8f5ae73d19694f92568b18350f/pyproject.toml"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://github.com/ermizin/avito-mcp/blob/99a37a0497088d8f5ae73d19694f92568b18350f/LICENSE"
+        },
+        {
+          "path": "src/avito_mcp/config.py",
+          "url": "https://github.com/ermizin/avito-mcp/blob/99a37a0497088d8f5ae73d19694f92568b18350f/src/avito_mcp/config.py"
+        },
+        {
+          "path": "src/avito_mcp/browser.py",
+          "url": "https://github.com/ermizin/avito-mcp/blob/99a37a0497088d8f5ae73d19694f92568b18350f/src/avito_mcp/browser.py"
+        },
+        {
+          "path": "src/avito_mcp/server.py",
+          "url": "https://github.com/ermizin/avito-mcp/blob/99a37a0497088d8f5ae73d19694f92568b18350f/src/avito_mcp/server.py"
+        },
+        {
+          "path": "src/avito_mcp/extract.py",
+          "url": "https://github.com/ermizin/avito-mcp/blob/99a37a0497088d8f5ae73d19694f92568b18350f/src/avito_mcp/extract.py"
+        }
+      ],
+      "metadata_source": "https://api.github.com/repos/ermizin/avito-mcp",
+      "commit_source": "https://api.github.com/repos/ermizin/avito-mcp/commits?per_page=1"
+    },
+    {
+      "repo": "Duff89/parser_avito",
+      "kind": "Парсер и мониторинг",
+      "license": "LICENSE не найден; GitHub license=null",
+      "transport": "curl_cffi HTTP-сессия с cookies/proxy; JSON из страниц и внутренние каталожные запросы; Playwright нужен для cookie/bootstrap.",
+      "reads": "Каталог, фильтры, продавцы, цена, описание, просмотры; SQLite seen(id,price).",
+      "writes": "Локальная БД/Excel; уведомления Telegram/VK. Отправка сообщений продавцам в проверенном workflow отсутствует.",
+      "scoring": "Мониторинг изменений и фильтрация, без проверенного AI valuation.",
+      "parts": "Фильтры, экспорт, модель объявления, дедуп и фиксация смены цены — как предмет изучения.",
+      "limits": "Без разрешающей лицензии не считать готовым кодом для включения в продукт. Обходы/сервисы cookies и недокументированные endpoints требуют отдельной оценки; текущая доступность не проверялась.",
+      "deps": "Python 3.11+ по README; curl_cffi; BeautifulSoup 4.13.4; Playwright1.52; Flet0.24.1; Pydantic2.9.2; openpyxl3.1.5; requests/httpx.",
+      "claims": "README3.2.23 описывает GUI/CLI/Docker, мониторинг, Excel и TG/VK.",
+      "evidence": [
+        "requirements.txt",
+        "parser/http/client.py",
+        "parser_cls.py",
+        "db_service.py",
+        "utils/build_api_params.py"
+      ],
+      "url": "https://github.com/Duff89/parser_avito",
+      "head_sha": "91a5399f79bf035d3eb919d66ada00545571c2f1",
+      "head_commit_date_utc": "2026-09-30T17:34:11Z",
+      "head_author_date_utc": "2026-09-30T17:34:11Z",
+      "commit_url": "https://github.com/Duff89/parser_avito/commit/91a5399f79bf035d3eb919d66ada00545571c2f1",
+      "default_branch": "master",
+      "archived": false,
+      "github_detected_license": null,
+      "runtime_verification": "not_run",
+      "sources": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/Duff89/parser_avito/blob/91a5399f79bf035d3eb919d66ada00545571c2f1/README.md"
+        },
+        {
+          "path": "requirements.txt",
+          "url": "https://github.com/Duff89/parser_avito/blob/91a5399f79bf035d3eb919d66ada00545571c2f1/requirements.txt"
+        },
+        {
+          "path": "parser/http/client.py",
+          "url": "https://github.com/Duff89/parser_avito/blob/91a5399f79bf035d3eb919d66ada00545571c2f1/parser/http/client.py"
+        },
+        {
+          "path": "parser_cls.py",
+          "url": "https://github.com/Duff89/parser_avito/blob/91a5399f79bf035d3eb919d66ada00545571c2f1/parser_cls.py"
+        },
+        {
+          "path": "db_service.py",
+          "url": "https://github.com/Duff89/parser_avito/blob/91a5399f79bf035d3eb919d66ada00545571c2f1/db_service.py"
+        },
+        {
+          "path": "utils/build_api_params.py",
+          "url": "https://github.com/Duff89/parser_avito/blob/91a5399f79bf035d3eb919d66ada00545571c2f1/utils/build_api_params.py"
+        }
+      ],
+      "metadata_source": "https://api.github.com/repos/Duff89/parser_avito",
+      "commit_source": "https://api.github.com/repos/Duff89/parser_avito/commits?per_page=1"
+    },
+    {
+      "repo": "xailiry/TechBot",
+      "kind": "Поиск выгодной электроники",
+      "license": "LICENSE не найден; GitHub license=null",
+      "transport": "Собственный Playwright browser/context, не current-tab extension; browser/stealth слой.",
+      "reads": "Объявления техники; нормализация модели/характеристик, состояние, фото, дубликаты; обучаемые ценовые наблюдения.",
+      "writes": "SQLite и Telegram-уведомления/feedback. Авито-переговоры не найдены в проверенном buyer workflow.",
+      "scoring": "Реальная source-логика: robust median/IQR, состояние, ремонт/резерв, resale/profit/ROI, confidence и scam heuristics; опциональный CLIP анализ фото.",
+      "parts": "Хороший исследовательский аналог предметной оценки, обучаемого baseline и раздельной уверенности/риска.",
+      "limits": "Специализация телефоны/электроника; правила нельзя переносить на велосипеды. Корректность цен, калибровки и фотооценки не измерялась. Разрешающая лицензия не обнаружена.",
+      "deps": "aiogram3.13.1; SQLAlchemy2.0.49/Alembic/aiosqlite; Playwright1.48/stealth; torch2.11/torchvision0.26/transformers5.8/Pillow/numpy.",
+      "claims": "README описывает TechHunter: подписки, Discovery, обучение рынка, Telegram.",
+      "evidence": [
+        "requirements.txt",
+        "techhunter/valuation/engine.py",
+        "techhunter/valuation/clustering.py",
+        "techhunter/ai/evaluate.py",
+        "techhunter/scraper/browser.py"
+      ],
+      "url": "https://github.com/xailiry/TechBot",
+      "head_sha": "2c0ac2d7af20b3ff1fd3f42a8d4a17e3382d8544",
+      "head_commit_date_utc": "2026-06-17T19:58:24Z",
+      "head_author_date_utc": "2026-06-17T19:58:24Z",
+      "commit_url": "https://github.com/xailiry/TechBot/commit/2c0ac2d7af20b3ff1fd3f42a8d4a17e3382d8544",
+      "default_branch": "main",
+      "archived": false,
+      "github_detected_license": null,
+      "runtime_verification": "not_run",
+      "sources": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/xailiry/TechBot/blob/2c0ac2d7af20b3ff1fd3f42a8d4a17e3382d8544/README.md"
+        },
+        {
+          "path": "requirements.txt",
+          "url": "https://github.com/xailiry/TechBot/blob/2c0ac2d7af20b3ff1fd3f42a8d4a17e3382d8544/requirements.txt"
+        },
+        {
+          "path": "techhunter/valuation/engine.py",
+          "url": "https://github.com/xailiry/TechBot/blob/2c0ac2d7af20b3ff1fd3f42a8d4a17e3382d8544/techhunter/valuation/engine.py"
+        },
+        {
+          "path": "techhunter/valuation/clustering.py",
+          "url": "https://github.com/xailiry/TechBot/blob/2c0ac2d7af20b3ff1fd3f42a8d4a17e3382d8544/techhunter/valuation/clustering.py"
+        },
+        {
+          "path": "techhunter/ai/evaluate.py",
+          "url": "https://github.com/xailiry/TechBot/blob/2c0ac2d7af20b3ff1fd3f42a8d4a17e3382d8544/techhunter/ai/evaluate.py"
+        },
+        {
+          "path": "techhunter/scraper/browser.py",
+          "url": "https://github.com/xailiry/TechBot/blob/2c0ac2d7af20b3ff1fd3f42a8d4a17e3382d8544/techhunter/scraper/browser.py"
+        }
+      ],
+      "metadata_source": "https://api.github.com/repos/xailiry/TechBot",
+      "commit_source": "https://api.github.com/repos/xailiry/TechBot/commits?per_page=1"
+    },
+    {
+      "repo": "ForseJDM/avito-gpu-helper",
+      "kind": "Расширение покупателя GPU",
+      "license": "MIT в LICENSE плюс trademark note; GitHub NOASSERTION",
+      "transport": "Chrome ManifestV3 content scripts в текущих Avito-страницах; local storage; service worker получает публичный JSON цен с GitHub.",
+      "reads": "DOM цены/модели/состояния/продавца; аналогичные предложения из локального search cache.",
+      "writes": "Бейджи/виджет/панель сравнения; локальные кеши/история, notifications. Avito chat send отсутствует в проверенных компонентах.",
+      "scoring": "Детерминированные пороги fair-price относительно встроенной/обновляемой GPU-базы; condition multipliers, антискам признаки. Это не LLM и не доказанная рыночная модель.",
+      "parts": "Наиболее близкая готовая MV3 оболочка, визуальные бейджи, раздельные детекторы и механизм аналогов.",
+      "limits": "Только видеокарты. realtime-prices.js не делает live Avito fetch; читает chrome.storage. Внешний prices.json, метод сбора и свежесть требуют независимой проверки.",
+      "deps": "Нативный JS без найденного npm runtime manifest; MV3 storage/alarms/notifications и host Avito/raw.githubusercontent.com.",
+      "claims": "README обещает realtime цены, состояние и антискам; source уточняет фактический кеш/feed и rules.",
+      "evidence": [
+        "LICENSE",
+        "extension/manifest.json",
+        "extension/src/core/fair-price-engine.js",
+        "extension/src/db/gpu-market-db.js",
+        "extension/src/core/realtime-prices.js",
+        "extension/src/core/price-updater.js",
+        "extension/src/service-worker.js",
+        "extension/src/content.js"
+      ],
+      "url": "https://github.com/ForseJDM/avito-gpu-helper",
+      "head_sha": "306b9a76e2153551fd7dd8d098672eee94a966f8",
+      "head_commit_date_utc": "2026-06-29T23:33:30Z",
+      "head_author_date_utc": "2026-06-29T23:33:30Z",
+      "commit_url": "https://github.com/ForseJDM/avito-gpu-helper/commit/306b9a76e2153551fd7dd8d098672eee94a966f8",
+      "default_branch": "main",
+      "archived": false,
+      "github_detected_license": "NOASSERTION",
+      "runtime_verification": "not_run",
+      "sources": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/ForseJDM/avito-gpu-helper/blob/306b9a76e2153551fd7dd8d098672eee94a966f8/README.md"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://github.com/ForseJDM/avito-gpu-helper/blob/306b9a76e2153551fd7dd8d098672eee94a966f8/LICENSE"
+        },
+        {
+          "path": "extension/manifest.json",
+          "url": "https://github.com/ForseJDM/avito-gpu-helper/blob/306b9a76e2153551fd7dd8d098672eee94a966f8/extension/manifest.json"
+        },
+        {
+          "path": "extension/src/core/fair-price-engine.js",
+          "url": "https://github.com/ForseJDM/avito-gpu-helper/blob/306b9a76e2153551fd7dd8d098672eee94a966f8/extension/src/core/fair-price-engine.js"
+        },
+        {
+          "path": "extension/src/db/gpu-market-db.js",
+          "url": "https://github.com/ForseJDM/avito-gpu-helper/blob/306b9a76e2153551fd7dd8d098672eee94a966f8/extension/src/db/gpu-market-db.js"
+        },
+        {
+          "path": "extension/src/core/realtime-prices.js",
+          "url": "https://github.com/ForseJDM/avito-gpu-helper/blob/306b9a76e2153551fd7dd8d098672eee94a966f8/extension/src/core/realtime-prices.js"
+        },
+        {
+          "path": "extension/src/core/price-updater.js",
+          "url": "https://github.com/ForseJDM/avito-gpu-helper/blob/306b9a76e2153551fd7dd8d098672eee94a966f8/extension/src/core/price-updater.js"
+        },
+        {
+          "path": "extension/src/service-worker.js",
+          "url": "https://github.com/ForseJDM/avito-gpu-helper/blob/306b9a76e2153551fd7dd8d098672eee94a966f8/extension/src/service-worker.js"
+        },
+        {
+          "path": "extension/src/content.js",
+          "url": "https://github.com/ForseJDM/avito-gpu-helper/blob/306b9a76e2153551fd7dd8d098672eee94a966f8/extension/src/content.js"
+        }
+      ],
+      "metadata_source": "https://api.github.com/repos/ForseJDM/avito-gpu-helper",
+      "commit_source": "https://api.github.com/repos/ForseJDM/avito-gpu-helper/commits?per_page=1"
+    },
+    {
+      "repo": "nummyn0rih/avito-monitor-bot",
+      "kind": "Минимальный мониторинг",
+      "license": "LICENSE не найден; GitHub license=null",
+      "transport": "Собственный headless Chromium/Playwright; умеет ручной login и сохранение storage_state.",
+      "reads": "Готовый URL поиска с фильтрами; DOM id,title,price,url,image,location.",
+      "writes": "SQLite seen и отправка Telegram alerts; команды status/last/log. Сообщения продавцам отсутствуют.",
+      "scoring": "Нет оценки выгодности: URL-фильтры + новые ID.",
+      "parts": "Небольшой понятный сборщик/дедуп/уведомитель; полезен как простой baseline.",
+      "limits": "README содержит пример велосипеда29, но не проверяет раму/обвес/износ. Это отдельный браузер, не чтение уже открытой вкладки. Лицензия не найдена.",
+      "deps": "Playwright>=1.47; httpx>=0.27; python-dotenv>=1.0; PyYAML>=6.",
+      "claims": "README: периодически читает выбранные поиски, шлёт новые объявления в Telegram.",
+      "evidence": [
+        "requirements.txt",
+        "avito_monitor/fetcher.py",
+        "avito_monitor/loop.py"
+      ],
+      "url": "https://github.com/nummyn0rih/avito-monitor-bot",
+      "head_sha": "236cbb76278ed63ccfa6e64a7d7d2ba6440f37a0",
+      "head_commit_date_utc": "2026-04-28T07:01:35Z",
+      "head_author_date_utc": "2026-04-28T07:01:35Z",
+      "commit_url": "https://github.com/nummyn0rih/avito-monitor-bot/commit/236cbb76278ed63ccfa6e64a7d7d2ba6440f37a0",
+      "default_branch": "main",
+      "archived": false,
+      "github_detected_license": null,
+      "runtime_verification": "not_run",
+      "sources": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/nummyn0rih/avito-monitor-bot/blob/236cbb76278ed63ccfa6e64a7d7d2ba6440f37a0/README.md"
+        },
+        {
+          "path": "requirements.txt",
+          "url": "https://github.com/nummyn0rih/avito-monitor-bot/blob/236cbb76278ed63ccfa6e64a7d7d2ba6440f37a0/requirements.txt"
+        },
+        {
+          "path": "avito_monitor/fetcher.py",
+          "url": "https://github.com/nummyn0rih/avito-monitor-bot/blob/236cbb76278ed63ccfa6e64a7d7d2ba6440f37a0/avito_monitor/fetcher.py"
+        },
+        {
+          "path": "avito_monitor/loop.py",
+          "url": "https://github.com/nummyn0rih/avito-monitor-bot/blob/236cbb76278ed63ccfa6e64a7d7d2ba6440f37a0/avito_monitor/loop.py"
+        }
+      ],
+      "metadata_source": "https://api.github.com/repos/nummyn0rih/avito-monitor-bot",
+      "commit_source": "https://api.github.com/repos/nummyn0rih/avito-monitor-bot/commits?per_page=1"
+    },
+    {
+      "repo": "domovoyproj/avito-parser",
+      "kind": "Парсер с панелью и скорингом",
+      "license": "Root LICENSE не найден; GitHub license=null; vendor licenses не лицензируют проект",
+      "transport": "Собственный Playwright Chromium или curl_cffi HTTP с cookies/proxy; локальная web-панель.",
+      "reads": "Поиск/карточки, история изменений цены, сведения продавца и состояния.",
+      "writes": "Локальные SQLite/списки/настройки, экспорт, TG. Авито-переговоры не установлены.",
+      "scoring": "ai_scoring.py: deterministic-2 score/grade/reasons/confidence, сравнение с переданным median/average, anomaly/flaw heuristics, custom rules; optional LLM API.",
+      "parts": "Референс объяснимых причин, отдельного статуса парсинга, истории цен, панели исследования.",
+      "limits": "Медиана сама по себе не доказывает сравнимость товаров. README-панель на пустой тестовой БД — не live Avito proof. Копирование исходников требует решения лицензии.",
+      "deps": "Playwright>=1.40; curl_cffi>=0.7; FastAPI/uvicorn/Jinja2; aiogram; aiosqlite; Pydantic; Tailwind3.4.17; Chart.js4.5.1/Lucide1.50.",
+      "claims": "README2.6 описывает сбор, мониторинг, scores и optional LLM; прямо отделяет UI demo от сетевого сбора.",
+      "evidence": [
+        "requirements.txt",
+        "package.json",
+        "ai_scoring.py",
+        "browser_engine.py",
+        "http_engine.py"
+      ],
+      "url": "https://github.com/domovoyproj/avito-parser",
+      "head_sha": "4295c18565fc961d5a7a708e702f1f52507501dc",
+      "head_commit_date_utc": "2026-10-21T17:01:24Z",
+      "head_author_date_utc": "2026-10-21T17:01:24Z",
+      "commit_url": "https://github.com/domovoyproj/avito-parser/commit/4295c18565fc961d5a7a708e702f1f52507501dc",
+      "default_branch": "main",
+      "archived": false,
+      "github_detected_license": null,
+      "runtime_verification": "not_run",
+      "sources": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/domovoyproj/avito-parser/blob/4295c18565fc961d5a7a708e702f1f52507501dc/README.md"
+        },
+        {
+          "path": "requirements.txt",
+          "url": "https://github.com/domovoyproj/avito-parser/blob/4295c18565fc961d5a7a708e702f1f52507501dc/requirements.txt"
+        },
+        {
+          "path": "package.json",
+          "url": "https://github.com/domovoyproj/avito-parser/blob/4295c18565fc961d5a7a708e702f1f52507501dc/package.json"
+        },
+        {
+          "path": "ai_scoring.py",
+          "url": "https://github.com/domovoyproj/avito-parser/blob/4295c18565fc961d5a7a708e702f1f52507501dc/ai_scoring.py"
+        },
+        {
+          "path": "browser_engine.py",
+          "url": "https://github.com/domovoyproj/avito-parser/blob/4295c18565fc961d5a7a708e702f1f52507501dc/browser_engine.py"
+        },
+        {
+          "path": "http_engine.py",
+          "url": "https://github.com/domovoyproj/avito-parser/blob/4295c18565fc961d5a7a708e702f1f52507501dc/http_engine.py"
+        }
+      ],
+      "metadata_source": "https://api.github.com/repos/domovoyproj/avito-parser",
+      "commit_source": "https://api.github.com/repos/domovoyproj/avito-parser/commits?per_page=1"
+    },
+    {
+      "repo": "Vladimir-Human/ru-marketplace-mcp",
+      "kind": "Read-only multi-marketplace MCP",
+      "license": "MIT, LICENSE прочитан",
+      "transport": "Avito поиск: internal /web/1/js/items через curl_cffi с CDP fallback; карточки/продавцы через Chrome CDP. Shared transport присоединяется к работающему Chrome.",
+      "reads": "avito_search, avito_card, avito_seller, chained selfcheck; JSON-LD Product и DOM fallback с проверкой идентичности объявления.",
+      "writes": "Avito write-tools в проверенном connector нет.",
+      "scoring": "Данные и multi-source price comparison в общем репозитории; полноценной предметной оценки велосипеда/торга в проверенном Avito connector нет.",
+      "parts": "Структурированные nullable модели, parser_drift/not_found/challenge разделение; seller/card parsing; CDP pacing и canary проверки.",
+      "limits": "Сильная зависимость от внутреннего API/DOM. Исходники фиксируют, что API игнорирует itemId/userId: без проверки ложные карточки/число объявлений. Авторские live отчёты не повторялись нами.",
+      "deps": "Python>=3.12; workspace mcp-core==2.8.2; FastMCP>=4.1.4,<5; curl_cffi>=0.8; Playwright>=1.47; Pydantic>=2.12/httpx.",
+      "claims": "README заявляет 13+ площадок и read-only сравнение; Avito source содержит три основных read tool и selfcheck.",
+      "evidence": [
+        "LICENSE",
+        "packages/avito-connector/pyproject.toml",
+        "packages/avito-connector/src/avito_connector/server.py",
+        "packages/mcp-core/src/mcp_core/transport/chrome_cdp.py"
+      ],
+      "url": "https://github.com/Vladimir-Human/ru-marketplace-mcp",
+      "head_sha": "416b065d03c971be86d982ccb5a6a1855069f09d",
+      "head_commit_date_utc": "2026-11-03T17:58:21Z",
+      "head_author_date_utc": "2026-11-03T17:58:21Z",
+      "commit_url": "https://github.com/Vladimir-Human/ru-marketplace-mcp/commit/416b065d03c971be86d982ccb5a6a1855069f09d",
+      "default_branch": "main",
+      "archived": false,
+      "github_detected_license": "MIT",
+      "runtime_verification": "not_run",
+      "sources": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/Vladimir-Human/ru-marketplace-mcp/blob/416b065d03c971be86d982ccb5a6a1855069f09d/README.md"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://github.com/Vladimir-Human/ru-marketplace-mcp/blob/416b065d03c971be86d982ccb5a6a1855069f09d/LICENSE"
+        },
+        {
+          "path": "packages/avito-connector/pyproject.toml",
+          "url": "https://github.com/Vladimir-Human/ru-marketplace-mcp/blob/416b065d03c971be86d982ccb5a6a1855069f09d/packages/avito-connector/pyproject.toml"
+        },
+        {
+          "path": "packages/avito-connector/src/avito_connector/server.py",
+          "url": "https://github.com/Vladimir-Human/ru-marketplace-mcp/blob/416b065d03c971be86d982ccb5a6a1855069f09d/packages/avito-connector/src/avito_connector/server.py"
+        },
+        {
+          "path": "packages/mcp-core/src/mcp_core/transport/chrome_cdp.py",
+          "url": "https://github.com/Vladimir-Human/ru-marketplace-mcp/blob/416b065d03c971be86d982ccb5a6a1855069f09d/packages/mcp-core/src/mcp_core/transport/chrome_cdp.py"
+        }
+      ],
+      "metadata_source": "https://api.github.com/repos/Vladimir-Human/ru-marketplace-mcp",
+      "commit_source": "https://api.github.com/repos/Vladimir-Human/ru-marketplace-mcp/commits?per_page=1"
+    },
+    {
+      "repo": "aurusxd/avito-ai-agent",
+      "kind": "AI outreach и лидогенерация",
+      "license": "LICENSE не найден; GitHub license=null",
+      "transport": "Собственный Playwright Chromium; ручной вход в отдельном браузере/noVNC, storage_state на аккаунт; есть HTTP/cookie вспомогательные клиенты.",
+      "reads": "Каталог, группировка продавцов, входящие сообщения; AI классификация ответов.",
+      "writes": "Трёхэтапная рассылка через UI, rotation/schedule/daily limits; журнал идемпотентности seller+stage; TG lead handoff.",
+      "scoring": "Определение интереса продавца/лида, не доказанная оценка справедливой цены товара.",
+      "parts": "Исследовать orchestration/fake clients, журналы этапов, ограничения расписания и обработку replies.",
+      "limits": "Продукт для outreach к продавцам с несколькими объявлениями, расходится с частным buyer search. Нет подтверждённой лицензии, runtime не проводился; рассылку не запускаем.",
+      "deps": "Python>=3.13; FastAPI/Pydantic; SQLAlchemy/SQLite/Alembic; APScheduler; Playwright>=1.62/curl-cffi>=0.16; Svelte5/SvelteKit/Tailwind4.",
+      "claims": "README описывает автоматическую 3-stage переписку, AI interested/neutral/negative, Telegram оператору и fake mode.",
+      "evidence": [
+        "backend/pyproject.toml",
+        "frontend/package.json",
+        "backend/app/clients/avito/playwright_client.py",
+        "backend/app/outreach/service.py"
+      ],
+      "url": "https://github.com/aurusxd/avito-ai-agent",
+      "head_sha": "1155f2b346f3945a903e605e8a59f1206e4ebaaf",
+      "head_commit_date_utc": "2026-09-20T16:49:51Z",
+      "head_author_date_utc": "2026-09-20T16:49:51Z",
+      "commit_url": "https://github.com/aurusxd/avito-ai-agent/commit/1155f2b346f3945a903e605e8a59f1206e4ebaaf",
+      "default_branch": "master",
+      "archived": false,
+      "github_detected_license": null,
+      "runtime_verification": "not_run",
+      "sources": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/aurusxd/avito-ai-agent/blob/1155f2b346f3945a903e605e8a59f1206e4ebaaf/README.md"
+        },
+        {
+          "path": "backend/pyproject.toml",
+          "url": "https://github.com/aurusxd/avito-ai-agent/blob/1155f2b346f3945a903e605e8a59f1206e4ebaaf/backend/pyproject.toml"
+        },
+        {
+          "path": "frontend/package.json",
+          "url": "https://github.com/aurusxd/avito-ai-agent/blob/1155f2b346f3945a903e605e8a59f1206e4ebaaf/frontend/package.json"
+        },
+        {
+          "path": "backend/app/clients/avito/playwright_client.py",
+          "url": "https://github.com/aurusxd/avito-ai-agent/blob/1155f2b346f3945a903e605e8a59f1206e4ebaaf/backend/app/clients/avito/playwright_client.py"
+        },
+        {
+          "path": "backend/app/outreach/service.py",
+          "url": "https://github.com/aurusxd/avito-ai-agent/blob/1155f2b346f3945a903e605e8a59f1206e4ebaaf/backend/app/outreach/service.py"
+        }
+      ],
+      "metadata_source": "https://api.github.com/repos/aurusxd/avito-ai-agent",
+      "commit_source": "https://api.github.com/repos/aurusxd/avito-ai-agent/commits?per_page=1"
+    },
+    {
+      "repo": "evgenygurin/avito-mcp-plugin",
+      "kind": "Модульный MCP-парсер",
+      "license": "MIT, LICENSE прочитан",
+      "transport": "curl_cffi HTTP parser с cookie/proxy provider; optional Playwright для получения cookies; не current-tab extension.",
+      "reads": "Поиск, карточка, мониторинг новых/смены цены; пагинация текущего кода следует pager.next.",
+      "writes": "Supabase/Postgres история/дедуп; экспорт; TG/VK notification. send_notification не отправляет сообщения продавцам Avito.",
+      "scoring": "Сбор/история/фильтры; отдельного оценщика выгодности не найдено в проверенном scraper.",
+      "parts": "7 MCP tools, gateway/roles, модели и monitoring/export контракты под разрешающей лицензией.",
+      "limits": "README честно отмечает сетевую часть непроверенной без чистого RU proxy. Старый design doc описывал SQLite/internal API, HEAD уже Supabase и pager.next; ориентироваться на код.",
+      "deps": "Python>=3.12; FastMCP>=3,<4; curl_cffi>=0.7; httpx; BeautifulSoup; shared workspace; optional Playwright; DB Supabase.",
+      "claims": "README0.5.0 заявляет scraper/db/notify/shared+gateway и7tools; не опубликован в marketplace.",
+      "evidence": [
+        "LICENSE",
+        "servers/scraper/pyproject.toml",
+        "servers/scraper/src/avito_mcp_scraper/tools/listings.py",
+        "servers/scraper/src/avito_mcp_scraper/http/client.py",
+        "servers/scraper/src/avito_mcp_scraper/parser/pagination.py",
+        "servers/db/src/avito_mcp_db/storage/supabase.py"
+      ],
+      "url": "https://github.com/evgenygurin/avito-mcp-plugin",
+      "head_sha": "fa1a9345cf2be6cc3ea7983c83db8663fca14da3",
+      "head_commit_date_utc": "2026-08-02T08:11:10Z",
+      "head_author_date_utc": "2026-08-02T08:11:10Z",
+      "commit_url": "https://github.com/evgenygurin/avito-mcp-plugin/commit/fa1a9345cf2be6cc3ea7983c83db8663fca14da3",
+      "default_branch": "main",
+      "archived": false,
+      "github_detected_license": "MIT",
+      "runtime_verification": "not_run",
+      "sources": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/evgenygurin/avito-mcp-plugin/blob/fa1a9345cf2be6cc3ea7983c83db8663fca14da3/README.md"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://github.com/evgenygurin/avito-mcp-plugin/blob/fa1a9345cf2be6cc3ea7983c83db8663fca14da3/LICENSE"
+        },
+        {
+          "path": "servers/scraper/pyproject.toml",
+          "url": "https://github.com/evgenygurin/avito-mcp-plugin/blob/fa1a9345cf2be6cc3ea7983c83db8663fca14da3/servers/scraper/pyproject.toml"
+        },
+        {
+          "path": "servers/scraper/src/avito_mcp_scraper/tools/listings.py",
+          "url": "https://github.com/evgenygurin/avito-mcp-plugin/blob/fa1a9345cf2be6cc3ea7983c83db8663fca14da3/servers/scraper/src/avito_mcp_scraper/tools/listings.py"
+        },
+        {
+          "path": "servers/scraper/src/avito_mcp_scraper/http/client.py",
+          "url": "https://github.com/evgenygurin/avito-mcp-plugin/blob/fa1a9345cf2be6cc3ea7983c83db8663fca14da3/servers/scraper/src/avito_mcp_scraper/http/client.py"
+        },
+        {
+          "path": "servers/scraper/src/avito_mcp_scraper/parser/pagination.py",
+          "url": "https://github.com/evgenygurin/avito-mcp-plugin/blob/fa1a9345cf2be6cc3ea7983c83db8663fca14da3/servers/scraper/src/avito_mcp_scraper/parser/pagination.py"
+        },
+        {
+          "path": "servers/db/src/avito_mcp_db/storage/supabase.py",
+          "url": "https://github.com/evgenygurin/avito-mcp-plugin/blob/fa1a9345cf2be6cc3ea7983c83db8663fca14da3/servers/db/src/avito_mcp_db/storage/supabase.py"
+        }
+      ],
+      "metadata_source": "https://api.github.com/repos/evgenygurin/avito-mcp-plugin",
+      "commit_source": "https://api.github.com/repos/evgenygurin/avito-mcp-plugin/commits?per_page=1"
+    },
+    {
+      "repo": "alexeysever/avito-filter",
+      "kind": "Расширение фильтрации/мониторинга",
+      "license": "ISC declared в package.json; отдельный LICENSE отсутствует, GitHub license=null",
+      "transport": "ManifestV3 content script в текущей Avito/OLX странице, chrome.storage.",
+      "reads": "DOM карточки и ID объявлений, локальный список просмотренных/скрытых.",
+      "writes": "Скрытие/окраска карточек, локальные списки, периодический reload и звуковой сигнал.",
+      "scoring": "Без AI и оценки рыночной цены.",
+      "parts": "Механика seen/hidden/new, UI фильтрации и мониторинга на странице.",
+      "limits": "Последний коммит2023; текущая совместимость с DOM не проверена. ISC в manifest полезный признак, но текст лицензии стоит уточнить перед распространением.",
+      "deps": "jQuery^3.6.4; Lodash^4.17.21; Webpack5.76/TypeScript4.9.5 для сборки.",
+      "claims": "README описывает фильтр ненужных/просмотренных и уведомления о новых Avito+OLX.",
+      "evidence": [
+        "manifest.json",
+        "package.json",
+        "content.js",
+        "Storage.js"
+      ],
+      "url": "https://github.com/alexeysever/avito-filter",
+      "head_sha": "31bf53faf4c4586b22b5dc7014dc2c82e5308afa",
+      "head_commit_date_utc": "2023-04-10T13:56:22Z",
+      "head_author_date_utc": "2023-04-10T13:56:04Z",
+      "commit_url": "https://github.com/alexeysever/avito-filter/commit/31bf53faf4c4586b22b5dc7014dc2c82e5308afa",
+      "default_branch": "master",
+      "archived": false,
+      "github_detected_license": null,
+      "runtime_verification": "not_run",
+      "sources": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/alexeysever/avito-filter/blob/31bf53faf4c4586b22b5dc7014dc2c82e5308afa/README.md"
+        },
+        {
+          "path": "manifest.json",
+          "url": "https://github.com/alexeysever/avito-filter/blob/31bf53faf4c4586b22b5dc7014dc2c82e5308afa/manifest.json"
+        },
+        {
+          "path": "package.json",
+          "url": "https://github.com/alexeysever/avito-filter/blob/31bf53faf4c4586b22b5dc7014dc2c82e5308afa/package.json"
+        },
+        {
+          "path": "content.js",
+          "url": "https://github.com/alexeysever/avito-filter/blob/31bf53faf4c4586b22b5dc7014dc2c82e5308afa/content.js"
+        },
+        {
+          "path": "Storage.js",
+          "url": "https://github.com/alexeysever/avito-filter/blob/31bf53faf4c4586b22b5dc7014dc2c82e5308afa/Storage.js"
+        }
+      ],
+      "metadata_source": "https://api.github.com/repos/alexeysever/avito-filter",
+      "commit_source": "https://api.github.com/repos/alexeysever/avito-filter/commits?per_page=1"
+    },
+    {
+      "repo": "zlexdev/avitoapi",
+      "kind": "SDK официального Partner API",
+      "license": "MIT, LICENSE прочитан",
+      "transport": "HTTP SDK с OAuth2 credentials к Avito Partner/Business API; не браузер и не доступ к произвольной сессии пользователя.",
+      "reads": "Свои объявления, чаты/сообщения, статистика и другие официальные account API domains.",
+      "writes": "Отправка/удаление сообщений, read mark, изменение цены/продвижение и другие account mutations по API-полномочиям.",
+      "scoring": "Нет buyer price valuation.",
+      "parts": "Typed DTO/enum/client facades, generated methods, OAuth/error/event transport — при наличии официального доступа.",
+      "limits": "Не решает поиск произвольных чужих объявлений через бесплатную browser session. Alpha0.1.0; соответствие текущей официальной схеме и runtime не проверены.",
+      "deps": "Python>=3.11; Pydantic>=2.6; pydantic-settings>=2.2; curl_cffi>=0.7; structlog/email-validator; optional web/storage transports.",
+      "claims": "README: typed async aiogram-style SDK, генерация из Avito OpenAPI, events/FSM/webhooks.",
+      "evidence": [
+        "LICENSE",
+        "pyproject.toml",
+        "avitoapi/methods/messenger.py",
+        "avitoapi/methods/items.py",
+        "avitoapi/auth/oauth.py"
+      ],
+      "url": "https://github.com/zlexdev/avitoapi",
+      "head_sha": "cbbe51736a1e5a4cefa68be6ed9307e8a1d47958",
+      "head_commit_date_utc": "2026-07-11T21:40:27Z",
+      "head_author_date_utc": "2026-07-11T21:40:27Z",
+      "commit_url": "https://github.com/zlexdev/avitoapi/commit/cbbe51736a1e5a4cefa68be6ed9307e8a1d47958",
+      "default_branch": "main",
+      "archived": false,
+      "github_detected_license": "MIT",
+      "runtime_verification": "not_run",
+      "sources": [
+        {
+          "path": "README.md",
+          "url": "https://github.com/zlexdev/avitoapi/blob/cbbe51736a1e5a4cefa68be6ed9307e8a1d47958/README.md"
+        },
+        {
+          "path": "LICENSE",
+          "url": "https://github.com/zlexdev/avitoapi/blob/cbbe51736a1e5a4cefa68be6ed9307e8a1d47958/LICENSE"
+        },
+        {
+          "path": "pyproject.toml",
+          "url": "https://github.com/zlexdev/avitoapi/blob/cbbe51736a1e5a4cefa68be6ed9307e8a1d47958/pyproject.toml"
+        },
+        {
+          "path": "avitoapi/methods/messenger.py",
+          "url": "https://github.com/zlexdev/avitoapi/blob/cbbe51736a1e5a4cefa68be6ed9307e8a1d47958/avitoapi/methods/messenger.py"
+        },
+        {
+          "path": "avitoapi/methods/items.py",
+          "url": "https://github.com/zlexdev/avitoapi/blob/cbbe51736a1e5a4cefa68be6ed9307e8a1d47958/avitoapi/methods/items.py"
+        },
+        {
+          "path": "avitoapi/auth/oauth.py",
+          "url": "https://github.com/zlexdev/avitoapi/blob/cbbe51736a1e5a4cefa68be6ed9307e8a1d47958/avitoapi/auth/oauth.py"
+        }
+      ],
+      "metadata_source": "https://api.github.com/repos/zlexdev/avitoapi",
+      "commit_source": "https://api.github.com/repos/zlexdev/avitoapi/commits?per_page=1"
+    }
+  ]
+}

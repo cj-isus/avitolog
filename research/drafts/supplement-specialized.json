@@ -1,0 +1,374 @@
+{
+  "schema_version": "1.0",
+  "checked_on": "2026-11-05",
+  "scope": "Additional manually reviewed candidates; separate from sealed search-discovered snapshot of 1811 repositories",
+  "runtime_verification": "not_run",
+  "candidates": [
+    {
+      "repo": "abotapi/avito-scraper",
+      "url": "https://github.com/abotapi/avito-scraper",
+      "kind": "hosted_service_client_examples",
+      "license": {
+        "spdx": "MIT",
+        "status": "LICENSE read",
+        "scope": "Examples in this repository; does not establish source availability or licensing of the hosted Apify Actor"
+      },
+      "transport": [
+        "Apify API via apify-client; calls hosted actor abotapi/avito-ru-scraper; requires APIFY_TOKEN",
+        "Hosted actor internals not inspected or provided by the reviewed repository"
+      ],
+      "reads": [
+        "Hosted output: listing title, description, price, location, attributes, seller fields; availability claims from README"
+      ],
+      "writes": [
+        "Local export/console through client examples; hosted actor execution",
+        "No seller messaging or Avito account mutations identified in reviewed examples"
+      ],
+      "scoring": {
+        "type": "simple_aggregate_example",
+        "details": "Node example computes median asking rent per square metre; no trained valuation or deal-quality model"
+      },
+      "parts": [
+        "Python/Node/cURL client examples",
+        "Input/output schema examples",
+        "Median calculation example"
+      ],
+      "limits": [
+        "Hosted service dependency with usage costs; no self-contained Avito scraper engine identified in root/README/examples",
+        "Sample output is explicitly mock data",
+        "Claims about API availability, access, latency and costs are author statements, not independently verified"
+      ],
+      "sources": [
+        {
+          "url": "https://api.github.com/repos/abotapi/avito-scraper",
+          "kind": "repository_metadata",
+          "checked_on": "2026-11-05"
+        },
+        {
+          "url": "https://github.com/abotapi/avito-scraper/blob/main/README.md",
+          "kind": "readme",
+          "checked_on": "2026-11-05"
+        },
+        {
+          "url": "https://github.com/abotapi/avito-scraper/blob/main/LICENSE",
+          "kind": "license",
+          "checked_on": "2026-11-05"
+        },
+        {
+          "url": "https://github.com/abotapi/avito-scraper/blob/main/examples/node/index.mjs",
+          "kind": "selected_source",
+          "checked_on": "2026-11-05"
+        }
+      ],
+      "review_level": "metadata_root_readme_license_and_selected_client_source",
+      "checked_on": "2026-11-05",
+      "runtime_verification": "not_run"
+    },
+    {
+      "repo": "2scraper/avito-scraper",
+      "url": "https://github.com/2scraper/avito-scraper",
+      "kind": "open_source_scraper_with_commercial_transport_integrations",
+      "license": {
+        "spdx": "MIT",
+        "status": "LICENSE read; copyright 2026 2Captcha",
+        "scope": "Repository source; external service access is separate"
+      },
+      "transport": [
+        "Python Playwright, pyppeteer, Selenium; CDP remote Scraping Browser API",
+        "HTML/DOM and embedded page JSON parsing with BeautifulSoup",
+        "Proxy/captcha/commercial browser integrations documented; no use of an existing manually authenticated Avito user session promised"
+      ],
+      "reads": [
+        "Search/category cards, item pages and seller profiles",
+        "Prices including displayed/old price, attributes, images, location and seller data as available"
+      ],
+      "writes": [
+        "Local JSON/CSV and completeness/attempt sidecars; diff of two captures",
+        "README states no login, contact-detail opening or seller messaging"
+      ],
+      "scoring": {
+        "type": "none",
+        "details": "Price-change diff and price extraction, not a market-value or negotiation model"
+      },
+      "parts": [
+        "product_parser.py: structured page parsing and data provenance",
+        "CLI/output metadata and completeness conventions",
+        "diff_runs.py comparison workflow"
+      ],
+      "limits": [
+        "Source is present, but operational independence from commercial transport is not demonstrated",
+        "README runtime measurements, anti-bot and universal paid-service claims are author reports; none reproduced",
+        "README states snapshot-based URL restrictions and an exception for page-generated seller-feed requests; this is not independent Avito permission evidence"
+      ],
+      "sources": [
+        {
+          "url": "https://api.github.com/repos/2scraper/avito-scraper",
+          "kind": "repository_metadata",
+          "checked_on": "2026-11-05"
+        },
+        {
+          "url": "https://github.com/2scraper/avito-scraper/blob/main/README.md",
+          "kind": "readme",
+          "checked_on": "2026-11-05"
+        },
+        {
+          "url": "https://github.com/2scraper/avito-scraper/blob/main/LICENSE",
+          "kind": "license",
+          "checked_on": "2026-11-05"
+        },
+        {
+          "url": "https://github.com/2scraper/avito-scraper/blob/main/product_parser.py",
+          "kind": "selected_source",
+          "checked_on": "2026-11-05"
+        }
+      ],
+      "review_level": "metadata_root_readme_license_and_selected_parser_source",
+      "checked_on": "2026-11-05",
+      "runtime_verification": "not_run"
+    },
+    {
+      "repo": "l0af-t0mcat/avito_renovation",
+      "url": "https://github.com/l0af-t0mcat/avito_renovation",
+      "kind": "open_source_specialized_monitor",
+      "license": {
+        "spdx": "MIT",
+        "status": "LICENSE read; copyright 2025 alast0r",
+        "scope": "Repository source"
+      },
+      "transport": [
+        "SeleniumBase Chrome Driver; DOM extraction; optional private/free proxies",
+        "README describes comparison against Moscow renovation addresses from mos.ru"
+      ],
+      "reads": [
+        "Listing title, price, address and URL; compares normalized address with renovation_data"
+      ],
+      "writes": [
+        "Telegram alerts; seen.json; parsed.db",
+        "No Avito seller messaging identified in selected parser"
+      ],
+      "scoring": {
+        "type": "rule_based_match",
+        "details": "Address membership in renovation list; no learned fair-price valuation or deal score"
+      },
+      "parts": [
+        "Address normalization and external-register matching pattern",
+        "Deduplication of seen listing ids",
+        "Telegram notifications and local persistence"
+      ],
+      "limits": [
+        "Specific to Moscow apartment renovation, not bicycles or general valuation",
+        "DOM selectors and current access are untested",
+        "README advertises Python 3.8+; environment compatibility and dependencies were not verified"
+      ],
+      "sources": [
+        {
+          "url": "https://api.github.com/repos/l0af-t0mcat/avito_renovation",
+          "kind": "repository_metadata",
+          "checked_on": "2026-11-05"
+        },
+        {
+          "url": "https://github.com/l0af-t0mcat/avito_renovation/blob/main/README.md",
+          "kind": "readme",
+          "checked_on": "2026-11-05"
+        },
+        {
+          "url": "https://github.com/l0af-t0mcat/avito_renovation/blob/main/LICENSE",
+          "kind": "license",
+          "checked_on": "2026-11-05"
+        },
+        {
+          "url": "https://github.com/l0af-t0mcat/avito_renovation/blob/main/avito_parser.py",
+          "kind": "selected_source",
+          "checked_on": "2026-11-05"
+        }
+      ],
+      "review_level": "metadata_root_readme_license_and_selected_parser_source",
+      "checked_on": "2026-11-05",
+      "runtime_verification": "not_run"
+    },
+    {
+      "repo": "nfilin480/carPrice_pred",
+      "url": "https://github.com/nfilin480/carPrice_pred",
+      "kind": "public_source_car_price_ml_research",
+      "license": {
+        "spdx": null,
+        "status": "No license in GitHub metadata or root listing; README read without finding a license statement",
+        "reuse": "No permission to incorporate code established by this review"
+      },
+      "transport": [
+        "Selenium DOM parser; local notebooks and model scripts"
+      ],
+      "reads": [
+        "Avito car listing name, asking price, parameters, description and region in selected parser",
+        "README reports a dataset of more than 70,000 rows"
+      ],
+      "writes": [
+        "Local CSV/datasets and model artifacts",
+        "No Avito account write capability identified in reviewed parser/README"
+      ],
+      "scoring": {
+        "type": "supervised_price_regression",
+        "details": "README lists CatBoost, LightGBM, RandomForest, LightAutoML and pyBoost; reported MAPE 14.58% and R2 0.952 are unverified author results"
+      },
+      "parts": [
+        "Car-feature preparation and comparison of boosting/AutoML approaches",
+        "Selenium dataset collector source; model/server directories visible"
+      ],
+      "limits": [
+        "License permission unresolved",
+        "Car category and historical data do not establish bicycle transfer or current price accuracy",
+        "Parser source starts its collection at module top level; do not import/run casually",
+        "No verified live assistant, negotiation or browser extension"
+      ],
+      "sources": [
+        {
+          "url": "https://api.github.com/repos/nfilin480/carPrice_pred",
+          "kind": "repository_metadata",
+          "checked_on": "2026-11-05"
+        },
+        {
+          "url": "https://github.com/nfilin480/carPrice_pred/blob/main/README.md",
+          "kind": "readme",
+          "checked_on": "2026-11-05"
+        },
+        {
+          "url": "https://github.com/nfilin480/carPrice_pred/blob/main/avito_parser.py",
+          "kind": "selected_source",
+          "checked_on": "2026-11-05"
+        }
+      ],
+      "review_level": "metadata_root_readme_and_selected_parser_source_license_unresolved",
+      "checked_on": "2026-11-05",
+      "runtime_verification": "not_run"
+    },
+    {
+      "repo": "Daniil-Solo/Avito-analytics",
+      "url": "https://github.com/Daniil-Solo/Avito-analytics",
+      "kind": "public_source_apartment_price_ml_university_project",
+      "license": {
+        "spdx": null,
+        "status": "No license in GitHub metadata or root listing; README read without finding a license statement",
+        "reuse": "No permission to incorporate code established by this review"
+      },
+      "transport": [
+        "README: requests/BeautifulSoup collection; Selenium geocoding; Overpass context features",
+        "Selected Prediction/main.py is a local Tkinter form invoking get_price"
+      ],
+      "reads": [
+        "Apartment/home attributes for Perm; geographic and nearby-amenity features"
+      ],
+      "writes": [
+        "Local prepared data/model artifacts and predicted-price GUI",
+        "No Avito seller messaging identified in reviewed material"
+      ],
+      "scoring": {
+        "type": "supervised_price_regression",
+        "details": "README describes a neural price model and feature engineering; reports test R2 0.943 and relative-error 4.56%, not reproduced"
+      },
+      "parts": [
+        "Cleaning, feature engineering and geospatial enrichment workflow",
+        "Model evaluation narrative and feature influence study",
+        "Local parameter-entry valuation GUI"
+      ],
+      "limits": [
+        "License permission unresolved",
+        "Specific city, property category and 2022 repository state; no current general-market calibration",
+        "Metric claims and split/data-leakage quality not independently assessed",
+        "Prediction function/model deserialization not inspected or run"
+      ],
+      "sources": [
+        {
+          "url": "https://api.github.com/repos/Daniil-Solo/Avito-analytics",
+          "kind": "repository_metadata",
+          "checked_on": "2026-11-05"
+        },
+        {
+          "url": "https://github.com/Daniil-Solo/Avito-analytics/blob/main/README.md",
+          "kind": "readme",
+          "checked_on": "2026-11-05"
+        },
+        {
+          "url": "https://github.com/Daniil-Solo/Avito-analytics/blob/main/Prediction/main.py",
+          "kind": "selected_source",
+          "checked_on": "2026-11-05"
+        }
+      ],
+      "review_level": "metadata_root_readme_and_selected_gui_source_license_unresolved",
+      "checked_on": "2026-11-05",
+      "runtime_verification": "not_run"
+    },
+    {
+      "repo": "Zzema/avito_nedvizhimost_analyse",
+      "url": "https://github.com/Zzema/avito_nedvizhimost_analyse",
+      "kind": "public_source_apartment_price_analysis_notebook",
+      "license": {
+        "spdx": null,
+        "status": "No license in GitHub metadata or root listing; README read without finding a license statement",
+        "reuse": "No permission to incorporate code established by this review"
+      },
+      "transport": [
+        "Local CSV datasets and Jupyter notebook",
+        "README links an external parser repository and describes Selenium/BeautifulSoup collection; parser not reviewed here"
+      ],
+      "reads": [
+        "Historical Moscow two-room apartment asks below 15 million rubles and Yandex realty reference data"
+      ],
+      "writes": [
+        "Local analysis/notebook outputs; seller messaging not documented"
+      ],
+      "scoring": {
+        "type": "price_prediction_and_underpricing_workflow_intent",
+        "details": "README proposes prioritizing asks below the predicted value; notebook model, metrics and ranking execution not inspected"
+      },
+      "parts": [
+        "Reference pattern for asking-price versus prediction screening",
+        "Historical apartment analysis notebook and CSV layout"
+      ],
+      "limits": [
+        "License permission unresolved",
+        "Dataset filenames and pushed date point to September 2020; unsuitable as current market evidence",
+        "Parser implementation is outside this repository and was not checked",
+        "Notebook was not executed or substantively audited"
+      ],
+      "sources": [
+        {
+          "url": "https://api.github.com/repos/Zzema/avito_nedvizhimost_analyse",
+          "kind": "repository_metadata",
+          "checked_on": "2026-11-05"
+        },
+        {
+          "url": "https://github.com/Zzema/avito_nedvizhimost_analyse/blob/master/README.md",
+          "kind": "readme",
+          "checked_on": "2026-11-05"
+        }
+      ],
+      "review_level": "metadata_root_and_readme_only_license_unresolved",
+      "checked_on": "2026-11-05",
+      "runtime_verification": "not_run"
+    },
+    {
+      "repo": "DynamicPricing (owner unspecified)",
+      "url": null,
+      "kind": "unresolved_candidate",
+      "license": {
+        "spdx": null,
+        "status": "unresolved"
+      },
+      "transport": [],
+      "reads": [],
+      "writes": [],
+      "scoring": {
+        "type": "unknown",
+        "details": "Name alone is insufficient to identify an Avito-related project"
+      },
+      "parts": [],
+      "limits": [
+        "No owner or repository URL supplied; no identity or capability inferred"
+      ],
+      "sources": [],
+      "review_level": "unresolved_identity",
+      "checked_on": "2026-11-05",
+      "runtime_verification": "not_run"
+    }
+  ]
+}

@@ -1,0 +1,375 @@
+{
+  "checked_at_utc": "2026-11-05T11:58:41.4865509Z",
+  "repository_count": 1811,
+  "search_plan": [
+    {
+      "pages": 10,
+      "query": "avito in:name,description"
+    },
+    {
+      "pages": 3,
+      "query": "авито in:name,description"
+    },
+    {
+      "pages": 1,
+      "query": "avito-mcp"
+    },
+    {
+      "pages": 1,
+      "query": "avito extension in:name,description,readme"
+    },
+    {
+      "pages": 1,
+      "query": "avito AI in:name,description"
+    },
+    {
+      "pages": 1,
+      "query": "avito llm in:name,description"
+    },
+    {
+      "pages": 1,
+      "query": "avito chatgpt in:name,description"
+    },
+    {
+      "pages": 2,
+      "query": "avito bot in:name,description"
+    },
+    {
+      "pages": 1,
+      "query": "avito price in:name,description"
+    },
+    {
+      "pages": 1,
+      "query": "avito monitor in:name,description"
+    }
+  ],
+  "searches": [
+    {
+      "query": "avito in:name,description",
+      "page": 1,
+      "per_page": 100,
+      "url": "https://api.github.com/search/repositories?q=avito%20in%3Aname%2Cdescription&per_page=100&page=1",
+      "fetched_at_utc": "2026-11-05T11:47:38.0371577Z",
+      "status": "ok",
+      "total_count": 10120,
+      "incomplete_results": false,
+      "returned_count": 100,
+      "rate_limit_remaining": "9",
+      "rate_limit_reset": "1793879351"
+    },
+    {
+      "query": "avito in:name,description",
+      "page": 2,
+      "per_page": 100,
+      "url": "https://api.github.com/search/repositories?q=avito%20in%3Aname%2Cdescription&per_page=100&page=2",
+      "fetched_at_utc": "2026-11-05T11:48:22.1192869Z",
+      "status": "error",
+      "error": "The SSL connection could not be established, see inner exception."
+    },
+    {
+      "query": "авито in:name,description",
+      "page": 1,
+      "per_page": 100,
+      "url": "https://api.github.com/search/repositories?q=%D0%B0%D0%B2%D0%B8%D1%82%D0%BE%20in%3Aname%2Cdescription&per_page=100&page=1",
+      "fetched_at_utc": "2026-11-05T11:49:02.4109113Z",
+      "status": "ok",
+      "total_count": 804,
+      "incomplete_results": false,
+      "returned_count": 100,
+      "rate_limit_remaining": "8",
+      "rate_limit_reset": "1793879351"
+    },
+    {
+      "query": "авито in:name,description",
+      "page": 2,
+      "per_page": 100,
+      "url": "https://api.github.com/search/repositories?q=%D0%B0%D0%B2%D0%B8%D1%82%D0%BE%20in%3Aname%2Cdescription&per_page=100&page=2",
+      "fetched_at_utc": "2026-11-05T11:49:19.6769815Z",
+      "status": "ok",
+      "total_count": 804,
+      "incomplete_results": false,
+      "returned_count": 100,
+      "rate_limit_remaining": "9",
+      "rate_limit_reset": "1793879439"
+    },
+    {
+      "query": "авито in:name,description",
+      "page": 3,
+      "per_page": 100,
+      "url": "https://api.github.com/search/repositories?q=%D0%B0%D0%B2%D0%B8%D1%82%D0%BE%20in%3Aname%2Cdescription&per_page=100&page=3",
+      "fetched_at_utc": "2026-11-05T11:49:51.8534672Z",
+      "status": "ok",
+      "total_count": 804,
+      "incomplete_results": false,
+      "returned_count": 100,
+      "rate_limit_remaining": "8",
+      "rate_limit_reset": "1793879439"
+    },
+    {
+      "query": "avito-mcp",
+      "page": 1,
+      "per_page": 100,
+      "url": "https://api.github.com/search/repositories?q=avito-mcp&per_page=100&page=1",
+      "fetched_at_utc": "2026-11-05T11:50:23.702251Z",
+      "status": "ok",
+      "total_count": 26,
+      "incomplete_results": false,
+      "returned_count": 26,
+      "rate_limit_remaining": "9",
+      "rate_limit_reset": "1793879507"
+    },
+    {
+      "query": "avito extension in:name,description,readme",
+      "page": 1,
+      "per_page": 100,
+      "url": "https://api.github.com/search/repositories?q=avito%20extension%20in%3Aname%2Cdescription%2Creadme&per_page=100&page=1",
+      "fetched_at_utc": "2026-11-05T11:50:55.9676703Z",
+      "status": "ok",
+      "total_count": 276,
+      "incomplete_results": false,
+      "returned_count": 100,
+      "rate_limit_remaining": "9",
+      "rate_limit_reset": "1793879523"
+    },
+    {
+      "query": "avito AI in:name,description",
+      "page": 1,
+      "per_page": 100,
+      "url": "https://api.github.com/search/repositories?q=avito%20AI%20in%3Aname%2Cdescription&per_page=100&page=1",
+      "fetched_at_utc": "2026-11-05T11:51:28.4063215Z",
+      "status": "ok",
+      "total_count": 152,
+      "incomplete_results": false,
+      "returned_count": 100,
+      "rate_limit_remaining": "8",
+      "rate_limit_reset": "1793879523"
+    },
+    {
+      "query": "avito llm in:name,description",
+      "page": 1,
+      "per_page": 100,
+      "url": "https://api.github.com/search/repositories?q=avito%20llm%20in%3Aname%2Cdescription&per_page=100&page=1",
+      "fetched_at_utc": "2026-11-05T11:51:47.8711853Z",
+      "status": "ok",
+      "total_count": 40,
+      "incomplete_results": false,
+      "returned_count": 40,
+      "rate_limit_remaining": "9",
+      "rate_limit_reset": "1793879568"
+    },
+    {
+      "query": "avito chatgpt in:name,description",
+      "page": 1,
+      "per_page": 100,
+      "url": "https://api.github.com/search/repositories?q=avito%20chatgpt%20in%3Aname%2Cdescription&per_page=100&page=1",
+      "fetched_at_utc": "2026-11-05T11:51:57.2587586Z",
+      "status": "ok",
+      "total_count": 3,
+      "incomplete_results": false,
+      "returned_count": 3,
+      "rate_limit_remaining": "8",
+      "rate_limit_reset": "1793879568"
+    },
+    {
+      "query": "avito bot in:name,description",
+      "page": 1,
+      "per_page": 100,
+      "url": "https://api.github.com/search/repositories?q=avito%20bot%20in%3Aname%2Cdescription&per_page=100&page=1",
+      "fetched_at_utc": "2026-11-05T11:52:05.0186995Z",
+      "status": "ok",
+      "total_count": 486,
+      "incomplete_results": false,
+      "returned_count": 100,
+      "rate_limit_remaining": "7",
+      "rate_limit_reset": "1793879568"
+    },
+    {
+      "query": "avito bot in:name,description",
+      "page": 2,
+      "per_page": 100,
+      "url": "https://api.github.com/search/repositories?q=avito%20bot%20in%3Aname%2Cdescription&per_page=100&page=2",
+      "fetched_at_utc": "2026-11-05T11:52:26.0592113Z",
+      "status": "ok",
+      "total_count": 486,
+      "incomplete_results": false,
+      "returned_count": 100,
+      "rate_limit_remaining": "6",
+      "rate_limit_reset": "1793879568"
+    },
+    {
+      "query": "avito price in:name,description",
+      "page": 1,
+      "per_page": 100,
+      "url": "https://api.github.com/search/repositories?q=avito%20price%20in%3Aname%2Cdescription&per_page=100&page=1",
+      "fetched_at_utc": "2026-11-05T11:52:45.8482487Z",
+      "status": "ok",
+      "total_count": 104,
+      "incomplete_results": false,
+      "returned_count": 100,
+      "rate_limit_remaining": "9",
+      "rate_limit_reset": "1793879630"
+    },
+    {
+      "query": "avito monitor in:name,description",
+      "page": 1,
+      "per_page": 100,
+      "url": "https://api.github.com/search/repositories?q=avito%20monitor%20in%3Aname%2Cdescription&per_page=100&page=1",
+      "fetched_at_utc": "2026-11-05T11:53:09.4930266Z",
+      "status": "ok",
+      "total_count": 68,
+      "incomplete_results": false,
+      "returned_count": 68,
+      "rate_limit_remaining": "8",
+      "rate_limit_reset": "1793879630"
+    },
+    {
+      "query": "avito in:name,description",
+      "page": 2,
+      "per_page": 100,
+      "url": "https://api.github.com/search/repositories?q=avito%20in%3Aname%2Cdescription&per_page=100&page=2",
+      "fetched_at_utc": "2026-11-05T11:53:56.9335804Z",
+      "status": "ok",
+      "attempt_count": 1,
+      "transport_errors": [],
+      "total_count": 10120,
+      "incomplete_results": false,
+      "returned_count": 100,
+      "rate_limit_remaining": "8",
+      "rate_limit_reset": "1793879694"
+    },
+    {
+      "query": "avito in:name,description",
+      "page": 3,
+      "per_page": 100,
+      "url": "https://api.github.com/search/repositories?q=avito%20in%3Aname%2Cdescription&per_page=100&page=3",
+      "fetched_at_utc": "2026-11-05T11:54:15.7293511Z",
+      "status": "ok",
+      "attempt_count": 1,
+      "transport_errors": [],
+      "total_count": 10120,
+      "incomplete_results": false,
+      "returned_count": 100,
+      "rate_limit_remaining": "9",
+      "rate_limit_reset": "1793879716"
+    },
+    {
+      "query": "avito in:name,description",
+      "page": 4,
+      "per_page": 100,
+      "url": "https://api.github.com/search/repositories?q=avito%20in%3Aname%2Cdescription&per_page=100&page=4",
+      "fetched_at_utc": "2026-11-05T11:54:28.4301984Z",
+      "status": "ok",
+      "attempt_count": 1,
+      "transport_errors": [],
+      "total_count": 10120,
+      "incomplete_results": false,
+      "returned_count": 100,
+      "rate_limit_remaining": "8",
+      "rate_limit_reset": "1793879716"
+    },
+    {
+      "query": "avito in:name,description",
+      "page": 5,
+      "per_page": 100,
+      "url": "https://api.github.com/search/repositories?q=avito%20in%3Aname%2Cdescription&per_page=100&page=5",
+      "fetched_at_utc": "2026-11-05T11:54:41.043386Z",
+      "status": "ok",
+      "attempt_count": 1,
+      "transport_errors": [],
+      "total_count": 10120,
+      "incomplete_results": false,
+      "returned_count": 100,
+      "rate_limit_remaining": "7",
+      "rate_limit_reset": "1793879716"
+    },
+    {
+      "query": "avito in:name,description",
+      "page": 6,
+      "per_page": 100,
+      "url": "https://api.github.com/search/repositories?q=avito%20in%3Aname%2Cdescription&per_page=100&page=6",
+      "fetched_at_utc": "2026-11-05T11:54:53.9279822Z",
+      "status": "ok",
+      "attempt_count": 1,
+      "transport_errors": [],
+      "total_count": 10120,
+      "incomplete_results": false,
+      "returned_count": 100,
+      "rate_limit_remaining": "6",
+      "rate_limit_reset": "1793879716"
+    },
+    {
+      "query": "avito in:name,description",
+      "page": 7,
+      "per_page": 100,
+      "url": "https://api.github.com/search/repositories?q=avito%20in%3Aname%2Cdescription&per_page=100&page=7",
+      "fetched_at_utc": "2026-11-05T11:55:12.4333311Z",
+      "status": "ok",
+      "attempt_count": 2,
+      "transport_errors": [
+        "The SSL connection could not be established, see inner exception."
+      ],
+      "total_count": 10120,
+      "incomplete_results": false,
+      "returned_count": 100,
+      "rate_limit_remaining": "9",
+      "rate_limit_reset": "1793879807"
+    },
+    {
+      "query": "avito in:name,description",
+      "page": 8,
+      "per_page": 100,
+      "url": "https://api.github.com/search/repositories?q=avito%20in%3Aname%2Cdescription&per_page=100&page=8",
+      "fetched_at_utc": "2026-11-05T11:56:06.7610608Z",
+      "status": "ok",
+      "attempt_count": 1,
+      "transport_errors": [],
+      "total_count": 10120,
+      "incomplete_results": false,
+      "returned_count": 100,
+      "rate_limit_remaining": "8",
+      "rate_limit_reset": "1793879807"
+    },
+    {
+      "query": "avito in:name,description",
+      "page": 9,
+      "per_page": 100,
+      "url": "https://api.github.com/search/repositories?q=avito%20in%3Aname%2Cdescription&per_page=100&page=9",
+      "fetched_at_utc": "2026-11-05T11:56:43.2352317Z",
+      "status": "ok",
+      "attempt_count": 1,
+      "transport_errors": [],
+      "total_count": 10120,
+      "incomplete_results": false,
+      "returned_count": 100,
+      "rate_limit_remaining": "9",
+      "rate_limit_reset": "1793879876"
+    },
+    {
+      "query": "avito in:name,description",
+      "page": 10,
+      "per_page": 100,
+      "url": "https://api.github.com/search/repositories?q=avito%20in%3Aname%2Cdescription&per_page=100&page=10",
+      "fetched_at_utc": "2026-11-05T11:57:09.8223305Z",
+      "status": "ok",
+      "attempt_count": 1,
+      "transport_errors": [],
+      "total_count": 10120,
+      "incomplete_results": false,
+      "returned_count": 100,
+      "rate_limit_remaining": "8",
+      "rate_limit_reset": "1793879876"
+    }
+  ],
+  "completeness_limitations": [
+    "GitHub repository search returns at most 1000 results per query; broad avito query is capped and therefore sampled.",
+    "Search uses default GitHub best-match relevance, without a frozen snapshot; results can move across pages during collection.",
+    "Only public repositories discovered by the listed queries are included; forks, synonyms, private and unindexed projects can be missed.",
+    "The catalog includes false positives: interview tasks, clones, Avito.ma, company infrastructure and Kaggle projects.",
+    "Metadata and GitHub-detected license were collected; no project was installed or run, and code was not reviewed in this inventory.",
+    "Missing license or NOASSERTION is not permission to reuse code; even detected SPDX is metadata, not a full license audit.",
+    "An initial GitHub connector probe returned 100 repositories but omitted description, stars, license and total_count; public REST was used for the export."
+  ],
+  "api_documentation_url": "https://docs.github.com/en/rest/search/search#about-search",
+  "api_documentation_checked_at": "2026-11-05",
+  "license_documentation_url": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository"
+}
