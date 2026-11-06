@@ -195,10 +195,10 @@ const stats = {
 }
 const pageEntries = []
 const pages = new Map()
-function writePage(destination, title, body, source, tags = []) {
+function writePage(destination, title, body, source, tags = [], checkedOn = reviews.checked_on) {
   if (pages.has(destination)) throw new Error(`Duplicate page: ${destination}`)
   const url = sourceUrl(source)
-  const frontmatter = { title, description: `${title} — база знаний АВИТОЛОГ`, tags, source_url: url, sourceUrl: url, source_ref: sourceRef, source_path: source, checked_on: reviews.checked_on }
+  const frontmatter = { title, description: `${title} — база знаний АВИТОЛОГ`, tags, source_url: url, sourceUrl: url, source_ref: sourceRef, source_path: source, ...(checkedOn ? { checked_on: checkedOn } : {}) }
   if (workingTree) frontmatter.draft_snapshot = true
   const yaml = Object.entries(frontmatter).map(([key, value]) => `${key}: ${JSON.stringify(value)}`).join("\n")
   const draft = workingTree ? "> Локальный предпросмотр из рабочего дерева. Ссылка на источник ведёт к HEAD; содержимое ещё не закреплено коммитом.\n\n" : ""
@@ -287,6 +287,7 @@ for (const [file, destination] of noteDestinations) {
   let body = sources.get(file).toString("utf8").replace(/^\uFEFF/, "").replace(/\r\n/g, "\n")
   const frontmatter = body.match(/^---\n([\s\S]*?)\n---\n/)
   let frontTitle
+  const noteCheckedOn = frontmatter?.[1].match(/^checked_on:\s*["']?(\d{4}-\d{2}-\d{2})["']?\s*$/m)?.[1] ?? null
   if (frontmatter) {
     const raw = frontmatter[1].match(/^title:\s*(.+)$/m)?.[1]
     if (raw) { try { frontTitle = JSON.parse(raw) } catch { frontTitle = raw.replace(/^['"]|['"]$/g, "") } }
@@ -300,7 +301,7 @@ for (const [file, destination] of noteDestinations) {
     const mapped = documentTargets.get(targetPath)
     return mapped ? `[[${mapped}${anchor}${alias}]]` : original
   })
-  writePage(destination + ".md", title, `${body.trim()}\n\n---\n\n${wiki("research/notes/index", "Исследования")} · ${wiki("index", "Главная карта")}`, file, ["исследование"])
+  writePage(destination + ".md", title, `${body.trim()}\n\n---\n\n${wiki("research/notes/index", "Исследования")} · ${wiki("index", "Главная карта")}`, file, ["исследование"], noteCheckedOn)
 }
 writePage("research/notes/index.md", "Исследования", `Пополняемые заметки, которые связывают проекты, источники и выводы. Канонические статьи находятся в разделе research/notes репозитория.\n\n${notePaths.length ? notePaths.map(file => { const destination = noteDestinations.get(file); return `- ${wiki(destination, pageEntries.find(entry => entry.destination === destination + ".md").title)}` }).join("\n") : "Новых самостоятельных статей пока нет. Исходная база доступна в разделах ниже."}\n\n## Основания базы\n\n${wiki("research/reuse/index", "Карта переиспользования")} · ${wiki("research/methodology/index", "Метод и лицензии")} · ${wiki("research/reconciliation/index", "Сверка присланного исследования")}\n\n${wiki("catalog", "Каталог проектов")} · ${wiki("index", "Главная карта")}`, "research/methodology.md", ["исследование"])
 const catalogIntroduction = sources.get("research/catalog.md").toString("utf8").replace(/^# .*\r?\n+/, "").split(/^## Подробные карточки/m)[0]

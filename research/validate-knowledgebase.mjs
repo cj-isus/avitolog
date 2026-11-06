@@ -62,7 +62,7 @@ check('user_input_integrity', attachmentHash === 'e7b0b5cde98d4f68db1220516272ae
 const reportPath = path.join(base, 'data/knowledgebase-validation.json');
 fs.writeFileSync(reportPath, '{}\n');
 const mdFiles = [];
-function walk(dir) {for (const item of fs.readdirSync(dir, {withFileTypes:true})) { if (item.name === '.git' || item.name === 'evidence') continue; const p = path.join(dir, item.name); if (item.isDirectory()) walk(p); else if (item.name.endsWith('.md')) mdFiles.push(p); }}
+function walk(dir) {for (const item of fs.readdirSync(dir, {withFileTypes:true})) { if (['.git', '.artifacts', 'node_modules', 'evidence'].includes(item.name)) continue; const p = path.join(dir, item.name); if (item.isDirectory()) walk(p); else if (item.name.endsWith('.md')) mdFiles.push(p); }}
 walk(root);
 const linkIssues = [];
 let localLinks = 0;
