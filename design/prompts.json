@@ -1,0 +1,88 @@
+{
+  "generatedOn": "2026-11-06",
+  "tool": "imagegen",
+  "kind": "AI generated target UX concepts; not runtime screenshots; fictional data",
+  "commonStyle": "Use case: ui-mockup. Create a single final high-fidelity product UI concept for the SAME coherent product named АВИТОЛОГ. Design language: futuristic premium decision cockpit, restrained and very usable, dark obsidian #0a1013, graphite panels #111b20, primary acid-lime #bcf57c, icy cyan #78dbe8 for evidence, soft off-white type, subtle technical depth, elegant fine borders and grids, generous spacing, precise icons, clean readable Russian typography. It should feel like a sophisticated near-future professional product, never a generic template, hacker terminal, poster, neon nightclub or decorative sci-fi HUD. Realistic controls, clear hierarchy, one main action. Match the architecture of a local-first browser extension plus full workspace. Flat front-on UI screenshot composition, no laptop, no perspective, no physical room, no watermark. This is one screen, not a collage or multiple screens. Desktop screens in widescreen 16:10; mobile screen in portrait. All displayed data fictional. ",
+  "screens": [
+    {
+      "id": 1,
+      "slug": "intent-brief",
+      "title": "Редактируемый бриф покупки",
+      "prompt": "Create one polished desktop product screen for АВИТОЛОГ, focused on EDITING BUYING INTENT. Use a large, calm form in the center and a compact live requirements summary on the right, within the shared application shell. Clear Russian heading: «Задача поиска». Fields: «Рост, см» 196, «Колёса» 29″, «Бюджет покупки» до 60 000 ₽, «Объявления» 30–90 тыс. ₽, «Отправная точка» Пролетарская. Separate essential requirements from preferences with labeled controls; include a short editable natural-language brief. One primary button: «Сохранить задачу». Show persistent «КОНЦЕПТ · СИНТЕТИЧЕСКИЕ ДАННЫЕ». This is a precise working form, not a landing page, onboarding carousel, or chatbot conversation. Do not imply that a live Avito search has run.",
+      "file": "concepts/01-brief.png",
+      "corrections": null
+    },
+    {
+      "id": 2,
+      "slug": "search-radar",
+      "title": "Радар сохранённых кандидатов",
+      "prompt": "Create one desktop АВИТОЛОГ screen centered on a BICYCLE CANDIDATE GRID. Heading «Мой радар», a useful search input, suitability filter, selectable product cards, and one primary action «Сравнить выбранные». Show realistic generated 29-inch hardtail bicycle illustrations for synthetic Trail 29 XL variants A, B, C, priced 52 000 ₽, 59 000 ₽, 55 000 ₽. Cards have readable price, frame and wheel chips, location marked conditional, and text statuses such as «Нужно уточнить». One secondary card may have missing frame information, making the collection feel like a real evaluation workflow. Use explicit selection checkboxes and restrained status icons. Keep persistent «КОНЦЕПТ · СИНТЕТИЧЕСКИЕ ДАННЫЕ». Present saved local examples; no live scanning animation, real listing count, savings promise, or fake seller identity.",
+      "file": "concepts/02-radar.png",
+      "corrections": "Replace all suitability percentages with needs clarification."
+    },
+    {
+      "id": 3,
+      "slug": "avito-sidepanel",
+      "title": "Расширение рядом с объявлением",
+      "prompt": "Create one believable DESKTOP BROWSER + EXTENSION SIDEPANEL composition. The left two-thirds show a fictional Avito bicycle listing for «Trail 29 · XL · вариант A», 52 000 ₽, with a generated bicycle illustration and brief seller-style description. Explicitly label that page «Пример страницы Avito · синтетика»; do not reproduce an actual account or listing. The right third is the narrow АВИТОЛОГ sidepanel: observed asking price, claimed 29″ wheels and XL frame, unknown geometry and service history, a short source section, and primary «Сохранить карточку». Include «Заявлено продавцом» and «Нужно уточнить». Preserve the page-versus-assistant hierarchy. Persistent «КОНЦЕПТ · СИНТЕТИЧЕСКИЕ ДАННЫЕ». No private chat, phone number, login flow, real listing URL, or autonomous extraction-success claim.",
+      "file": "concepts/03-sidepanel.png",
+      "corrections": null
+    },
+    {
+      "id": 4,
+      "slug": "bicycle-dossier",
+      "title": "Досье велосипеда и неизвестное",
+      "prompt": "Create one АВИТОЛОГ desktop BICYCLE DOSSIER screen. Make a large, exceptionally clear generated hardtail bicycle illustration the main visual; add only four elegant inspection callouts for frame, fork, drivetrain and brakes. Label the illustration «Сгенерированная иллюстрация». The right evidence column has compact rows «Заявлено», «Неизвестно», «Нужен осмотр», with missing fork service history and unconfirmed frame geometry. Use a readable statement/source/next-question hierarchy rather than magical defect detection. Heading «Разбор экземпляра», synthetic variant A asking price 52 000 ₽, primary «Подготовить вопросы». Persistent «КОНЦЕПТ · СИНТЕТИЧЕСКИЕ ДАННЫЕ» and an additional «Будущая возможность · анализ фото» tag. No AI confidence percentage, invented cracks, certified condition, or completed mechanical inspection.",
+      "file": "concepts/04-dossier.png",
+      "corrections": null
+    },
+    {
+      "id": 5,
+      "slug": "compare-three",
+      "title": "Сравнение трёх кандидатов",
+      "prompt": "Create one АВИТОЛОГ desktop COMPARISON screen with exactly THREE balanced candidate columns A, B, C and a fixed criterion column. Small generated bicycle thumbnails sit above concise rows. Heading «Различия, которые важны». Exact synthetic numbers: A price 52 000 ₽ + user reserve 3 500 ₽ = 55 500 ₽; B 59 000 ₽ + 4 500 ₽ = 63 500 ₽, explicitly «Выше бюджета»; C 55 000 ₽ + 4 000 ₽ = 59 000 ₽. Other rows show 29″ wheels, claimed XL frame, components and unknown service history. The reserve is labeled «Ваш резерв», not a diagnosed repair cost. Use text and icons for limitations. Primary «Открыть разбор». Persistent «КОНЦЕПТ · СИНТЕТИЧЕСКИЕ ДАННЫЕ». No numerical trust scores, winner trophy, verified fit claim or predicted discount.",
+      "file": "concepts/05-compare.png",
+      "corrections": "All three sellers are fictional private individuals."
+    },
+    {
+      "id": 6,
+      "slug": "asking-comparables",
+      "title": "Ценовые ориентиры и аналоги",
+      "prompt": "Create one АВИТОЛОГ desktop ANALYTICS screen about ASKING-PRICE COMPARABLES, not completed sales. Heading «Ценовые ориентиры». Make a restrained dot plot with three independent synthetic observations 55 000 ₽, 57 000 ₽, 59 000 ₽, a clear range 55–59 тыс. ₽, and median 57 тыс. ₽. Do not use a time-series axis. Pair it with a readable included-comparables table and a method panel explaining matching group, wheels, frame and excluded target A. Show labels «3 демоаналога», «Цены объявлений», «Не цены сделок», and «Износ не учтён». Primary «Проверить аналоги». Persistent «КОНЦЕПТ · СИНТЕТИЧЕСКИЕ ДАННЫЕ». This is transparent arithmetic on saved examples, not a market-wide valuation, fair-price guarantee, profit forecast or measured saving.",
+      "file": "concepts/06-market.png",
+      "corrections": "Match declared XL frame size; geometry unknown."
+    },
+    {
+      "id": 7,
+      "slug": "proletarskaya-map",
+      "title": "География поиска от Пролетарской",
+      "prompt": "Create one АВИТОЛОГ desktop MAP-LED SEARCH CONCEPT. A beautifully restrained schematic Moscow map occupies most of the workspace, with «Пролетарская» as the clear origin anchor and subtle radius rings. Three conditional candidate pins A, B, C link to a compact list on the right; one selected pin and card share a clear highlight. Include region and radius controls and primary «Выбрать область». Treat the map as a schematic, not an accurate surveyed route; visibly label «Схема · расстояния условные». The points are fictional and must not imply real sellers or real availability. Persistent «КОНЦЕПТ · СИНТЕТИЧЕСКИЕ ДАННЫЕ» plus «Будущая возможность · карта». No verified travel times, private addresses, live tracking or completed geocoding claim.",
+      "file": "concepts/07-map.png",
+      "corrections": null
+    },
+    {
+      "id": 8,
+      "slug": "negotiation-draft",
+      "title": "Два вопроса и ручное предложение",
+      "prompt": "Create one АВИТОЛОГ desktop NEGOTIATION DRAFT workspace, not an active messenger. Left panel: synthetic candidate A, asking 52 000 ₽; exactly two questions about precise frame size/geometry and fork/drivetrain service or defects. A clearly editable user-entered offer field contains 45 000 ₽. Right panel: a large editable Russian message draft with greeting, those two questions and a conditional sentence about discussing that price only if fit and inspection are satisfactory. Main heading «Сначала вопросы. Затем цена». Primary action «Копировать текст», visible status «Черновик · не отправлено». Persistent «КОНЦЕПТ · СИНТЕТИЧЕСКИЕ ДАННЫЕ». Use authentic textarea and input affordances. No send-to-all, accepted offer, seller reply, automatic bargaining or achieved discount.",
+      "file": "concepts/08-negotiation.png",
+      "corrections": null
+    },
+    {
+      "id": 9,
+      "slug": "mobile-inspection",
+      "title": "Мобильный чек-лист осмотра",
+      "prompt": "Create exactly one PORTRAIT MOBILE АВИТОЛОГ screen, a practical ON-SITE BICYCLE INSPECTION CHECKLIST, shown front-on without hands or a staged room. Heading «На осмотре», synthetic candidate A and a compact progress indicator explicitly about checklist completion. Large thumb-friendly rows: «Рама», «Вилка», «Колёса», «Тормоза», each initially «Не проверено» with an unchecked control. One expanded section has a short inspection question, editable note area and secondary «Добавить фото». Sticky primary action «Записать замечание». Keep plenty of breathing room and readable Cyrillic. Persistent «КОНЦЕПТ · СИНТЕТИЧЕСКИЕ ДАННЫЕ» plus «Будущая возможность · осмотр». No pre-certified safety, autonomous photo diagnosis, fake completed checks, invented defects or claim that a checklist replaces a mechanic.",
+      "file": "concepts/09-inspection.png",
+      "corrections": null
+    },
+    {
+      "id": 10,
+      "slug": "decision-library",
+      "title": "Библиотека решений и граф доказательств",
+      "prompt": "Create one АВИТОЛОГ desktop DECISION LIBRARY screen, distinct from a listing radar. A left list contains saved synthetic buying cases; the center shows a small legible evidence graph for candidate A with only five or six named nodes such as «Карточка A», «Описание», «Аналоги», «Вопросы», «Решение». Select one meaningful connection; the right detail drawer displays the related statement, its synthetic source and remaining unknown. Heading «История решений», status «Выбор не сделан», primary «Открыть обоснование». Use navigable-looking list rows, source links and a sensible graph zoom control, not a decorative neural network. Persistent «КОНЦЕПТ · СИНТЕТИЧЕСКИЕ ДАННЫЕ» plus «Будущая возможность · граф». No real transaction history, cloud-sync claim, completed purchase or fabricated evidence.",
+      "file": "concepts/10-decision.png",
+      "corrections": "Conclusions preserve unknown geometry, no inspection, asks only."
+    }
+  ]
+}

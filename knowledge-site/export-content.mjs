@@ -9,6 +9,11 @@ const permitted = [
   "research/data/deep-reviews.csv", "research/data/github-repositories.csv",
   "research/reuse-map.md", "research/methodology.md", "research/reconciliation.md", "research/catalog.md",
 ]
+const conceptFiles = [
+  "01-brief.png", "02-radar.png", "03-sidepanel.png", "04-dossier.png", "05-compare.png",
+  "06-market.png", "07-map.png", "08-negotiation.png", "09-inspection.png", "10-decision.png",
+]
+const conceptDestinations = new Map(conceptFiles.map(file => [`design/concepts/${file}`, `assets/concepts/${file}`]))
 const flags = new Map()
 for (let i = 2; i < process.argv.length; i++) {
   const key = process.argv[i]
@@ -69,6 +74,29 @@ if (workingTree) {
   }
 }
 permitted.push(...notePaths.sort())
+const availableConcepts = new Set()
+if (workingTree) {
+  for (const file of conceptDestinations.keys()) {
+    const absolute = path.join(repository, file)
+    if (!fs.existsSync(absolute)) continue
+    for (const part of ["design", "design/concepts", file]) {
+      if (fs.lstatSync(path.join(repository, part)).isSymbolicLink()) throw new Error(`Symlink concept input is not allowed: ${part}`)
+    }
+    if (!fs.statSync(absolute).isFile()) throw new Error(`Concept input is not a regular file: ${file}`)
+    availableConcepts.add(file)
+  }
+} else {
+  for (const record of git("ls-tree", "-r", "-z", sourceRef, "--", ...conceptDestinations.keys()).toString().split("\0").filter(Boolean)) {
+    const match = record.match(/^(\d+) blob [a-f0-9]+\t(.+)$/)
+    if (!match || !conceptDestinations.has(match[2]) || !["100644", "100755"].includes(match[1])) throw new Error("Concept input must be an explicitly allowed regular Git blob")
+    availableConcepts.add(match[2])
+  }
+}
+if (notePaths.includes("research/notes/mvp-gallery.md")) {
+  const missing = [...conceptDestinations.keys()].filter(file => !availableConcepts.has(file))
+  if (missing.length) throw new Error(`MVP gallery requires all ten concept images; missing: ${missing.join(", ")}`)
+}
+permitted.push(...availableConcepts)
 const sources = new Map()
 for (const file of permitted) {
   let bytes
@@ -80,6 +108,41 @@ for (const file of permitted) {
   } else bytes = git("show", `${sourceRef}:${file}`)
   sources.set(file, bytes)
 }
+function inspectConceptPng(bytes, file) {
+  if (bytes.length < 57 || bytes.length > 8 * 1024 * 1024) throw new Error(`Concept PNG must be at most 8 MiB: ${file}`)
+  if (!bytes.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]))) throw new Error(`Invalid PNG signature: ${file}`)
+  let offset = 8, width, height, sawData = false, ended = false
+  while (offset < bytes.length) {
+    if (offset + 12 > bytes.length) throw new Error(`Truncated PNG chunk: ${file}`)
+    const length = bytes.readUInt32BE(offset), end = offset + 12 + length
+    if (end > bytes.length) throw new Error(`Truncated PNG payload: ${file}`)
+    const type = bytes.toString("ascii", offset + 4, offset + 8)
+    if (!/^[A-Za-z]{4}$/.test(type)) throw new Error(`Invalid PNG chunk type: ${file}`)
+    let crc = 0xffffffff
+    for (const byte of bytes.subarray(offset + 4, end - 4)) {
+      crc ^= byte
+      for (let bit = 0; bit < 8; bit++) crc = (crc >>> 1) ^ (crc & 1 ? 0xedb88320 : 0)
+    }
+    if (((crc ^ 0xffffffff) >>> 0) !== bytes.readUInt32BE(end - 4)) throw new Error(`PNG checksum mismatch: ${file}`)
+    if (offset === 8) {
+      if (type !== "IHDR" || length !== 13) throw new Error(`PNG must start with IHDR: ${file}`)
+      width = bytes.readUInt32BE(offset + 8); height = bytes.readUInt32BE(offset + 12)
+      const depth = bytes[offset + 16], color = bytes[offset + 17]
+      const validDepths = { 0: [1, 2, 4, 8, 16], 2: [8, 16], 3: [1, 2, 4, 8], 4: [8, 16], 6: [8, 16] }
+      if (!validDepths[color]?.includes(depth) || bytes[offset + 18] !== 0 || bytes[offset + 19] !== 0 || bytes[offset + 20] > 1) throw new Error(`Unsupported PNG header: ${file}`)
+      if (width < 320 || height < 240 || width > 4096 || height > 4096) throw new Error(`Concept PNG dimensions must be 320–4096 by 240–4096: ${file}`)
+    } else if (type === "IHDR") throw new Error(`Duplicate PNG header: ${file}`)
+    if (type === "IDAT" && length) sawData = true
+    if (type === "IEND") {
+      if (length !== 0 || end !== bytes.length || !sawData) throw new Error(`Invalid PNG end: ${file}`)
+      ended = true
+    }
+    offset = end
+  }
+  if (!ended) throw new Error(`PNG has no IEND: ${file}`)
+  return { width, height, bytes: bytes.length, mediaType: "image/png" }
+}
+const conceptAssets = [...availableConcepts].map(file => ({ source: file, destination: conceptDestinations.get(file), ...inspectConceptPng(sources.get(file), file), sha256: crypto.createHash("sha256").update(sources.get(file)).digest("hex") }))
 const reviews = JSON.parse(sources.get(permitted[0]).toString("utf8").replace(/^\uFEFF/, ""))
 const inventory = JSON.parse(sources.get(permitted[1]).toString("utf8").replace(/^\uFEFF/, ""))
 if (!Array.isArray(reviews.entries) || !Array.isArray(reviews.adjacent_entries) || !Array.isArray(inventory.repositories)) throw new Error("Unsupported knowledge-base schema")
@@ -221,8 +284,8 @@ const noteSpecs = [
   ["research/reconciliation.md", "reconciliation", "Сверка присланного исследования"],
 ]
 function rewriteLinks(body, source) {
-  return body.replace(/\[([^\]\n]+)\]\(([^\s)]+)(?:\s+"[^"\n]*")?\)/g, (original, title, url) => {
-    if (/^https:\/\/github\.com\//.test(url)) {
+  return body.replace(/(!?)\[([^\]\n]+)\]\(([^\s)]+)(?:\s+("[^"\n]*"))?\)/g, (original, image, title, url, caption) => {
+    if (!image && /^https:\/\/github\.com\//.test(url)) {
       const match = url.match(/^https:\/\/github\.com\/([^/]+\/[^/#?]+)\/?$/)
       const entry = match && allProjects.find(item => item.repo.toLowerCase() === match[1].toLowerCase())
       return entry ? wiki(slug(entry.repo), title) : original
@@ -230,6 +293,14 @@ function rewriteLinks(body, source) {
     if (/^[a-z][a-z0-9+.-]*:/i.test(url) || url.startsWith("#")) return original
     const pathname = url.split(/[?#]/)[0]
     const target = path.posix.normalize(path.posix.join(path.posix.dirname(source), decodeURIComponent(pathname)))
+    if (conceptDestinations.has(target)) {
+      if (!availableConcepts.has(target)) throw new Error(`Referenced concept image is missing: ${target}`)
+      const destination = documentTargets.get(source)
+      if (!destination) throw new Error(`No page destination for concept reference: ${source}`)
+      const relative = path.posix.relative(path.posix.dirname(destination), conceptDestinations.get(target))
+      return `${image}[${title}](${relative}${caption ? " " + caption : ""})`
+    }
+    if (image) throw new Error(`Local image is outside the publication allowlist: ${target}`)
     if (documentTargets.has(target)) return wiki(documentTargets.get(target), title)
     if (target === "research/source-index.md") return wiki("catalog", title)
     if (permitted.includes(target)) return `[${title}](${sourceUrl(target)})`
@@ -325,12 +396,18 @@ for (const [destination, markdown] of pages) {
 }
 fs.mkdirSync(path.join(output, "downloads"), { recursive: true })
 for (const file of permitted.filter(file => /^research\/data\//.test(file))) fs.writeFileSync(path.join(output, "downloads", path.basename(file)), sources.get(file))
+for (const asset of conceptAssets) {
+  const target = path.join(output, asset.destination)
+  fs.mkdirSync(path.dirname(target), { recursive: true })
+  fs.writeFileSync(target, sources.get(asset.source))
+}
 const report = {
   schemaVersion: 1, materials: pageEntries.length, sourceRef, requestedRef: ref,
   sourceMode: workingTree ? "working-tree-preview" : "pinned-git-commit", sourceRepository: sourceBase,
   checkedOn: reviews.checked_on, counts: stats, entries: pageEntries,
   inputs: [...sources].map(([file, bytes]) => ({ path: file, sha256: crypto.createHash("sha256").update(bytes).digest("hex") })),
   downloads: permitted.filter(file => /^research\/data\//.test(file)).map(file => `downloads/${path.basename(file)}`),
+  assets: conceptAssets,
 }
 fs.writeFileSync(path.join(quartz, "knowledge-export.json"), JSON.stringify(report, null, 2) + "\n")
 console.log(JSON.stringify({ materials: report.materials, sourceRef, sourceMode: report.sourceMode, counts: stats, downloads: report.downloads.length }))

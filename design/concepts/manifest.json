@@ -1,0 +1,98 @@
+{
+  "generated_on": "2026-11-06",
+  "status": "ten_selected_concepts",
+  "not_runtime_screenshots": true,
+  "visual_review": "All ten viewed. Corrected numeric suitability, private seller, frame size and unsupported fit claims in four images.",
+  "screens": [
+    {
+      "file": "01-brief.png",
+      "width": 1586,
+      "height": 992,
+      "bytes": 1696210,
+      "sha256": "ff918ab37fc7917a3d0ea04da552da5badfda9de610505d87023c7add3cbf103",
+      "kind": "ai_generated_concept",
+      "data": "fictional"
+    },
+    {
+      "file": "02-radar.png",
+      "width": 1586,
+      "height": 992,
+      "bytes": 1858475,
+      "sha256": "73269f2375386377913b69774bc1cb5d8e73ca236531160661109abbedd2db86",
+      "kind": "ai_generated_concept",
+      "data": "fictional"
+    },
+    {
+      "file": "03-sidepanel.png",
+      "width": 1585,
+      "height": 992,
+      "bytes": 1862558,
+      "sha256": "977b5d6c79d20df97b53ddf1078d2db5d41e214d084dad2c51ef67a16a689443",
+      "kind": "ai_generated_concept",
+      "data": "fictional"
+    },
+    {
+      "file": "04-dossier.png",
+      "width": 1585,
+      "height": 992,
+      "bytes": 1861866,
+      "sha256": "f09c75d1f61481ee10a884b7f46a8ca0b93c74aeda10229453dbd0b7eaed0774",
+      "kind": "ai_generated_concept",
+      "data": "fictional"
+    },
+    {
+      "file": "05-compare.png",
+      "width": 1585,
+      "height": 992,
+      "bytes": 1839730,
+      "sha256": "53bd521892c1e1eba769de0d7d47fa65329e759b4b9d358c04a003056135ca98",
+      "kind": "ai_generated_concept",
+      "data": "fictional"
+    },
+    {
+      "file": "06-market.png",
+      "width": 1585,
+      "height": 992,
+      "bytes": 1784196,
+      "sha256": "d05603d6f7a81f0224a8afbe10f1a8156c47447f3f6f669a5cf812f734f46c55",
+      "kind": "ai_generated_concept",
+      "data": "fictional"
+    },
+    {
+      "file": "07-map.png",
+      "width": 1585,
+      "height": 992,
+      "bytes": 1759538,
+      "sha256": "bae0b75d66bee7f47218e48df7a54f321a30424033844bd7bfceb65423cdcfa1",
+      "kind": "ai_generated_concept",
+      "data": "fictional"
+    },
+    {
+      "file": "08-negotiation.png",
+      "width": 1585,
+      "height": 992,
+      "bytes": 1792707,
+      "sha256": "ec5e228b23b305fcd43cc3d5dbb31c33e20896917ec6dba5186f8ea389bcf469",
+      "kind": "ai_generated_concept",
+      "data": "fictional"
+    },
+    {
+      "file": "09-inspection.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 1519374,
+      "sha256": "df5c6994618098bf7d6218aa76dd350bc1e9d3da282ddc5c22d90b1cd4a0b9ec",
+      "kind": "ai_generated_concept",
+      "data": "fictional"
+    },
+    {
+      "file": "10-decision.png",
+      "width": 1584,
+      "height": 993,
+      "bytes": 1843493,
+      "sha256": "e1fc12a4e3827cc3619a452bb531bc83b9a04d69b27049ccc60f4d068111ddab",
+      "kind": "ai_generated_concept",
+      "data": "fictional"
+    }
+  ]
+}

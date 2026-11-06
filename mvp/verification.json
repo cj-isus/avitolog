@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "checked_on": "2026-11-06",
+  "scope": "Local starter build and synthetic browser verification; not installed extension or live Avito/model/market proof",
+  "runtime": {
+    "node": "22.21.1",
+    "chrome": "156.0.8078.81"
+  },
+  "checks": {
+    "prepare": "pass",
+    "typecheck": "pass",
+    "pipeline_tests": {
+      "status": "pass",
+      "passed": 17,
+      "failed": 0
+    },
+    "chrome_mv3_build": "pass",
+    "standalone_web_build": "pass",
+    "browser": {
+      "status": "pass",
+      "passed": 15,
+      "failed": 0,
+      "checks": [
+        "local-server-ready",
+        "empty-new-isolated-context",
+        "load-six-demo-select-three-and-fit-status",
+        "compare-three-synthetic-candidates",
+        "asking-range-UI-and-median-domain",
+        "conditional-draft-and-cross-view-candidate-reset",
+        "invalid-url-reject-then-manual-unknown-card",
+        "facts-editor-validation-save-reload-and-export",
+        "invalid-JSON-import-atomic-and-valid-download-roundtrip",
+        "requirements-recompute-budget-height-wheel",
+        "Radix-dialog-keyboard-focus-trap-Escape-return",
+        "desktop-1440-global-overflow",
+        "mobile-390-radar-compare-brief-facts-overflow",
+        "sidepanel-preview-380-radar-compare-brief-facts-overflow",
+        "browser-JS-errors"
+      ],
+      "source_stable_during_run": true,
+      "external_requests": 0,
+      "js_errors": 0,
+      "viewports": [
+        1440,
+        390,
+        380
+      ]
+    }
+  },
+  "not_verified": [
+    "Installed extension user gestures/activeTab grants",
+    "Live Avito/account/DOM compatibility",
+    "LLM integration",
+    "Price accuracy or paid demand"
+  ],
+  "source_hashes": {
+    "mvp/entrypoints/background.ts": "1d5da6d485413f408b50662b9bd9833f9397fd19637b6bb2764bbf51367ef5f5",
+    "mvp/package-lock.json": "59450ffc28602a02ae9d16af2fbd4a8b2478277634bd345d4ab3f021df6cd5e7",
+    "mvp/package.json": "619cd647bfc8e014d632709b0ae71fb83bf7fc54809ded6c9db7fc23cd1fcba1",
+    "mvp/src/App.tsx": "2300832df4359c1c1a1037fc0821dcd14c3bd53136fbde73d6a14bfe72b6d4e1",
+    "mvp/src/capture.ts": "010d131295eb9eb0e0f4f029fd56d24820008bf79515cf51a476bd35afadf659",
+    "mvp/src/db.ts": "2b308277d17c1ba5fcdde50ea7372251bf473fd9114c493cf1bbbbbb8534d113",
+    "mvp/src/demo.ts": "cb362e12db66eb81bc6b80f3be963b17c0b8af802ec36fc2ff3a1c4488381e46",
+    "mvp/src/domain.ts": "412f290f6f9e4a8732f3321f0956d00207d46bb89696bb87b9fb707b9bb4f716",
+    "mvp/src/extract.ts": "ec3e762c31ce8672921fe0c94b87fb42455bbfd55e22c08dfc1d715b65902884",
+    "mvp/src/FactsEditor.tsx": "60c503d6cc17d6e9a8e76ae287e642b8cdf5710ee65adcf7e1e96659fe953082",
+    "mvp/src/main.tsx": "e36696dc893cc8fd22b45b742883950fbdce917a7c75a59a1e57309db05f95de",
+    "mvp/src/styles.css": "3f5d099ebb4b65e026ba86c9cb29b7c8168d1c83c3bc2e88498da14bc21ee725",
+    "mvp/tsconfig.json": "a0b82be98c7a197e7e04288e464d911b8e991e27a8731424183ef3040219c86a",
+    "mvp/vite.preview.config.ts": "00b2035af5e98f5ce4699e990b941d13ccffe45d57cacbdcb7c6eaccf185fc30",
+    "mvp/wxt.config.ts": "d3e0c53237796a07d74956667a3c5c9cb7881119c7794a839e73f33bf9ea5313"
+  }
+}

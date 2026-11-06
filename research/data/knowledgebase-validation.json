@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-11-06T11:32:56.476Z",
+  "checked_at_utc": "2026-11-06T13:04:13.855Z",
   "status": "pass",
   "scope": "Local data, links, counts, hashes and evidence labels; not live Avito/runtime/valuation validation",
   "checks": [
@@ -110,8 +110,8 @@
       "name": "local_markdown_links",
       "result": "pass",
       "detail": {
-        "markdown_files": 29,
-        "checked_local_links": 46,
+        "markdown_files": 53,
+        "checked_local_links": 437,
         "missing": []
       }
     },

@@ -7,6 +7,8 @@ on:
       - 'research/**'
       - 'README.md'
       - 'knowledge-site/**'
+      - 'mvp/**'
+      - 'design/**'
       - '.github/workflows/knowledge-pages.yml'
   workflow_dispatch:
 
@@ -47,6 +49,7 @@ jobs:
           cache-dependency-path: |
             .knowledge-engine/package-lock.json
             source/knowledge-site/runtime/package-lock.json
+            source/mvp/package-lock.json
       - name: Install pinned engine dependencies without lifecycle scripts
         working-directory: .knowledge-engine
         run: npm ci --ignore-scripts --no-audit --no-fund
@@ -59,6 +62,20 @@ jobs:
         run: node source/knowledge-site/apply-site.mjs --quartz .knowledge-engine
       - name: Build the static knowledge site
         run: node source/knowledge-site/build-site.mjs --quartz .knowledge-engine
+      - name: Install the pinned MVP preview dependencies
+        working-directory: source/mvp
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Verify and build the local MVP workspace
+        working-directory: source/mvp
+        run: |
+          npm run prepare
+          npm run typecheck
+          npm test
+          npm run build:preview
+      - name: Package the standalone web preview
+        run: |
+          mkdir -p .knowledge-engine/public/prototype
+          cp -R source/mvp/preview-dist/. .knowledge-engine/public/prototype/
       - name: Upload the Pages site
         uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
         with:
