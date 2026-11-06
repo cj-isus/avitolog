@@ -53,11 +53,16 @@
     "LLM integration",
     "Price accuracy or paid demand"
   ],
+  "hash_normalization": "SHA256 of UTF-8 file bytes with CRLF normalized to LF for portable source identity",
   "source_hashes": {
     "mvp/entrypoints/background.ts": "1d5da6d485413f408b50662b9bd9833f9397fd19637b6bb2764bbf51367ef5f5",
+    "mvp/entrypoints/sidepanel/index.html": "382d31d5206ed4ab1042c7a11977032ab7beb4f743db5a11f9f4b6ada078c0d2",
+    "mvp/entrypoints/workspace/index.html": "1bc28a18e69576d644254bf968eeec863a42456dd551d875c0e7a25ed7e51ab7",
+    "mvp/index.html": "bb96718163aee8a5bdfcca2bd2b2326c8b0ecbbc978bf8f51bd248b528a650de",
     "mvp/package-lock.json": "59450ffc28602a02ae9d16af2fbd4a8b2478277634bd345d4ab3f021df6cd5e7",
     "mvp/package.json": "619cd647bfc8e014d632709b0ae71fb83bf7fc54809ded6c9db7fc23cd1fcba1",
-    "mvp/src/App.tsx": "2300832df4359c1c1a1037fc0821dcd14c3bd53136fbde73d6a14bfe72b6d4e1",
+    "mvp/scripts/collect-notices.mjs": "c50267670e5fb2fe680ec54fcf9b5efc5641a78f107876ce293eeed2bef94efb",
+    "mvp/src/App.tsx": "7a2b715e88af548a261d17cce5efa73e313a1f1162fd937eab50228421cd78f3",
     "mvp/src/capture.ts": "010d131295eb9eb0e0f4f029fd56d24820008bf79515cf51a476bd35afadf659",
     "mvp/src/db.ts": "2b308277d17c1ba5fcdde50ea7372251bf473fd9114c493cf1bbbbbb8534d113",
     "mvp/src/demo.ts": "cb362e12db66eb81bc6b80f3be963b17c0b8af802ec36fc2ff3a1c4488381e46",
@@ -66,6 +71,7 @@
     "mvp/src/FactsEditor.tsx": "60c503d6cc17d6e9a8e76ae287e642b8cdf5710ee65adcf7e1e96659fe953082",
     "mvp/src/main.tsx": "e36696dc893cc8fd22b45b742883950fbdce917a7c75a59a1e57309db05f95de",
     "mvp/src/styles.css": "3f5d099ebb4b65e026ba86c9cb29b7c8168d1c83c3bc2e88498da14bc21ee725",
+    "mvp/tests/pipeline.test.ts": "6de1ad842059a4eb51dd6e43f74a85d854a39db3e6fe262f4044e8b65afba138",
     "mvp/tsconfig.json": "a0b82be98c7a197e7e04288e464d911b8e991e27a8731424183ef3040219c86a",
     "mvp/vite.preview.config.ts": "00b2035af5e98f5ce4699e990b941d13ccffe45d57cacbdcb7c6eaccf185fc30",
     "mvp/wxt.config.ts": "d3e0c53237796a07d74956667a3c5c9cb7881119c7794a839e73f33bf9ea5313"
