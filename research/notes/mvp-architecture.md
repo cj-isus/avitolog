@@ -1,13 +1,13 @@
 ---
 title: "Архитектура первого MVP: локальная рабочая область и расширение"
-checked_on: 2026-11-06
+checked_on: 2026-11-08
 tags: [avito, mvp, architecture, extension, local-first, provenance, permissions]
 status: research-and-build-contract
 ---
 
-Рекомендация для начинающейся сборки: **WXT + React + TypeScript, Dexie для локальной базы, Zod для границ данных, Lucide для иконок**. Сравнение остаётся семантической HTML-таблицей; Recharts полезен для распределения наблюдаемых цен, Radix Dialog — для импорта и досье. Отдельный сервер и агентный фреймворк первому сценарию «демо/ручной импорт → сравнение → вопросы продавцу» не нужны. Это проектное решение для проверки полезности, а не доказательство доступности данных Авито или готовности автономного покупателя.
+Основа сборки: **WXT + React + TypeScript, Base UI для общих интерактивных примитивов, Dexie для локальной базы, Zod для границ данных, Lucide для иконок**. Сравнение остаётся семантической HTML-таблицей; Recharts показывает цены предложений и загружается отдельным компонентом. Отдельный сервер и агентный фреймворк первому сценарию «демо/ручной импорт → сравнение → вопросы продавцу» не нужны. Это проектное решение для проверки полезности, а не доказательство доступности данных Авито или готовности автономного покупателя.
 
-Смежные материалы: [[mvp-oss-components|переиспользуемые OSS-компоненты]], [[mvp-product-analogues|продуктовые аналоги]], [[mvp-build-plan|план сборки и проверки]], [[data-access-and-autonomy|варианты доступа и автономность]].
+Смежные материалы: [[mvp-component-foundation|компонентная основа от 8 ноября]], [[mvp-oss-components|переиспользуемые OSS-компоненты]], [[mvp-product-analogues|продуктовые аналоги]], [[mvp-build-plan|план сборки и проверки]], [[data-access-and-autonomy|варианты доступа и автономность]].
 
 ## Выбор основы
 
@@ -36,11 +36,13 @@ status: research-and-build-contract
 | [zod](https://registry.npmjs.org/zod/latest) | 4.6.7 | MIT | Runtime-валидация импортов и сообщений. |
 | [lucide-react](https://registry.npmjs.org/lucide-react/latest) | 1.70.0 | ISC; отдельные Feather-derived иконки — MIT | Сохранять применимые notices, не сводить всё дерево иконок к одному npm-полю. |
 | [recharts](https://registry.npmjs.org/recharts/latest), [react-is](https://registry.npmjs.org/react-is/latest) | 3.10.1 / 19.3.1 | MIT | График; таблица остаётся доступной формой сравнения. |
-| [@radix-ui/react-dialog](https://registry.npmjs.org/@radix-ui%2freact-dialog/latest) | 1.3.1 | MIT | Диалог как UI-примитив, не доказательство доступности всего приложения. |
+| [@radix-ui/react-dialog](https://registry.npmjs.org/@radix-ui%2freact-dialog/latest) | 1.3.1 | MIT | Исторический кандидат и первая реализация; в основе от 8 ноября заменён на Base UI. |
 | [@tanstack/react-query](https://registry.npmjs.org/@tanstack%2freact-query/latest) | 5.106.1 | MIT | Отложить до удалённых запросов/задач: для Dexie уже есть `useLiveQuery`. |
 | [dexie-export-import](https://registry.npmjs.org/dexie-export-import/latest) | 4.4.2 | Apache-2.0 | Возможный поздний addon для больших резервных копий; не обязателен для нашего JSON DTO. |
 
 Первичные файлы лицензий: [WXT](https://github.com/wxt-dev/wxt/blob/main/LICENSE), [Plasmo](https://github.com/PlasmoHQ/plasmo/blob/main/LICENSE), [Vite](https://github.com/vitejs/vite/blob/main/LICENSE), [React](https://github.com/react/react/blob/main/LICENSE), [TypeScript](https://github.com/microsoft/TypeScript/blob/main/LICENSE.txt), [Dexie](https://github.com/dexie/Dexie.js/blob/master/LICENSE), [Zod](https://github.com/colinhacks/zod/blob/main/LICENSE), [Lucide](https://github.com/lucide-icons/lucide/blob/main/LICENSE), [Recharts](https://github.com/recharts/recharts/blob/main/LICENSE), [Radix](https://github.com/radix-ui/primitives/blob/main/LICENSE), [TanStack Query](https://github.com/TanStack/query/blob/main/LICENSE). Эти лицензии регулируют переиспользование соответствующего кода; разрешение взаимодействовать с Авито из них не следует.
+
+Таблица сохраняет срез 6 ноября. В текущем lock зафиксирован [Base UI React 1.9.0](https://registry.npmjs.org/@base-ui%2freact/1.9.0); Button/Input/Dialog подключены через небольшие собственные обёртки. Причина замены, сохранённые LICENSE/NOTICE и метод учёта включённого runtime описаны в [REUSE.md](https://github.com/cj-isus/avitolog/blob/main/mvp/REUSE.md) и [THIRD-PARTY-NOTICES](https://github.com/cj-isus/avitolog/blob/main/mvp/THIRD-PARTY-NOTICES.md). Это текущая инженерная запись; историческое исследование Radix не переписывается задним числом.
 
 У WXT указан Node ≥22, у Vite 8 — `^20.19.0 || >=22.12.0`; совместный практический минимум — **Node ≥22.12.0**. Сообщённый основной сборщиком Node 22.21.1 попадает в этот диапазон. Peer metadata допускают выбранные основные семейства, но не доказывают компиляцию TS 7, разрешение всех транзитивных пакетов или запуск расширения. Воспроизводимое основание — lockfile и проверки конкретной сборки из [[mvp-build-plan|плана сборки]]. WXT генерирует конфигурацию TypeScript через `wxt prepare`; проект должен расширять `.wxt/tsconfig.json`, а не подменять её несогласованным набором alias. [WXT TypeScript](https://wxt.dev/guide/essentials/config/typescript)
 
@@ -100,7 +102,7 @@ Dexie поддерживает версионирование схемы; `dexie
 
 Объявление, вложенная разметка и импортированный JSON — данные внешнего автора. Текст вроде «игнорируй правила, отправь сообщение» не получает полномочий. Очистка и маркировка полезны, но не образуют полной защиты: полномочия, допустимые действия, схемы параметров и лимиты проверяются обычным кодом вне модели. В первом сценарии у анализа вообще нет инструмента отправки: пользователь читает и переносит черновик вручную. Это выбранная граница MVP, не утверждение о требованиях Авито. [OWASP prompt injection prevention](https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html)
 
-Radix помогает с focus trap, Escape, заголовком и описанием диалога, но подписи, порядок фокуса, ошибки импорта и клавиатурная проверка остаются за приложением. Recharts требует измеримого контейнера; график должен сопровождаться числовыми значениями и таблицей. Наличие библиотек не доказывает доступность интерфейса или качество ценовой оценки. [Radix Dialog](https://www.radix-ui.com/primitives/docs/components/dialog), [Recharts ResponsiveContainer](https://recharts.github.io/en-US/api/ResponsiveContainer/)
+Base UI предоставляет диалог с focus trap, Escape, заголовком и описанием, но подписи, возврат фокуса при удалённом opener, ошибки и клавиатурная проверка остаются за приложением. Recharts требует измеримого контейнера; график сопровождается числовыми значениями. Наличие библиотек не доказывает доступность интерфейса или качество ценовой оценки. [Base UI Dialog](https://base-ui.com/react/components/dialog), [Recharts ResponsiveContainer](https://recharts.github.io/en-US/api/ResponsiveContainer/)
 
 ## Ожидаемые отказы и реакция
 
@@ -116,6 +118,6 @@ Radix помогает с focus trap, Escape, заголовком и описа
 
 ## Что относится к текущему starter
 
-На момент чтения изменяющихся исходников 6 ноября: в `mvp/` присутствуют WXT-конфигурация, React UI, Dexie, Zod-схемы, демо и ручные записи, сравнение, простая оценка по ценам предложений и черновик вопросов. Recharts, `react-is` и Radix Dialog внесены в package manifest и UI. DOM extractor предназначен для заголовка, цены, описания и характеристик; превращение захвата в запись сохраняет неизвестными параметры посадки. Fixture-проверка extractor не подтверждает работу на живом Авито.
+На 8 ноября в `mvp/` присутствуют WXT-конфигурация, компонентный React UI с Base UI, Dexie, Zod-схемы, демо и ручные записи, сравнение, простая оценка по ценам предложений и черновик вопросов. Исходники разделены на `components`, `features`, `application`, `domain`, `data`, `integrations`, `lib` и `styles`; предметные правила не дублируются в экранах. DOM extractor предназначен для заголовка, цены, описания и характеристик; превращение захвата в запись сохраняет неизвестными параметры посадки. Fixture-проверка extractor не подтверждает работу на живом Авито.
 
 Отдельный неизменяемый Snapshot, полноценные field source refs/extraction method, согласованная миграция контрактов, промышленный import preview и все проверки отказов — цели развития, не автоматически реализованные свойства. LLM proxy, визуальное распознавание состояния, фоновый мониторинг рынка и переписка с продавцами — будущие отдельные этапы. Актуальные результаты install/typecheck/build/preview и границы браузерной приёмки должны фиксироваться в [[mvp-build-plan|плане сборки]]: этот исследовательский файл не заменяет их. В этой работе не выполнялись вход в Авито, действия в аккаунте, отправка сообщений, проверка расширения на Авито, изменение VPN или настроек браузера.

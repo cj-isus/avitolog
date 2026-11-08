@@ -71,7 +71,9 @@ jobs:
           npm run prepare
           npm run typecheck
           npm test
+          npm run build
           npm run build:preview
+          npm run licenses:check -- --require-bundle-report
       - name: Package the standalone web preview
         run: |
           mkdir -p .knowledge-engine/public/prototype

@@ -1,0 +1,16 @@
+:root {
+  color-scheme: dark;
+  --bg: #0a1013;
+  --surface: #111b20;
+  --surface-raised: #17232a;
+  --line: #29373d;
+  --line-soft: #1f2c32;
+  --text: #eaf1f3;
+  --muted: #9cabb3;
+  --lime: #bcf57c;
+  --cyan: #78dbe8;
+  --amber: #f2c783;
+  --red: #ffada8;
+  --radius: 16px;
+  --font: "Segoe UI", system-ui, -apple-system, sans-serif;
+}

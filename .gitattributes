@@ -6,3 +6,4 @@ research/data/inventory-validation.json -text
 research/inputs/user-research-2026-11-05.txt -text
 # Preserve upstream legal texts byte-for-byte, including their final blank lines.
 mvp/public/licenses/packages/** -text -whitespace
+mvp/scripts/license-sources/**/LICENSE -text -whitespace

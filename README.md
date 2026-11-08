@@ -6,11 +6,13 @@
 
 Начальная база сохранена. 6 ноября добавлены углублённые аналоги, source-аудит и первая ограниченная сборка MVP на готовых компонентах; live-работа на Avito и коммерческая полезность ещё не подтверждены.
 
+8 ноября подготовлена [компонентная основа демо](research/notes/mvp-component-foundation.md): единые UI-примитивы на Base UI, отдельные экраны и границы application/domain/data/integrations. [Происхождение переиспользуемого кода](mvp/REUSE.md) фиксирует готовые пакеты и применимые уведомления. Новый интерфейс проверяется по текущим исходникам; результаты первой реализации не переносятся автоматически.
+
 ## Первая сборка и десять экранов
 
 **[Веб-прототип](https://cj-isus.github.io/avitolog/prototype/)** · **[10 изображений](https://cj-isus.github.io/avitolog/notes/mvp-gallery)** · [Архитектура](research/notes/mvp-architecture.md) · [Состав и границы](research/notes/mvp-build-plan.md)
 
-[Starter в mvp](mvp/README.md) собирает WXT, React/TypeScript, Dexie, Zod, Radix, Recharts и Lucide. Работают локальный радар, требования, сравнение, ориентиры по сохранённым предложениям и черновик вопросов. [Восемь продуктовых аналогов](research/notes/mvp-product-analogues.md) и [восемь OSS-кандидатов](research/notes/mvp-oss-components.md) разобраны отдельно. [Визуальный бриф](research/notes/mvp-visual-direction.md) отличает десять целевых сцен от реализованных возможностей. Демо вымышлено; LLM, live-поиск, карта и автоматическая переписка не подключены.
+[Основа в mvp](mvp/README.md) собирает WXT, React/TypeScript, Base UI, Dexie, Zod, Recharts и Lucide. Работают локальный радар, требования, сравнение, ориентиры по сохранённым предложениям и черновик вопросов. [Восемь продуктовых аналогов](research/notes/mvp-product-analogues.md) и [восемь OSS-кандидатов](research/notes/mvp-oss-components.md) разобраны отдельно. [Визуальный бриф](research/notes/mvp-visual-direction.md) отличает десять целевых сцен от реализованных возможностей. Демо вымышлено; LLM, live-поиск, карта и автоматическая переписка не подключены.
 
 ## Карта исследований
 

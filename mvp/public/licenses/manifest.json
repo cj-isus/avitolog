@@ -1,12 +1,107 @@
 {
-  "schemaVersion": 1,
-  "generator": "avitolog-collect-notices/v1",
+  "schemaVersion": 2,
+  "generator": "avitolog-collect-notices/v2",
   "packageLock": {
     "sourcePath": "package-lock.json",
-    "sha256": "59450ffc28602a02ae9d16af2fbd4a8b2478277634bd345d4ab3f021df6cd5e7",
+    "sha256": "8d9c8615bdc9825cee82d4d5b2946ebdcd19aca1feeff1d7e04c622b3bb501a8",
     "lockfileVersion": 3
   },
-  "selection": "Every non-root package-lock packages entry with dev !== true; installed files copied byte-for-byte. Includes optional/devOptional/type packages conservatively; not a bundler reachability analysis.",
+  "selection": "Union of every non-root package-lock entry with dev !== true and package locations reported in emitted runtime chunks. Production-lock selection remains conservative; emitted runtime additions include dev-marked packages. Original installed or explicitly recovered immutable-source notices are copied byte-for-byte.",
+  "bundleInventory": {
+    "sourcePath": ".artifacts/bundled-runtime.json",
+    "inventorySha256": "b9073037a45e7fad6764b7d751b1993ed9dd16ee8ca2775134dc88efee221c11",
+    "digestScope": "Canonical target name, lock SHA-256 and emitted package locations. Raw module lengths/counts, source roots and report bytes are excluded; positive renderedLength is still validated for every reported module.",
+    "targets": [
+      {
+        "name": "extension",
+        "packageLockSha256": "8d9c8615bdc9825cee82d4d5b2946ebdcd19aca1feeff1d7e04c622b3bb501a8",
+        "packageLockPaths": [
+          "node_modules/@base-ui/react",
+          "node_modules/@base-ui/utils",
+          "node_modules/@floating-ui/utils",
+          "node_modules/@reduxjs/toolkit",
+          "node_modules/@wxt-dev/browser",
+          "node_modules/clsx",
+          "node_modules/d3-array",
+          "node_modules/d3-color",
+          "node_modules/d3-format",
+          "node_modules/d3-interpolate",
+          "node_modules/d3-path",
+          "node_modules/d3-scale",
+          "node_modules/d3-shape",
+          "node_modules/d3-time",
+          "node_modules/d3-time-format",
+          "node_modules/decimal.js-light",
+          "node_modules/dexie",
+          "node_modules/dexie-react-hooks",
+          "node_modules/es-toolkit",
+          "node_modules/eventemitter3",
+          "node_modules/immer",
+          "node_modules/lucide-react",
+          "node_modules/react",
+          "node_modules/react-dom",
+          "node_modules/react-is",
+          "node_modules/react-redux",
+          "node_modules/recharts",
+          "node_modules/redux",
+          "node_modules/redux-thunk",
+          "node_modules/reselect",
+          "node_modules/rolldown",
+          "node_modules/scheduler",
+          "node_modules/tiny-invariant",
+          "node_modules/use-sync-external-store",
+          "node_modules/victory-vendor",
+          "node_modules/vite",
+          "node_modules/wxt",
+          "node_modules/zod"
+        ]
+      },
+      {
+        "name": "preview",
+        "packageLockSha256": "8d9c8615bdc9825cee82d4d5b2946ebdcd19aca1feeff1d7e04c622b3bb501a8",
+        "packageLockPaths": [
+          "node_modules/@base-ui/react",
+          "node_modules/@base-ui/utils",
+          "node_modules/@floating-ui/utils",
+          "node_modules/@reduxjs/toolkit",
+          "node_modules/@wxt-dev/browser",
+          "node_modules/clsx",
+          "node_modules/d3-array",
+          "node_modules/d3-color",
+          "node_modules/d3-format",
+          "node_modules/d3-interpolate",
+          "node_modules/d3-path",
+          "node_modules/d3-scale",
+          "node_modules/d3-shape",
+          "node_modules/d3-time",
+          "node_modules/d3-time-format",
+          "node_modules/decimal.js-light",
+          "node_modules/dexie",
+          "node_modules/dexie-react-hooks",
+          "node_modules/es-toolkit",
+          "node_modules/eventemitter3",
+          "node_modules/immer",
+          "node_modules/lucide-react",
+          "node_modules/react",
+          "node_modules/react-dom",
+          "node_modules/react-is",
+          "node_modules/react-redux",
+          "node_modules/recharts",
+          "node_modules/redux",
+          "node_modules/redux-thunk",
+          "node_modules/reselect",
+          "node_modules/rolldown",
+          "node_modules/scheduler",
+          "node_modules/tiny-invariant",
+          "node_modules/use-sync-external-store",
+          "node_modules/victory-vendor",
+          "node_modules/vite",
+          "node_modules/wxt",
+          "node_modules/zod"
+        ]
+      }
+    ]
+  },
   "scopeLimits": [
     "Dependency code is not executed. No network fetches or npm lifecycle scripts are used by this collector.",
     "Only conventionally named LICENSE/LICENCE/NOTICE/COPYING/CopyrightNotice/third-party notice files and notice directories are collected; inline source headers and nonstandard names require separate review.",
@@ -14,25 +109,34 @@
     "The AVITOLOG application license has not been selected; third-party licenses do not license the original application or authorize access to Avito."
   ],
   "totals": {
-    "selectedLockLocations": 74,
+    "selectedLockLocations": 60,
+    "productionLockLocations": 56,
+    "bundledRuntimeLocations": 38,
+    "runtimeAdditions": 4,
     "directPackages": 9,
-    "originalFiles": 91,
-    "missingLicenseTexts": 1,
+    "originalFiles": 76,
+    "installedNoticeFiles": 74,
+    "recoveredNoticeFiles": 2,
+    "missingLicenseTexts": 0,
     "declaredLicenses": {
-      "MIT": 57,
+      "MIT": 44,
       "ISC": 12,
       "BSD-3-Clause": 1,
       "Apache-2.0": 2,
-      "0BSD": 1,
       "MIT AND ISC AND BSD-3-Clause": 1
     }
   },
   "packages": [
     {
-      "name": "@radix-ui/primitive",
-      "version": "1.2.0",
-      "lockPath": "node_modules/@radix-ui/primitive",
+      "name": "@babel/runtime",
+      "version": "8.1.0",
+      "lockPath": "node_modules/@babel/runtime",
       "direct": false,
+      "selectionReasons": [
+        "production_lock"
+      ],
+      "bundledTargets": [],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -40,80 +144,37 @@
       "licenseTextStatus": "collected_original_files",
       "repository": {
         "type": "git",
-        "url": "git+https://github.com/radix-ui/primitives.git",
-        "directory": "packages/core/primitive"
+        "url": "https://github.com/babel/babel.git",
+        "directory": "packages/babel-runtime"
       },
-      "resolved": "https://registry.npmjs.org/@radix-ui/primitive/-/primitive-1.2.0.tgz",
-      "integrity": "sha512-KABY+VMIRPJL+Vyzv/335FEhXXD/xDv8BMb1kl48/aXJZMH0LtHCTx5ga5RnxaEP3nZHtmTLf1P9vanmFX46bw==",
+      "resolved": "https://registry.npmjs.org/@babel/runtime/-/runtime-8.1.0.tgz",
+      "integrity": "sha512-MQye/pU7gzXerMzlhScFNH1u4Je6rR8cqJWSgAfD+rIwbbtwG8tVDegoI7sWfcXkfVRW09G7vk2vjxGIuKFfwg==",
       "files": [
         {
-          "sourcePath": "node_modules/@radix-ui/primitive/LICENSE",
-          "copiedPath": "packages/_radix-ui_primitive@1.2.0--993c4510bd/LICENSE",
-          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
-          "bytes": 1063
+          "sourcePath": "node_modules/@babel/runtime/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
+          "copiedPath": "packages/_babel_runtime@8.1.0--b0d8c4c357/LICENSE",
+          "sha256": "117da2af0d4ce0fe1c8e19b5cff9dcd806adf973d328d27b11d4448c4ff24f76",
+          "bytes": 1106
         }
       ],
       "warnings": []
     },
     {
-      "name": "@radix-ui/react-compose-refs",
-      "version": "1.1.5",
-      "lockPath": "node_modules/@radix-ui/react-compose-refs",
-      "direct": false,
-      "devOptional": false,
-      "optional": false,
-      "declaredLicense": "MIT",
-      "installedLicense": "MIT",
-      "licenseTextStatus": "collected_original_files",
-      "repository": {
-        "type": "git",
-        "url": "git+https://github.com/radix-ui/primitives.git",
-        "directory": "packages/react/compose-refs"
-      },
-      "resolved": "https://registry.npmjs.org/@radix-ui/react-compose-refs/-/react-compose-refs-1.1.5.tgz",
-      "integrity": "sha512-+48PbAAbq3didjJxa+OaWY2ZwgAKsNiRGyeHKszblZMQ+kcpd9pAaT11cMkGEie0vsOi3QdeTE6d5Fe3Gn61kA==",
-      "files": [
-        {
-          "sourcePath": "node_modules/@radix-ui/react-compose-refs/LICENSE",
-          "copiedPath": "packages/_radix-ui_react-compose-refs@1.1.5--a935db1b45/LICENSE",
-          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
-          "bytes": 1063
-        }
-      ],
-      "warnings": []
-    },
-    {
-      "name": "@radix-ui/react-context",
-      "version": "1.3.0",
-      "lockPath": "node_modules/@radix-ui/react-context",
-      "direct": false,
-      "devOptional": false,
-      "optional": false,
-      "declaredLicense": "MIT",
-      "installedLicense": "MIT",
-      "licenseTextStatus": "collected_original_files",
-      "repository": {
-        "type": "git",
-        "url": "git+https://github.com/radix-ui/primitives.git",
-        "directory": "packages/react/context"
-      },
-      "resolved": "https://registry.npmjs.org/@radix-ui/react-context/-/react-context-1.3.0.tgz",
-      "integrity": "sha512-v5AYEocMISkbJ+1fTXzZpiFv7NRr3D2WiYbLIKf+FkmJ8VkP6d503eV2n34MFussHXY1pcoq3yfJiQH77dc4Mg==",
-      "files": [
-        {
-          "sourcePath": "node_modules/@radix-ui/react-context/LICENSE",
-          "copiedPath": "packages/_radix-ui_react-context@1.3.0--0f9925decc/LICENSE",
-          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
-          "bytes": 1063
-        }
-      ],
-      "warnings": []
-    },
-    {
-      "name": "@radix-ui/react-dialog",
-      "version": "1.3.1",
-      "lockPath": "node_modules/@radix-ui/react-dialog",
+      "name": "@base-ui/react",
+      "version": "1.9.0",
+      "lockPath": "node_modules/@base-ui/react",
       "direct": true,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -121,26 +182,37 @@
       "licenseTextStatus": "collected_original_files",
       "repository": {
         "type": "git",
-        "url": "git+https://github.com/radix-ui/primitives.git",
-        "directory": "packages/react/dialog"
+        "url": "git+https://github.com/mui/base-ui.git",
+        "directory": "packages/react"
       },
-      "resolved": "https://registry.npmjs.org/@radix-ui/react-dialog/-/react-dialog-1.3.1.tgz",
-      "integrity": "sha512-+0E4qvVTwjAWra9sEhJ+9BTsvHE00zkUuNw1VGh7S+Gc13dfYk+S1PVQdchWDj+XYHhAai7Z7IpzXVDCGsDplg==",
+      "resolved": "https://registry.npmjs.org/@base-ui/react/-/react-1.9.0.tgz",
+      "integrity": "sha512-S8CSYosASBKtpL8SWUfS78rFElfLijiCgA7oHOK22jCJ95FULsYyKwBNFOgudt0RA+/7yNc7F81bOvQnRgbBiQ==",
       "files": [
         {
-          "sourcePath": "node_modules/@radix-ui/react-dialog/LICENSE",
-          "copiedPath": "packages/_radix-ui_react-dialog@1.3.1--4ba0125d4d/LICENSE",
-          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
-          "bytes": 1063
+          "sourcePath": "node_modules/@base-ui/react/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
+          "copiedPath": "packages/_base-ui_react@1.9.0--41c28eb6e0/LICENSE",
+          "sha256": "07fc1b39d69d14bc7d40482a628f47226258eb01265db68ae684944b916beb2a",
+          "bytes": 1072
         }
       ],
       "warnings": []
     },
     {
-      "name": "@radix-ui/react-dismissable-layer",
-      "version": "1.2.1",
-      "lockPath": "node_modules/@radix-ui/react-dismissable-layer",
+      "name": "@base-ui/utils",
+      "version": "0.5.0",
+      "lockPath": "node_modules/@base-ui/utils",
       "direct": false,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -148,26 +220,33 @@
       "licenseTextStatus": "collected_original_files",
       "repository": {
         "type": "git",
-        "url": "git+https://github.com/radix-ui/primitives.git",
-        "directory": "packages/react/dismissable-layer"
+        "url": "git+https://github.com/mui/base-ui.git",
+        "directory": "packages/utils"
       },
-      "resolved": "https://registry.npmjs.org/@radix-ui/react-dismissable-layer/-/react-dismissable-layer-1.2.1.tgz",
-      "integrity": "sha512-KIfDcAsx+oVylFZ4xryVKusJUrLLhTQmfnJW4kwk4Km5myvhHCrj04hnWWUC166+xD4DHdH8tQGylwYX1h6+Pg==",
+      "resolved": "https://registry.npmjs.org/@base-ui/utils/-/utils-0.5.0.tgz",
+      "integrity": "sha512-dYGGcEttjkYiMoa5nHm8vLaJ2UcuTWxo3BFAwOYXeRg/q7UVVvA6cacEIXEs3FgBfK1CGtW1ptElqs7wsx+t9A==",
       "files": [
         {
-          "sourcePath": "node_modules/@radix-ui/react-dismissable-layer/LICENSE",
-          "copiedPath": "packages/_radix-ui_react-dismissable-layer@1.2.1--9af7fcf675/LICENSE",
-          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
-          "bytes": 1063
+          "sourcePath": "node_modules/@base-ui/utils/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
+          "copiedPath": "packages/_base-ui_utils@0.5.0--9f5284f7e3/LICENSE",
+          "sha256": "07fc1b39d69d14bc7d40482a628f47226258eb01265db68ae684944b916beb2a",
+          "bytes": 1072
         }
       ],
       "warnings": []
     },
     {
-      "name": "@radix-ui/react-focus-guards",
-      "version": "1.2.0",
-      "lockPath": "node_modules/@radix-ui/react-focus-guards",
+      "name": "reselect",
+      "version": "5.3.0",
+      "lockPath": "node_modules/@base-ui/utils/node_modules/reselect",
       "direct": false,
+      "selectionReasons": [
+        "production_lock"
+      ],
+      "bundledTargets": [],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -175,26 +254,32 @@
       "licenseTextStatus": "collected_original_files",
       "repository": {
         "type": "git",
-        "url": "git+https://github.com/radix-ui/primitives.git",
-        "directory": "packages/react/focus-guards"
+        "url": "https://github.com/reduxjs/reselect.git"
       },
-      "resolved": "https://registry.npmjs.org/@radix-ui/react-focus-guards/-/react-focus-guards-1.2.0.tgz",
-      "integrity": "sha512-MPm5R0iRGUDrDnPNxmLBkv+X7pN4XKzt+MbWJEuJQsH3NFH4omrbpXpucyYCCKTSt+na/ZxGhEWQrWTZ0285cA==",
+      "resolved": "https://registry.npmjs.org/reselect/-/reselect-5.3.0.tgz",
+      "integrity": "sha512-XGoLeRAVzUTcJ1qkxPQhDJyIZ5d6zzZD9nT7AEZOaaU9UbWclhycElmhO+VD5bFeLuzhPBaOV2oXC8uG35ZSpg==",
       "files": [
         {
-          "sourcePath": "node_modules/@radix-ui/react-focus-guards/LICENSE",
-          "copiedPath": "packages/_radix-ui_react-focus-guards@1.2.0--b35b96d032/LICENSE",
-          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
-          "bytes": 1063
+          "sourcePath": "node_modules/@base-ui/utils/node_modules/reselect/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
+          "copiedPath": "packages/reselect@5.3.0--ada53a4851/LICENSE",
+          "sha256": "e98047a5dee068b33f82e8c4b7a63037b5108c93393198efd4097753004af5dd",
+          "bytes": 1093
         }
       ],
       "warnings": []
     },
     {
-      "name": "@radix-ui/react-focus-scope",
-      "version": "1.3.1",
-      "lockPath": "node_modules/@radix-ui/react-focus-scope",
+      "name": "@floating-ui/core",
+      "version": "1.8.0",
+      "lockPath": "node_modules/@floating-ui/core",
       "direct": false,
+      "selectionReasons": [
+        "production_lock"
+      ],
+      "bundledTargets": [],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -202,26 +287,33 @@
       "licenseTextStatus": "collected_original_files",
       "repository": {
         "type": "git",
-        "url": "git+https://github.com/radix-ui/primitives.git",
-        "directory": "packages/react/focus-scope"
+        "url": "https://github.com/floating-ui/floating-ui.git",
+        "directory": "packages/core"
       },
-      "resolved": "https://registry.npmjs.org/@radix-ui/react-focus-scope/-/react-focus-scope-1.3.1.tgz",
-      "integrity": "sha512-ugeMhbXt4y5S2T1GnIqbWDKEN962PDwnX1fN0eKOOgf5f63Dh2mn8F1FUySlgW0iF6GiVsRF32DzuDIWTUyQJg==",
+      "resolved": "https://registry.npmjs.org/@floating-ui/core/-/core-1.8.0.tgz",
+      "integrity": "sha512-0CIZ5itps/8x7BG8dEIhs53BvCUH2PCoogtakwRTut+Arm58sJooJ0AuZhLw2HJYIR5cMLNPBSS728sPho2khQ==",
       "files": [
         {
-          "sourcePath": "node_modules/@radix-ui/react-focus-scope/LICENSE",
-          "copiedPath": "packages/_radix-ui_react-focus-scope@1.3.1--ec4be12860/LICENSE",
-          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
-          "bytes": 1063
+          "sourcePath": "node_modules/@floating-ui/core/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
+          "copiedPath": "packages/_floating-ui_core@1.8.0--46ec348427/LICENSE",
+          "sha256": "0e4c9a9b6c71019cbbea3bdc20b01223110a9035700f9c960c8fcbf78c2325ce",
+          "bytes": 1089
         }
       ],
       "warnings": []
     },
     {
-      "name": "@radix-ui/react-id",
-      "version": "1.1.4",
-      "lockPath": "node_modules/@radix-ui/react-id",
+      "name": "@floating-ui/dom",
+      "version": "1.8.0",
+      "lockPath": "node_modules/@floating-ui/dom",
       "direct": false,
+      "selectionReasons": [
+        "production_lock"
+      ],
+      "bundledTargets": [],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -229,26 +321,33 @@
       "licenseTextStatus": "collected_original_files",
       "repository": {
         "type": "git",
-        "url": "git+https://github.com/radix-ui/primitives.git",
-        "directory": "packages/react/id"
+        "url": "https://github.com/floating-ui/floating-ui.git",
+        "directory": "packages/dom"
       },
-      "resolved": "https://registry.npmjs.org/@radix-ui/react-id/-/react-id-1.1.4.tgz",
-      "integrity": "sha512-TMQp2llA+RYn7JcjnrMnz7wN4pcVttPZnRZo52PLQsoLVKzNlVwUeHmfePgTgRluXFvlD3GD5g5MOVVTJCO0qA==",
+      "resolved": "https://registry.npmjs.org/@floating-ui/dom/-/dom-1.8.0.tgz",
+      "integrity": "sha512-yXSrzeHZBTZadLOlfyhCkJHNeLJnHRnRInwdZ40L7ZiaAtrBwoYlsDrX3v5zB1Utk7CLfzcOVnVVWoXEky7Ceg==",
       "files": [
         {
-          "sourcePath": "node_modules/@radix-ui/react-id/LICENSE",
-          "copiedPath": "packages/_radix-ui_react-id@1.1.4--face9df97e/LICENSE",
-          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
-          "bytes": 1063
+          "sourcePath": "node_modules/@floating-ui/dom/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
+          "copiedPath": "packages/_floating-ui_dom@1.8.0--f505c35819/LICENSE",
+          "sha256": "0e4c9a9b6c71019cbbea3bdc20b01223110a9035700f9c960c8fcbf78c2325ce",
+          "bytes": 1089
         }
       ],
       "warnings": []
     },
     {
-      "name": "@radix-ui/react-portal",
-      "version": "1.2.0",
-      "lockPath": "node_modules/@radix-ui/react-portal",
+      "name": "@floating-ui/react-dom",
+      "version": "2.1.9",
+      "lockPath": "node_modules/@floating-ui/react-dom",
       "direct": false,
+      "selectionReasons": [
+        "production_lock"
+      ],
+      "bundledTargets": [],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -256,80 +355,37 @@
       "licenseTextStatus": "collected_original_files",
       "repository": {
         "type": "git",
-        "url": "git+https://github.com/radix-ui/primitives.git",
-        "directory": "packages/react/portal"
+        "url": "https://github.com/floating-ui/floating-ui.git",
+        "directory": "packages/react-dom"
       },
-      "resolved": "https://registry.npmjs.org/@radix-ui/react-portal/-/react-portal-1.2.0.tgz",
-      "integrity": "sha512-StX7xXnaRU41VvFtMm9zlhVGz8XF6GmWWTXftkQaY+tqVkbs/R9UmAp5mLzHHapk5hM9RMZQvO/3usyIP/g42g==",
+      "resolved": "https://registry.npmjs.org/@floating-ui/react-dom/-/react-dom-2.1.9.tgz",
+      "integrity": "sha512-JDjEFGCpImxDCA7JJKviA0M9+RtmJdj0m/NVU5IMgBK+AmZouAQQ7/+2GLH0GXXY0YMw9oXPB8hKdbPYg5QLYg==",
       "files": [
         {
-          "sourcePath": "node_modules/@radix-ui/react-portal/LICENSE",
-          "copiedPath": "packages/_radix-ui_react-portal@1.2.0--73946d39db/LICENSE",
-          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
-          "bytes": 1063
+          "sourcePath": "node_modules/@floating-ui/react-dom/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
+          "copiedPath": "packages/_floating-ui_react-dom@2.1.9--1a54005a71/LICENSE",
+          "sha256": "0e4c9a9b6c71019cbbea3bdc20b01223110a9035700f9c960c8fcbf78c2325ce",
+          "bytes": 1089
         }
       ],
       "warnings": []
     },
     {
-      "name": "@radix-ui/react-presence",
-      "version": "1.1.11",
-      "lockPath": "node_modules/@radix-ui/react-presence",
+      "name": "@floating-ui/utils",
+      "version": "0.2.12",
+      "lockPath": "node_modules/@floating-ui/utils",
       "direct": false,
-      "devOptional": false,
-      "optional": false,
-      "declaredLicense": "MIT",
-      "installedLicense": "MIT",
-      "licenseTextStatus": "collected_original_files",
-      "repository": {
-        "type": "git",
-        "url": "git+https://github.com/radix-ui/primitives.git",
-        "directory": "packages/react/presence"
-      },
-      "resolved": "https://registry.npmjs.org/@radix-ui/react-presence/-/react-presence-1.1.11.tgz",
-      "integrity": "sha512-Z7/atlkab36Z8hm+V8zYc79r0W+tiOB1o0tun1By94JyadkekLQmtEAnBSP9XKXBNQsStoStS4+gX10JpS5akA==",
-      "files": [
-        {
-          "sourcePath": "node_modules/@radix-ui/react-presence/LICENSE",
-          "copiedPath": "packages/_radix-ui_react-presence@1.1.11--e10f4d5f82/LICENSE",
-          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
-          "bytes": 1063
-        }
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
       ],
-      "warnings": []
-    },
-    {
-      "name": "@radix-ui/react-primitive",
-      "version": "2.2.0",
-      "lockPath": "node_modules/@radix-ui/react-primitive",
-      "direct": false,
-      "devOptional": false,
-      "optional": false,
-      "declaredLicense": "MIT",
-      "installedLicense": "MIT",
-      "licenseTextStatus": "collected_original_files",
-      "repository": {
-        "type": "git",
-        "url": "git+https://github.com/radix-ui/primitives.git",
-        "directory": "packages/react/primitive"
-      },
-      "resolved": "https://registry.npmjs.org/@radix-ui/react-primitive/-/react-primitive-2.2.0.tgz",
-      "integrity": "sha512-HCTSPMNqv55Qk0IX4geJbpyXazmqulcimwuyjxTkKi29v+QZbG2Zho9BnbBq4YS2PF+KlNb2CXoLz66uUmblkg==",
-      "files": [
-        {
-          "sourcePath": "node_modules/@radix-ui/react-primitive/LICENSE",
-          "copiedPath": "packages/_radix-ui_react-primitive@2.2.0--f385af645e/LICENSE",
-          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
-          "bytes": 1063
-        }
+      "bundledTargets": [
+        "extension",
+        "preview"
       ],
-      "warnings": []
-    },
-    {
-      "name": "@radix-ui/react-slot",
-      "version": "1.5.0",
-      "lockPath": "node_modules/@radix-ui/react-slot",
-      "direct": false,
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -337,125 +393,19 @@
       "licenseTextStatus": "collected_original_files",
       "repository": {
         "type": "git",
-        "url": "git+https://github.com/radix-ui/primitives.git",
-        "directory": "packages/react/slot"
+        "url": "https://github.com/floating-ui/floating-ui.git",
+        "directory": "packages/utils"
       },
-      "resolved": "https://registry.npmjs.org/@radix-ui/react-slot/-/react-slot-1.5.0.tgz",
-      "integrity": "sha512-tyYd9ddPXAysAbdbD9eYxgwpCSv6f3PncqVSNKQFSR5lcJVLz3cb/pANDoYrLiHBpXv7skortyUgGUWsYuPPFQ==",
+      "resolved": "https://registry.npmjs.org/@floating-ui/utils/-/utils-0.2.12.tgz",
+      "integrity": "sha512-HpCo8tmWzLVad5s2d19EhAz5zqrrQ6s69qd6moPMQvkOuSwDT1YgRfWSVuc4ennqrgv3OHppiOGMQ7oC13yIww==",
       "files": [
         {
-          "sourcePath": "node_modules/@radix-ui/react-slot/LICENSE",
-          "copiedPath": "packages/_radix-ui_react-slot@1.5.0--ebfaab3df9/LICENSE",
-          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
-          "bytes": 1063
-        }
-      ],
-      "warnings": []
-    },
-    {
-      "name": "@radix-ui/react-use-callback-ref",
-      "version": "1.1.5",
-      "lockPath": "node_modules/@radix-ui/react-use-callback-ref",
-      "direct": false,
-      "devOptional": false,
-      "optional": false,
-      "declaredLicense": "MIT",
-      "installedLicense": "MIT",
-      "licenseTextStatus": "collected_original_files",
-      "repository": {
-        "type": "git",
-        "url": "git+https://github.com/radix-ui/primitives.git",
-        "directory": "packages/react/use-callback-ref"
-      },
-      "resolved": "https://registry.npmjs.org/@radix-ui/react-use-callback-ref/-/react-use-callback-ref-1.1.5.tgz",
-      "integrity": "sha512-Y5GBf4NKeADoXI1geiMlMuMoURT3k9MizzzKhGb/m55H94aGigZ01PIpkvsO6lML13BA6XYAXSJ6gza7vTn5nw==",
-      "files": [
-        {
-          "sourcePath": "node_modules/@radix-ui/react-use-callback-ref/LICENSE",
-          "copiedPath": "packages/_radix-ui_react-use-callback-ref@1.1.5--fe2bf6d042/LICENSE",
-          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
-          "bytes": 1063
-        }
-      ],
-      "warnings": []
-    },
-    {
-      "name": "@radix-ui/react-use-controllable-state",
-      "version": "1.3.0",
-      "lockPath": "node_modules/@radix-ui/react-use-controllable-state",
-      "direct": false,
-      "devOptional": false,
-      "optional": false,
-      "declaredLicense": "MIT",
-      "installedLicense": "MIT",
-      "licenseTextStatus": "collected_original_files",
-      "repository": {
-        "type": "git",
-        "url": "git+https://github.com/radix-ui/primitives.git",
-        "directory": "packages/react/use-controllable-state"
-      },
-      "resolved": "https://registry.npmjs.org/@radix-ui/react-use-controllable-state/-/react-use-controllable-state-1.3.0.tgz",
-      "integrity": "sha512-TAcBI7bw2ljYCbv4+zuTSd6zICu8pRt6SDN2vJ/Z06K2MXh6I9WYFe/A9ovlFDtR5HVHGm5iDxDoABm/++dbKg==",
-      "files": [
-        {
-          "sourcePath": "node_modules/@radix-ui/react-use-controllable-state/LICENSE",
-          "copiedPath": "packages/_radix-ui_react-use-controllable-state@1.3.0--71d97e90de/LICENSE",
-          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
-          "bytes": 1063
-        }
-      ],
-      "warnings": []
-    },
-    {
-      "name": "@radix-ui/react-use-effect-event",
-      "version": "0.0.5",
-      "lockPath": "node_modules/@radix-ui/react-use-effect-event",
-      "direct": false,
-      "devOptional": false,
-      "optional": false,
-      "declaredLicense": "MIT",
-      "installedLicense": "MIT",
-      "licenseTextStatus": "collected_original_files",
-      "repository": {
-        "type": "git",
-        "url": "git+https://github.com/radix-ui/primitives.git",
-        "directory": "packages/react/use-effect-event"
-      },
-      "resolved": "https://registry.npmjs.org/@radix-ui/react-use-effect-event/-/react-use-effect-event-0.0.5.tgz",
-      "integrity": "sha512-7cshFL8HGS/7HEiHH+9kL9HBwp2sa9yX18Knwek6KYWmXwM7pegMgta2AXMQKI+rq3JnfSj9x8wYqFMTdG1Jgg==",
-      "files": [
-        {
-          "sourcePath": "node_modules/@radix-ui/react-use-effect-event/LICENSE",
-          "copiedPath": "packages/_radix-ui_react-use-effect-event@0.0.5--aee140787a/LICENSE",
-          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
-          "bytes": 1063
-        }
-      ],
-      "warnings": []
-    },
-    {
-      "name": "@radix-ui/react-use-layout-effect",
-      "version": "1.1.4",
-      "lockPath": "node_modules/@radix-ui/react-use-layout-effect",
-      "direct": false,
-      "devOptional": false,
-      "optional": false,
-      "declaredLicense": "MIT",
-      "installedLicense": "MIT",
-      "licenseTextStatus": "collected_original_files",
-      "repository": {
-        "type": "git",
-        "url": "git+https://github.com/radix-ui/primitives.git",
-        "directory": "packages/react/use-layout-effect"
-      },
-      "resolved": "https://registry.npmjs.org/@radix-ui/react-use-layout-effect/-/react-use-layout-effect-1.1.4.tgz",
-      "integrity": "sha512-K20DkRkUwDnxEYMBPcg3Y6voLkEy5p5QQmszZgLngKKiC7dzBR/aEuK3w1qlx2JWDUNH6FluahYdgR3BP+QbYw==",
-      "files": [
-        {
-          "sourcePath": "node_modules/@radix-ui/react-use-layout-effect/LICENSE",
-          "copiedPath": "packages/_radix-ui_react-use-layout-effect@1.1.4--80355f5894/LICENSE",
-          "sha256": "0e80a2d229d2fd4fc7e8636142ec5d0ff0bc031f14c15b682e2ac01dfd5b5138",
-          "bytes": 1063
+          "sourcePath": "node_modules/@floating-ui/utils/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
+          "copiedPath": "packages/_floating-ui_utils@0.2.12--09bd0df886/LICENSE",
+          "sha256": "0e4c9a9b6c71019cbbea3bdc20b01223110a9035700f9c960c8fcbf78c2325ce",
+          "bytes": 1089
         }
       ],
       "warnings": []
@@ -465,6 +415,15 @@
       "version": "2.14.0",
       "lockPath": "node_modules/@reduxjs/toolkit",
       "direct": false,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -479,6 +438,8 @@
       "files": [
         {
           "sourcePath": "node_modules/@reduxjs/toolkit/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/_reduxjs_toolkit@2.14.0--d453c64d3c/LICENSE",
           "sha256": "49784961ec6c4941437b7a2c54d8977d0528076a9e7c73dd40f7d0942b8f106d",
           "bytes": 1069
@@ -491,6 +452,11 @@
       "version": "1.1.0",
       "lockPath": "node_modules/@standard-schema/spec",
       "direct": false,
+      "selectionReasons": [
+        "production_lock"
+      ],
+      "bundledTargets": [],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -505,6 +471,8 @@
       "files": [
         {
           "sourcePath": "node_modules/@standard-schema/spec/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/_standard-schema_spec@1.1.0--2840a25bcf/LICENSE",
           "sha256": "653b779005a3a4d64a7288c940f7b9a0e8f0b1e0375f6aa6af9473caf131e564",
           "bytes": 1071
@@ -517,6 +485,11 @@
       "version": "0.3.0",
       "lockPath": "node_modules/@standard-schema/utils",
       "direct": false,
+      "selectionReasons": [
+        "production_lock"
+      ],
+      "bundledTargets": [],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -531,6 +504,8 @@
       "files": [
         {
           "sourcePath": "node_modules/@standard-schema/utils/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/_standard-schema_utils@0.3.0--80f6130165/LICENSE",
           "sha256": "9cf2166507311f427e083ef7671da566949391cb745789abcff8bd43ac26d1f1",
           "bytes": 1069
@@ -543,6 +518,11 @@
       "version": "3.2.2",
       "lockPath": "node_modules/@types/d3-array",
       "direct": false,
+      "selectionReasons": [
+        "production_lock"
+      ],
+      "bundledTargets": [],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -558,6 +538,8 @@
       "files": [
         {
           "sourcePath": "node_modules/@types/d3-array/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/_types_d3-array@3.2.2--ad4d248aa6/LICENSE",
           "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
           "bytes": 1141
@@ -570,6 +552,11 @@
       "version": "3.1.3",
       "lockPath": "node_modules/@types/d3-color",
       "direct": false,
+      "selectionReasons": [
+        "production_lock"
+      ],
+      "bundledTargets": [],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -585,6 +572,8 @@
       "files": [
         {
           "sourcePath": "node_modules/@types/d3-color/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/_types_d3-color@3.1.3--602110a404/LICENSE",
           "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
           "bytes": 1141
@@ -597,6 +586,11 @@
       "version": "3.0.2",
       "lockPath": "node_modules/@types/d3-ease",
       "direct": false,
+      "selectionReasons": [
+        "production_lock"
+      ],
+      "bundledTargets": [],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -612,6 +606,8 @@
       "files": [
         {
           "sourcePath": "node_modules/@types/d3-ease/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/_types_d3-ease@3.0.2--fbafe6d995/LICENSE",
           "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
           "bytes": 1141
@@ -624,6 +620,11 @@
       "version": "3.0.4",
       "lockPath": "node_modules/@types/d3-interpolate",
       "direct": false,
+      "selectionReasons": [
+        "production_lock"
+      ],
+      "bundledTargets": [],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -639,6 +640,8 @@
       "files": [
         {
           "sourcePath": "node_modules/@types/d3-interpolate/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/_types_d3-interpolate@3.0.4--09828c5523/LICENSE",
           "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
           "bytes": 1141
@@ -651,6 +654,11 @@
       "version": "3.1.1",
       "lockPath": "node_modules/@types/d3-path",
       "direct": false,
+      "selectionReasons": [
+        "production_lock"
+      ],
+      "bundledTargets": [],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -666,6 +674,8 @@
       "files": [
         {
           "sourcePath": "node_modules/@types/d3-path/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/_types_d3-path@3.1.1--857caeaf41/LICENSE",
           "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
           "bytes": 1141
@@ -678,6 +688,11 @@
       "version": "4.0.9",
       "lockPath": "node_modules/@types/d3-scale",
       "direct": false,
+      "selectionReasons": [
+        "production_lock"
+      ],
+      "bundledTargets": [],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -693,6 +708,8 @@
       "files": [
         {
           "sourcePath": "node_modules/@types/d3-scale/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/_types_d3-scale@4.0.9--e14f8790fd/LICENSE",
           "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
           "bytes": 1141
@@ -705,6 +722,11 @@
       "version": "3.2.0",
       "lockPath": "node_modules/@types/d3-shape",
       "direct": false,
+      "selectionReasons": [
+        "production_lock"
+      ],
+      "bundledTargets": [],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -720,6 +742,8 @@
       "files": [
         {
           "sourcePath": "node_modules/@types/d3-shape/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/_types_d3-shape@3.2.0--8da0dd2230/LICENSE",
           "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
           "bytes": 1141
@@ -732,6 +756,11 @@
       "version": "3.0.4",
       "lockPath": "node_modules/@types/d3-time",
       "direct": false,
+      "selectionReasons": [
+        "production_lock"
+      ],
+      "bundledTargets": [],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -747,6 +776,8 @@
       "files": [
         {
           "sourcePath": "node_modules/@types/d3-time/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/_types_d3-time@3.0.4--1552732410/LICENSE",
           "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
           "bytes": 1141
@@ -759,6 +790,11 @@
       "version": "3.0.2",
       "lockPath": "node_modules/@types/d3-timer",
       "direct": false,
+      "selectionReasons": [
+        "production_lock"
+      ],
+      "bundledTargets": [],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -774,6 +810,8 @@
       "files": [
         {
           "sourcePath": "node_modules/@types/d3-timer/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/_types_d3-timer@3.0.2--2d61d765d9/LICENSE",
           "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
           "bytes": 1141
@@ -786,6 +824,11 @@
       "version": "19.3.0",
       "lockPath": "node_modules/@types/react",
       "direct": false,
+      "selectionReasons": [
+        "production_lock"
+      ],
+      "bundledTargets": [],
+      "runtimeAttributions": [],
       "devOptional": true,
       "optional": false,
       "declaredLicense": "MIT",
@@ -801,34 +844,9 @@
       "files": [
         {
           "sourcePath": "node_modules/@types/react/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/_types_react@19.3.0--2300dff8f1/LICENSE",
-          "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
-          "bytes": 1141
-        }
-      ],
-      "warnings": []
-    },
-    {
-      "name": "@types/react-dom",
-      "version": "19.3.0",
-      "lockPath": "node_modules/@types/react-dom",
-      "direct": false,
-      "devOptional": true,
-      "optional": false,
-      "declaredLicense": "MIT",
-      "installedLicense": "MIT",
-      "licenseTextStatus": "collected_original_files",
-      "repository": {
-        "type": "git",
-        "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
-        "directory": "types/react-dom"
-      },
-      "resolved": "https://registry.npmjs.org/@types/react-dom/-/react-dom-19.3.0.tgz",
-      "integrity": "sha512-ZI7bU42mZXXKHn/qNLEw2IrbiINU7X5+vfgdixBHkCNpYWXjKgfQ/P+uyGb5CjOLB9UcnTeg3rylQtV2hym44Q==",
-      "files": [
-        {
-          "sourcePath": "node_modules/@types/react-dom/LICENSE",
-          "copiedPath": "packages/_types_react-dom@19.3.0--278d2b698c/LICENSE",
           "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
           "bytes": 1141
         }
@@ -840,6 +858,11 @@
       "version": "0.0.6",
       "lockPath": "node_modules/@types/use-sync-external-store",
       "direct": false,
+      "selectionReasons": [
+        "production_lock"
+      ],
+      "bundledTargets": [],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -855,6 +878,8 @@
       "files": [
         {
           "sourcePath": "node_modules/@types/use-sync-external-store/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/_types_use-sync-external-store@0.0.6--4ad17bb940/LICENSE",
           "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
           "bytes": 1141
@@ -863,36 +888,118 @@
       "warnings": []
     },
     {
-      "name": "aria-hidden",
-      "version": "1.2.6",
-      "lockPath": "node_modules/aria-hidden",
+      "name": "@wxt-dev/browser",
+      "version": "0.3.7",
+      "lockPath": "node_modules/@wxt-dev/browser",
       "direct": false,
+      "selectionReasons": [
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
       "installedLicense": "MIT",
-      "licenseTextStatus": "collected_original_files",
+      "licenseTextStatus": "collected_version_matched_source_files",
       "repository": {
         "type": "git",
-        "url": "git+https://github.com/theKashey/aria-hidden.git"
+        "url": "git+https://github.com/wxt-dev/wxt.git",
+        "directory": "packages/browser"
       },
-      "resolved": "https://registry.npmjs.org/aria-hidden/-/aria-hidden-1.2.6.tgz",
-      "integrity": "sha512-ik3ZgC9dY/lYVVM++OISsaYDeg1tb0VtP5uL3ouh1koGOaUMDPpbFIei4JkFimWUFPn90sbMNMXQAIVOlnYKJA==",
+      "resolved": "https://registry.npmjs.org/@wxt-dev/browser/-/browser-0.3.7.tgz",
+      "integrity": "sha512-TCBcayayb2mycJxt9X3kTq3QZerqltx/I4FW1WVTafBcqQC6vUaDz5Sboummy0rVsSMbYzyKnS5118VTw0dt4A==",
       "files": [
         {
-          "sourcePath": "node_modules/aria-hidden/LICENSE",
-          "copiedPath": "packages/aria-hidden@1.2.6--b337ebd897/LICENSE",
-          "sha256": "30f0cfddf483d1128e3610205020f2041a6c5e837aa999e0aa82e5576187d4a9",
-          "bytes": 1071
+          "sourcePath": "scripts/license-sources/wxt-dev-browser-0.3.7/LICENSE",
+          "sourceKind": "version_matched_upstream",
+          "packagePath": "recovered-source/LICENSE",
+          "copiedPath": "packages/_wxt-dev_browser@0.3.7--9295ae4ea0/recovered-source/LICENSE",
+          "sha256": "7b0b00fcdbc6a036078aad84d0bc0fae240ac67144b86c911149c2daa37c9f85",
+          "bytes": 1062
         }
       ],
-      "warnings": []
+      "warnings": [],
+      "sourceRecoveryReview": {
+        "name": "@wxt-dev/browser",
+        "version": "0.3.7",
+        "integrity": "sha512-TCBcayayb2mycJxt9X3kTq3QZerqltx/I4FW1WVTafBcqQC6vUaDz5Sboummy0rVsSMbYzyKnS5118VTw0dt4A==",
+        "declaredLicense": "MIT",
+        "repository": "https://github.com/wxt-dev/wxt",
+        "sourceCommit": "f5386b496d28ca66baa1efc5ae6e49f85f5d8d2d",
+        "sourceUrl": "https://raw.githubusercontent.com/wxt-dev/wxt/f5386b496d28ca66baa1efc5ae6e49f85f5d8d2d/LICENSE",
+        "sourcePath": "scripts/license-sources/wxt-dev-browser-0.3.7/LICENSE",
+        "sha256": "7b0b00fcdbc6a036078aad84d0bc0fae240ac67144b86c911149c2daa37c9f85",
+        "bytes": 1062,
+        "npmMetadataUrl": "https://registry.npmjs.org/@wxt-dev%2fbrowser/0.3.7",
+        "npmProvenanceUrl": "https://registry.npmjs.org/-/npm/v1/attestations/@wxt-dev%2fbrowser@0.3.7",
+        "provenanceStatement": {
+          "_type": "https://in-toto.io/Statement/v1",
+          "subject": [
+            {
+              "name": "pkg:npm/%40wxt-dev/browser@0.3.7",
+              "digest": {
+                "sha512": "4c205c6b26b26f69b2709c6df57de44eadd065eaea96dc7f238156d5655369f05ca900babd4683cf949ba2e9a6cb4ad5b1231b633c8a9d2e75d7c553c3476de0"
+              }
+            }
+          ],
+          "predicateType": "https://slsa.dev/provenance/v1",
+          "predicate": {
+            "buildDefinition": {
+              "buildType": "https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1",
+              "externalParameters": {
+                "workflow": {
+                  "ref": "refs/heads/main",
+                  "repository": "https://github.com/wxt-dev/wxt",
+                  "path": ".github/workflows/update-browser-package.yml"
+                }
+              },
+              "internalParameters": {
+                "github": {
+                  "event_name": "schedule",
+                  "repository_id": "658389713",
+                  "repository_owner_id": "144182268"
+                }
+              },
+              "resolvedDependencies": [
+                {
+                  "uri": "git+https://github.com/wxt-dev/wxt@refs/heads/main",
+                  "digest": {
+                    "gitCommit": "f5386b496d28ca66baa1efc5ae6e49f85f5d8d2d"
+                  }
+                }
+              ]
+            },
+            "runDetails": {
+              "builder": {
+                "id": "https://github.com/actions/runner/github-hosted"
+              },
+              "metadata": {
+                "invocationId": "https://github.com/wxt-dev/wxt/actions/runs/40635157359/attempts/1"
+              }
+            }
+          }
+        },
+        "verification": "Registry provenance statement subject SHA-512 matched the npm artifact integrity and downloaded tarball bytes; source LICENSE fetched at its resolved immutable commit. DSSE/Sigstore cryptographic signature and transparency proof were not independently verified."
+      }
     },
     {
       "name": "clsx",
       "version": "2.1.1",
       "lockPath": "node_modules/clsx",
       "direct": false,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -904,6 +1011,8 @@
       "files": [
         {
           "sourcePath": "node_modules/clsx/license",
+          "sourceKind": "installed_package",
+          "packagePath": "license",
           "copiedPath": "packages/clsx@2.1.1--d66d255412/license",
           "sha256": "9a9edad7baae52622bddf3c15b2ef8a33d2c89f2d25408ad13e8a7481c6b0c97",
           "bytes": 1104
@@ -916,6 +1025,11 @@
       "version": "3.2.3",
       "lockPath": "node_modules/csstype",
       "direct": false,
+      "selectionReasons": [
+        "production_lock"
+      ],
+      "bundledTargets": [],
+      "runtimeAttributions": [],
       "devOptional": true,
       "optional": false,
       "declaredLicense": "MIT",
@@ -927,6 +1041,8 @@
       "files": [
         {
           "sourcePath": "node_modules/csstype/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/csstype@3.2.3--8c4a8a7665/LICENSE",
           "sha256": "11d55bd4541c75ee7879547ac49089c489163dae49551389713c3d026cab383e",
           "bytes": 1062
@@ -939,6 +1055,15 @@
       "version": "3.2.5",
       "lockPath": "node_modules/d3-array",
       "direct": false,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "ISC",
@@ -953,6 +1078,8 @@
       "files": [
         {
           "sourcePath": "node_modules/d3-array/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/d3-array@3.2.5--f1e9a8fff8/LICENSE",
           "sha256": "2a6d2d5f32ba0b755ddbc1c833f766e30cdbe6ebe9a6d4e3e24427721f0b63d3",
           "bytes": 731
@@ -965,6 +1092,15 @@
       "version": "3.1.1",
       "lockPath": "node_modules/d3-color",
       "direct": false,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "ISC",
@@ -979,6 +1115,8 @@
       "files": [
         {
           "sourcePath": "node_modules/d3-color/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/d3-color@3.1.1--e73223f67a/LICENSE",
           "sha256": "2a6d2d5f32ba0b755ddbc1c833f766e30cdbe6ebe9a6d4e3e24427721f0b63d3",
           "bytes": 731
@@ -991,6 +1129,11 @@
       "version": "3.0.2",
       "lockPath": "node_modules/d3-ease",
       "direct": false,
+      "selectionReasons": [
+        "production_lock"
+      ],
+      "bundledTargets": [],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "BSD-3-Clause",
@@ -1005,6 +1148,8 @@
       "files": [
         {
           "sourcePath": "node_modules/d3-ease/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/d3-ease@3.0.2--779dc8df6e/LICENSE",
           "sha256": "82f2a38e51f9013690c0cea086e901b33e51b5f0c3ba837941d7a58073c72917",
           "bytes": 1504
@@ -1017,6 +1162,15 @@
       "version": "3.1.3",
       "lockPath": "node_modules/d3-format",
       "direct": false,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "ISC",
@@ -1031,6 +1185,8 @@
       "files": [
         {
           "sourcePath": "node_modules/d3-format/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/d3-format@3.1.3--34de80807d/LICENSE",
           "sha256": "2a6d2d5f32ba0b755ddbc1c833f766e30cdbe6ebe9a6d4e3e24427721f0b63d3",
           "bytes": 731
@@ -1043,6 +1199,15 @@
       "version": "3.0.2",
       "lockPath": "node_modules/d3-interpolate",
       "direct": false,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "ISC",
@@ -1057,6 +1222,8 @@
       "files": [
         {
           "sourcePath": "node_modules/d3-interpolate/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/d3-interpolate@3.0.2--ede6e5e370/LICENSE",
           "sha256": "2a6d2d5f32ba0b755ddbc1c833f766e30cdbe6ebe9a6d4e3e24427721f0b63d3",
           "bytes": 731
@@ -1069,6 +1236,15 @@
       "version": "3.1.1",
       "lockPath": "node_modules/d3-path",
       "direct": false,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "ISC",
@@ -1083,6 +1259,8 @@
       "files": [
         {
           "sourcePath": "node_modules/d3-path/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/d3-path@3.1.1--3d9c861aef/LICENSE",
           "sha256": "f5dff44740d51a1849b4d16b657eccf60577fb5d28d8ee46d33dcc780a11f94a",
           "bytes": 731
@@ -1095,6 +1273,15 @@
       "version": "4.0.3",
       "lockPath": "node_modules/d3-scale",
       "direct": false,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "ISC",
@@ -1109,6 +1296,8 @@
       "files": [
         {
           "sourcePath": "node_modules/d3-scale/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/d3-scale@4.0.3--71961a9994/LICENSE",
           "sha256": "2a6d2d5f32ba0b755ddbc1c833f766e30cdbe6ebe9a6d4e3e24427721f0b63d3",
           "bytes": 731
@@ -1121,6 +1310,15 @@
       "version": "3.2.1",
       "lockPath": "node_modules/d3-shape",
       "direct": false,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "ISC",
@@ -1135,6 +1333,8 @@
       "files": [
         {
           "sourcePath": "node_modules/d3-shape/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/d3-shape@3.2.1--5fc5058b9a/LICENSE",
           "sha256": "2a6d2d5f32ba0b755ddbc1c833f766e30cdbe6ebe9a6d4e3e24427721f0b63d3",
           "bytes": 731
@@ -1147,6 +1347,15 @@
       "version": "3.1.1",
       "lockPath": "node_modules/d3-time",
       "direct": false,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "ISC",
@@ -1161,6 +1370,8 @@
       "files": [
         {
           "sourcePath": "node_modules/d3-time/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/d3-time@3.1.1--f4e6430694/LICENSE",
           "sha256": "2a6d2d5f32ba0b755ddbc1c833f766e30cdbe6ebe9a6d4e3e24427721f0b63d3",
           "bytes": 731
@@ -1173,6 +1384,15 @@
       "version": "4.1.1",
       "lockPath": "node_modules/d3-time-format",
       "direct": false,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "ISC",
@@ -1187,6 +1407,8 @@
       "files": [
         {
           "sourcePath": "node_modules/d3-time-format/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/d3-time-format@4.1.1--3ddedcd3de/LICENSE",
           "sha256": "2a6d2d5f32ba0b755ddbc1c833f766e30cdbe6ebe9a6d4e3e24427721f0b63d3",
           "bytes": 731
@@ -1199,6 +1421,11 @@
       "version": "3.0.2",
       "lockPath": "node_modules/d3-timer",
       "direct": false,
+      "selectionReasons": [
+        "production_lock"
+      ],
+      "bundledTargets": [],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "ISC",
@@ -1213,6 +1440,8 @@
       "files": [
         {
           "sourcePath": "node_modules/d3-timer/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/d3-timer@3.0.2--5d08ea60b0/LICENSE",
           "sha256": "2a6d2d5f32ba0b755ddbc1c833f766e30cdbe6ebe9a6d4e3e24427721f0b63d3",
           "bytes": 731
@@ -1225,6 +1454,15 @@
       "version": "2.5.1",
       "lockPath": "node_modules/decimal.js-light",
       "direct": false,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -1239,35 +1477,11 @@
       "files": [
         {
           "sourcePath": "node_modules/decimal.js-light/LICENCE.md",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENCE.md",
           "copiedPath": "packages/decimal.js-light@2.5.1--8fc0c987c5/LICENCE.md",
           "sha256": "fc0397fbd5c128bec7edef4e8d3f45e15db5fd043cdd0a2edfc4f14d47fbc3e4",
           "bytes": 1110
-        }
-      ],
-      "warnings": []
-    },
-    {
-      "name": "detect-node-es",
-      "version": "1.1.0",
-      "lockPath": "node_modules/detect-node-es",
-      "direct": false,
-      "devOptional": false,
-      "optional": false,
-      "declaredLicense": "MIT",
-      "installedLicense": "MIT",
-      "licenseTextStatus": "collected_original_files",
-      "repository": {
-        "type": "git",
-        "url": "https://github.com/thekashey/detect-node"
-      },
-      "resolved": "https://registry.npmjs.org/detect-node-es/-/detect-node-es-1.1.0.tgz",
-      "integrity": "sha512-ypdmJU/TbBby2Dxibuv7ZLW3Bs1QEmM7nHjEANfohJLvE0XVujisn1qPJcZxg+qDucsr+bP6fLD1rPS3AhJ7EQ==",
-      "files": [
-        {
-          "sourcePath": "node_modules/detect-node-es/LICENSE",
-          "copiedPath": "packages/detect-node-es@1.1.0--14390e4b58/LICENSE",
-          "sha256": "54b32293ea560d22cd9b62af9b2cda1a030d910a48c6601d227c5ff2338d95f8",
-          "bytes": 1068
         }
       ],
       "warnings": []
@@ -1277,6 +1491,15 @@
       "version": "4.4.7",
       "lockPath": "node_modules/dexie",
       "direct": true,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "Apache-2.0",
@@ -1291,12 +1514,16 @@
       "files": [
         {
           "sourcePath": "node_modules/dexie/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/dexie@4.4.7--3d64eccf53/LICENSE",
           "sha256": "cb5e8e7e5f4a3988e1063c142c60dc2df75605f4c46515e776e3aca6df976e14",
           "bytes": 11325
         },
         {
           "sourcePath": "node_modules/dexie/NOTICE",
+          "sourceKind": "installed_package",
+          "packagePath": "NOTICE",
           "copiedPath": "packages/dexie@4.4.7--3d64eccf53/NOTICE",
           "sha256": "6176d2e8a3fd8a881828a1a27bbcc5a9e03a75f437ce3c4ddbedd94fdac475c1",
           "bytes": 575
@@ -1309,6 +1536,15 @@
       "version": "4.4.0",
       "lockPath": "node_modules/dexie-react-hooks",
       "direct": true,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "Apache-2.0",
@@ -1323,6 +1559,8 @@
       "files": [
         {
           "sourcePath": "node_modules/dexie-react-hooks/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/dexie-react-hooks@4.4.0--70f231f5f6/LICENSE",
           "sha256": "cb5e8e7e5f4a3988e1063c142c60dc2df75605f4c46515e776e3aca6df976e14",
           "bytes": 11325
@@ -1335,6 +1573,15 @@
       "version": "1.53.2",
       "lockPath": "node_modules/es-toolkit",
       "direct": false,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -1349,12 +1596,16 @@
       "files": [
         {
           "sourcePath": "node_modules/es-toolkit/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/es-toolkit@1.53.2--096564addc/LICENSE",
           "sha256": "51f3674294d988d89dbebd31273baaeb3c697a15482d9699b14d1fded2e132a7",
           "bytes": 1077
         },
         {
           "sourcePath": "node_modules/es-toolkit/NOTICE",
+          "sourceKind": "installed_package",
+          "packagePath": "NOTICE",
           "copiedPath": "packages/es-toolkit@1.53.2--096564addc/NOTICE",
           "sha256": "11ee5e3bce9b0a4dde7f73811caf98978e710228d891c3111ad8ef8d7d2a916f",
           "bytes": 1698
@@ -1367,6 +1618,15 @@
       "version": "5.0.4",
       "lockPath": "node_modules/eventemitter3",
       "direct": false,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -1381,32 +1641,11 @@
       "files": [
         {
           "sourcePath": "node_modules/eventemitter3/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/eventemitter3@5.0.4--e9eb74a1ee/LICENSE",
           "sha256": "3aecc12b1cb28832b5f65ab64291de96568c3f236a74d646281b4491f7bcadbf",
           "bytes": 1082
-        }
-      ],
-      "warnings": []
-    },
-    {
-      "name": "get-nonce",
-      "version": "1.0.1",
-      "lockPath": "node_modules/get-nonce",
-      "direct": false,
-      "devOptional": false,
-      "optional": false,
-      "declaredLicense": "MIT",
-      "installedLicense": "MIT",
-      "licenseTextStatus": "collected_original_files",
-      "repository": "git@github.com:theKashey/get-nonce.git",
-      "resolved": "https://registry.npmjs.org/get-nonce/-/get-nonce-1.0.1.tgz",
-      "integrity": "sha512-FJhYRoDaiatfEkUK8HKlicmu/3SGFD51q3itKDGoSTysQJBnfOcxU5GxnhE1E6soB76MbT0MBtnKJuXyAx+96Q==",
-      "files": [
-        {
-          "sourcePath": "node_modules/get-nonce/LICENSE",
-          "copiedPath": "packages/get-nonce@1.0.1--6bca10a68f/LICENSE",
-          "sha256": "acf3b087b348d2f2e731b9d4131af185aad694c1204ce14a46909483fd42da05",
-          "bytes": 1071
         }
       ],
       "warnings": []
@@ -1416,6 +1655,15 @@
       "version": "11.2.9",
       "lockPath": "node_modules/immer",
       "direct": false,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -1430,6 +1678,8 @@
       "files": [
         {
           "sourcePath": "node_modules/immer/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/immer@11.2.9--c2c91cd705/LICENSE",
           "sha256": "99cf22f6960a6fe228ec84ea9aefb0d75b27999ece83a3a9801e1c2081fa270b",
           "bytes": 1074
@@ -1442,6 +1692,11 @@
       "version": "2.0.3",
       "lockPath": "node_modules/internmap",
       "direct": false,
+      "selectionReasons": [
+        "production_lock"
+      ],
+      "bundledTargets": [],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "ISC",
@@ -1456,6 +1711,8 @@
       "files": [
         {
           "sourcePath": "node_modules/internmap/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/internmap@2.0.3--2b3d70aa25/LICENSE",
           "sha256": "9ea8903938dab5f12c4572d60725069bec2d1b0dc3bcc210b09bae946a5ebb1f",
           "bytes": 726
@@ -1468,6 +1725,15 @@
       "version": "1.70.0",
       "lockPath": "node_modules/lucide-react",
       "direct": true,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "ISC",
@@ -1483,21 +1749,11 @@
       "files": [
         {
           "sourcePath": "node_modules/lucide-react/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/lucide-react@1.70.0--005b3cad11/LICENSE",
           "sha256": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57",
           "bytes": 3208
-        },
-        {
-          "sourcePath": "node_modules/lucide-react/dist/esm/icons/copyright.mjs",
-          "copiedPath": "packages/lucide-react@1.70.0--005b3cad11/dist/esm/icons/copyright.mjs",
-          "sha256": "7bf025ccbcc913a8bf8d2c76766ec9b55132e17060c1d714a234f45848167294",
-          "bytes": 261
-        },
-        {
-          "sourcePath": "node_modules/lucide-react/dist/esm/icons/copyright.mjs.map",
-          "copiedPath": "packages/lucide-react@1.70.0--005b3cad11/dist/esm/icons/copyright.mjs.map",
-          "sha256": "3c510ff8c410b65ddad8795a805fde08cfd86d5c3b0c1935e59ca6aef28d9c72",
-          "bytes": 101
         }
       ],
       "warnings": [],
@@ -1508,6 +1764,15 @@
       "version": "19.3.1",
       "lockPath": "node_modules/react",
       "direct": true,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -1523,6 +1788,8 @@
       "files": [
         {
           "sourcePath": "node_modules/react/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/react@19.3.1--c32755efed/LICENSE",
           "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93",
           "bytes": 1088
@@ -1535,6 +1802,15 @@
       "version": "19.3.1",
       "lockPath": "node_modules/react-dom",
       "direct": true,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -1550,6 +1826,8 @@
       "files": [
         {
           "sourcePath": "node_modules/react-dom/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/react-dom@19.3.1--d5a4b102c0/LICENSE",
           "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93",
           "bytes": 1088
@@ -1562,6 +1840,15 @@
       "version": "19.3.1",
       "lockPath": "node_modules/react-is",
       "direct": true,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -1577,6 +1864,8 @@
       "files": [
         {
           "sourcePath": "node_modules/react-is/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/react-is@19.3.1--083c4f82ea/LICENSE",
           "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93",
           "bytes": 1088
@@ -1589,6 +1878,15 @@
       "version": "9.3.1",
       "lockPath": "node_modules/react-redux",
       "direct": false,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -1600,84 +1898,11 @@
       "files": [
         {
           "sourcePath": "node_modules/react-redux/LICENSE.md",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE.md",
           "copiedPath": "packages/react-redux@9.3.1--0e5546be9f/LICENSE.md",
           "sha256": "f2da73c752c6b87624755edacf927cbd915fa76555d383e74494bad4a5155ab3",
           "bytes": 1086
-        }
-      ],
-      "warnings": []
-    },
-    {
-      "name": "react-remove-scroll",
-      "version": "2.7.2",
-      "lockPath": "node_modules/react-remove-scroll",
-      "direct": false,
-      "devOptional": false,
-      "optional": false,
-      "declaredLicense": "MIT",
-      "installedLicense": "MIT",
-      "licenseTextStatus": "collected_original_files",
-      "repository": "https://github.com/theKashey/react-remove-scroll",
-      "resolved": "https://registry.npmjs.org/react-remove-scroll/-/react-remove-scroll-2.7.2.tgz",
-      "integrity": "sha512-Iqb9NjCCTt6Hf+vOdNIZGdTiH1QSqr27H/Ek9sv/a97gfueI/5h1s3yRi1nngzMUaOOToin5dI1dXKdXiF+u0Q==",
-      "files": [
-        {
-          "sourcePath": "node_modules/react-remove-scroll/LICENSE",
-          "copiedPath": "packages/react-remove-scroll@2.7.2--e27e925afd/LICENSE",
-          "sha256": "30f0cfddf483d1128e3610205020f2041a6c5e837aa999e0aa82e5576187d4a9",
-          "bytes": 1071
-        }
-      ],
-      "warnings": []
-    },
-    {
-      "name": "react-remove-scroll-bar",
-      "version": "2.3.8",
-      "lockPath": "node_modules/react-remove-scroll-bar",
-      "direct": false,
-      "devOptional": false,
-      "optional": false,
-      "declaredLicense": "MIT",
-      "installedLicense": "MIT",
-      "licenseTextStatus": "unknown_missing_file",
-      "repository": "https://github.com/theKashey/react-remove-scroll-bar",
-      "resolved": "https://registry.npmjs.org/react-remove-scroll-bar/-/react-remove-scroll-bar-2.3.8.tgz",
-      "integrity": "sha512-9r+yi9+mgU33AKcj6IbT9oRCO78WriSj6t/cF8DWBZJ9aOGPOTEDvdUDz1FwKim7QXWwmHqtdHnRJfhAxEG46Q==",
-      "files": [],
-      "warnings": [
-        "No conventionally named LICENSE/LICENCE/COPYING file found in the installed package; declared metadata is not a substitute."
-      ],
-      "sourceRecoveryReview": {
-        "checkedOn": "2026-11-06",
-        "npmVersionMetadata": "https://registry.npmjs.org/react-remove-scroll-bar/2.3.8",
-        "reportedGitHead": "b3b1287aad81def2e2ae707274b74531b61ddbaf",
-        "attemptedExactSource": "https://raw.githubusercontent.com/theKashey/react-remove-scroll-bar/b3b1287aad81def2e2ae707274b74531b61ddbaf/LICENSE",
-        "outcome": "Exact gitHead and version tag lookups returned 404 through GitHub connector; version-matched original text was not recovered. No master/other-version text substituted.",
-        "collectorNetworkAccess": false
-      }
-    },
-    {
-      "name": "react-style-singleton",
-      "version": "2.2.3",
-      "lockPath": "node_modules/react-style-singleton",
-      "direct": false,
-      "devOptional": false,
-      "optional": false,
-      "declaredLicense": "MIT",
-      "installedLicense": "MIT",
-      "licenseTextStatus": "collected_original_files",
-      "repository": {
-        "type": "git",
-        "url": "https://github.com/theKashey/react-style-singleton"
-      },
-      "resolved": "https://registry.npmjs.org/react-style-singleton/-/react-style-singleton-2.2.3.tgz",
-      "integrity": "sha512-b6jSvxvVnyptAiLjbkWLE/lOnR4lfTtDAl+eUC7RZy+QQWc6wRzIV2CE6xBuMmDxc2qIihtDCZD5NPOFl7fRBQ==",
-      "files": [
-        {
-          "sourcePath": "node_modules/react-style-singleton/LICENSE",
-          "copiedPath": "packages/react-style-singleton@2.2.3--45445eedd5/LICENSE",
-          "sha256": "30f0cfddf483d1128e3610205020f2041a6c5e837aa999e0aa82e5576187d4a9",
-          "bytes": 1071
         }
       ],
       "warnings": []
@@ -1687,6 +1912,15 @@
       "version": "3.10.1",
       "lockPath": "node_modules/recharts",
       "direct": true,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -1701,6 +1935,8 @@
       "files": [
         {
           "sourcePath": "node_modules/recharts/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/recharts@3.10.1--7dee638522/LICENSE",
           "sha256": "2d3aa48a8d1d3b93093680e8e68d3a64cfb590c3ade377ffcaefc69dac7c2ce5",
           "bytes": 1084
@@ -1713,6 +1949,15 @@
       "version": "5.0.1",
       "lockPath": "node_modules/redux",
       "direct": false,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -1724,6 +1969,8 @@
       "files": [
         {
           "sourcePath": "node_modules/redux/LICENSE.md",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE.md",
           "copiedPath": "packages/redux@5.0.1--7d985dd44d/LICENSE.md",
           "sha256": "f2da73c752c6b87624755edacf927cbd915fa76555d383e74494bad4a5155ab3",
           "bytes": 1086
@@ -1736,6 +1983,15 @@
       "version": "3.1.0",
       "lockPath": "node_modules/redux-thunk",
       "direct": false,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -1747,6 +2003,8 @@
       "files": [
         {
           "sourcePath": "node_modules/redux-thunk/LICENSE.md",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE.md",
           "copiedPath": "packages/redux-thunk@3.1.0--c150edba31/LICENSE.md",
           "sha256": "635da794c92d278f8355428be0f9922d643f556d4f75f33fe4aca6b98d27affe",
           "bytes": 1107
@@ -1759,6 +2017,15 @@
       "version": "5.2.0",
       "lockPath": "node_modules/reselect",
       "direct": false,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -1773,9 +2040,69 @@
       "files": [
         {
           "sourcePath": "node_modules/reselect/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/reselect@5.2.0--f833ca6162/LICENSE",
           "sha256": "e98047a5dee068b33f82e8c4b7a63037b5108c93393198efd4097753004af5dd",
           "bytes": 1093
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "name": "rolldown",
+      "version": "1.2.16",
+      "lockPath": "node_modules/rolldown",
+      "direct": false,
+      "selectionReasons": [
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [
+        {
+          "target": "extension",
+          "id": "\u0000rolldown/runtime.js",
+          "emittedPositiveLength": true,
+          "attribution": "Rolldown-generated interop runtime; installed dist/shared/rolldown-runtime source and original notices reviewed."
+        },
+        {
+          "target": "preview",
+          "id": "\u0000rolldown/runtime.js",
+          "emittedPositiveLength": true,
+          "attribution": "Rolldown-generated interop runtime; installed dist/shared/rolldown-runtime source and original notices reviewed."
+        }
+      ],
+      "devOptional": false,
+      "optional": false,
+      "declaredLicense": "MIT",
+      "installedLicense": "MIT",
+      "licenseTextStatus": "collected_original_files",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/rolldown/rolldown.git",
+        "directory": "packages/rolldown"
+      },
+      "resolved": "https://registry.npmjs.org/rolldown/-/rolldown-1.2.16.tgz",
+      "integrity": "sha512-bWvlMpFKiTfDKfnK7FC2MPgPeWCf/Kpwsq49ApdW+FQaBZb6O6dZ4MAPbPUjp7hYQrw/RobqCzn64BRrQecGHw==",
+      "files": [
+        {
+          "sourcePath": "node_modules/rolldown/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
+          "copiedPath": "packages/rolldown@1.2.16--e21b483fd2/LICENSE",
+          "sha256": "23ecfff35a5a2e80d92142f75228912c3b1abc4b5a8337a821ff4397e2f9f734",
+          "bytes": 1302
+        },
+        {
+          "sourcePath": "node_modules/rolldown/THIRD-PARTY-LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "THIRD-PARTY-LICENSE",
+          "copiedPath": "packages/rolldown@1.2.16--e21b483fd2/THIRD-PARTY-LICENSE",
+          "sha256": "a877291d800ed43692f3f9ae09d8e01cc6f7293ad39d43896059c188ffbb8b7c",
+          "bytes": 2209
         }
       ],
       "warnings": []
@@ -1785,6 +2112,15 @@
       "version": "0.28.0",
       "lockPath": "node_modules/scheduler",
       "direct": false,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -1800,6 +2136,8 @@
       "files": [
         {
           "sourcePath": "node_modules/scheduler/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/scheduler@0.28.0--7bf6cc1c4f/LICENSE",
           "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93",
           "bytes": 1088
@@ -1812,6 +2150,15 @@
       "version": "1.3.3",
       "lockPath": "node_modules/tiny-invariant",
       "direct": false,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -1826,90 +2173,11 @@
       "files": [
         {
           "sourcePath": "node_modules/tiny-invariant/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/tiny-invariant@1.3.3--6671cdc598/LICENSE",
           "sha256": "b1c501095de70182748cb8e8d97ac5577701a4ef3b755ba30d59fd87b24bdb0f",
           "bytes": 1073
-        }
-      ],
-      "warnings": []
-    },
-    {
-      "name": "tslib",
-      "version": "2.9.1",
-      "lockPath": "node_modules/tslib",
-      "direct": false,
-      "devOptional": false,
-      "optional": false,
-      "declaredLicense": "0BSD",
-      "installedLicense": "0BSD",
-      "licenseTextStatus": "collected_original_files",
-      "repository": {
-        "type": "git",
-        "url": "https://github.com/Microsoft/tslib.git"
-      },
-      "resolved": "https://registry.npmjs.org/tslib/-/tslib-2.9.1.tgz",
-      "integrity": "sha512-a4Ux9VKuIMHsOS7ENbEq6hK2ZGYIT27Rtl0E4eD9KqwxhKiQeMZE/9xb3IdYwWaSOyIBQLExhQgXDTYoiCxnWA==",
-      "files": [
-        {
-          "sourcePath": "node_modules/tslib/CopyrightNotice.txt",
-          "copiedPath": "packages/tslib@2.9.1--7e89d502d0/CopyrightNotice.txt",
-          "sha256": "da16ddb65f8ca390998fb99223d0112498b56b45784d00afd77ff8ce1ac4de8b",
-          "bytes": 822
-        },
-        {
-          "sourcePath": "node_modules/tslib/LICENSE.txt",
-          "copiedPath": "packages/tslib@2.9.1--7e89d502d0/LICENSE.txt",
-          "sha256": "210b19e543130388c68654b7497e967119ce17145f66ab7d85688fbd70f08751",
-          "bytes": 655
-        }
-      ],
-      "warnings": []
-    },
-    {
-      "name": "use-callback-ref",
-      "version": "1.3.3",
-      "lockPath": "node_modules/use-callback-ref",
-      "direct": false,
-      "devOptional": false,
-      "optional": false,
-      "declaredLicense": "MIT",
-      "installedLicense": "MIT",
-      "licenseTextStatus": "collected_original_files",
-      "repository": "https://github.com/theKashey/use-callback-ref/",
-      "resolved": "https://registry.npmjs.org/use-callback-ref/-/use-callback-ref-1.3.3.tgz",
-      "integrity": "sha512-jQL3lRnocaFtu3V00JToYz/4QkNWswxijDaCVNZRiRTO3HQDLsdu1ZtmIUvV4yPp+rvWm5j0y0TG/S61cuijTg==",
-      "files": [
-        {
-          "sourcePath": "node_modules/use-callback-ref/LICENSE",
-          "copiedPath": "packages/use-callback-ref@1.3.3--f4dde66954/LICENSE",
-          "sha256": "30f0cfddf483d1128e3610205020f2041a6c5e837aa999e0aa82e5576187d4a9",
-          "bytes": 1071
-        }
-      ],
-      "warnings": []
-    },
-    {
-      "name": "use-sidecar",
-      "version": "1.1.3",
-      "lockPath": "node_modules/use-sidecar",
-      "direct": false,
-      "devOptional": false,
-      "optional": false,
-      "declaredLicense": "MIT",
-      "installedLicense": "MIT",
-      "licenseTextStatus": "collected_original_files",
-      "repository": {
-        "type": "git",
-        "url": "https://github.com/theKashey/use-sidecar"
-      },
-      "resolved": "https://registry.npmjs.org/use-sidecar/-/use-sidecar-1.1.3.tgz",
-      "integrity": "sha512-Fedw0aZvkhynoPYlA5WXrMCAMm+nSWdZt6lzJQ7Ok8S6Q+VsHmHpRWndVRJ8Be0ZbkfPc5LRYH+5XrzXcEeLRQ==",
-      "files": [
-        {
-          "sourcePath": "node_modules/use-sidecar/LICENSE",
-          "copiedPath": "packages/use-sidecar@1.1.3--1d5d0ccb32/LICENSE",
-          "sha256": "30f0cfddf483d1128e3610205020f2041a6c5e837aa999e0aa82e5576187d4a9",
-          "bytes": 1071
         }
       ],
       "warnings": []
@@ -1919,6 +2187,15 @@
       "version": "1.7.0",
       "lockPath": "node_modules/use-sync-external-store",
       "direct": false,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -1934,6 +2211,8 @@
       "files": [
         {
           "sourcePath": "node_modules/use-sync-external-store/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/use-sync-external-store@1.7.0--6ea4d325df/LICENSE",
           "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93",
           "bytes": 1088
@@ -1946,6 +2225,15 @@
       "version": "37.4.1",
       "lockPath": "node_modules/victory-vendor",
       "direct": false,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT AND ISC AND BSD-3-Clause",
@@ -1960,84 +2248,112 @@
       "files": [
         {
           "sourcePath": "node_modules/victory-vendor/LICENSE.txt",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE.txt",
           "copiedPath": "packages/victory-vendor@37.4.1--4b9e789614/LICENSE.txt",
           "sha256": "909af77588b84d9e557d26c4bd1a26a282aaba7123c4a839c75287c803166955",
           "bytes": 7768
         },
         {
           "sourcePath": "node_modules/victory-vendor/lib-vendor/d3-array/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "lib-vendor/d3-array/LICENSE",
           "copiedPath": "packages/victory-vendor@37.4.1--4b9e789614/lib-vendor/d3-array/LICENSE",
           "sha256": "faa682e3e430941f958d26180458f5934a62f58dac4d70ccdd15608c15d0f884",
           "bytes": 731
         },
         {
           "sourcePath": "node_modules/victory-vendor/lib-vendor/d3-color/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "lib-vendor/d3-color/LICENSE",
           "copiedPath": "packages/victory-vendor@37.4.1--4b9e789614/lib-vendor/d3-color/LICENSE",
           "sha256": "faa682e3e430941f958d26180458f5934a62f58dac4d70ccdd15608c15d0f884",
           "bytes": 731
         },
         {
           "sourcePath": "node_modules/victory-vendor/lib-vendor/d3-ease/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "lib-vendor/d3-ease/LICENSE",
           "copiedPath": "packages/victory-vendor@37.4.1--4b9e789614/lib-vendor/d3-ease/LICENSE",
           "sha256": "b989d9085148d21ff64a75e14462aefa06b2589a55553b07b1460c70081c7d08",
           "bytes": 1504
         },
         {
           "sourcePath": "node_modules/victory-vendor/lib-vendor/d3-format/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "lib-vendor/d3-format/LICENSE",
           "copiedPath": "packages/victory-vendor@37.4.1--4b9e789614/lib-vendor/d3-format/LICENSE",
           "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee",
           "bytes": 731
         },
         {
           "sourcePath": "node_modules/victory-vendor/lib-vendor/d3-interpolate/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "lib-vendor/d3-interpolate/LICENSE",
           "copiedPath": "packages/victory-vendor@37.4.1--4b9e789614/lib-vendor/d3-interpolate/LICENSE",
           "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee",
           "bytes": 731
         },
         {
           "sourcePath": "node_modules/victory-vendor/lib-vendor/d3-path/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "lib-vendor/d3-path/LICENSE",
           "copiedPath": "packages/victory-vendor@37.4.1--4b9e789614/lib-vendor/d3-path/LICENSE",
           "sha256": "0ab21426fad1e8b819ea8ab4c7faf5a24d4fca9c01572fe722490d600bba0d22",
           "bytes": 731
         },
         {
           "sourcePath": "node_modules/victory-vendor/lib-vendor/d3-scale/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "lib-vendor/d3-scale/LICENSE",
           "copiedPath": "packages/victory-vendor@37.4.1--4b9e789614/lib-vendor/d3-scale/LICENSE",
           "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee",
           "bytes": 731
         },
         {
           "sourcePath": "node_modules/victory-vendor/lib-vendor/d3-shape/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "lib-vendor/d3-shape/LICENSE",
           "copiedPath": "packages/victory-vendor@37.4.1--4b9e789614/lib-vendor/d3-shape/LICENSE",
           "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee",
           "bytes": 731
         },
         {
           "sourcePath": "node_modules/victory-vendor/lib-vendor/d3-time-format/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "lib-vendor/d3-time-format/LICENSE",
           "copiedPath": "packages/victory-vendor@37.4.1--4b9e789614/lib-vendor/d3-time-format/LICENSE",
           "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee",
           "bytes": 731
         },
         {
           "sourcePath": "node_modules/victory-vendor/lib-vendor/d3-time/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "lib-vendor/d3-time/LICENSE",
           "copiedPath": "packages/victory-vendor@37.4.1--4b9e789614/lib-vendor/d3-time/LICENSE",
           "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee",
           "bytes": 731
         },
         {
           "sourcePath": "node_modules/victory-vendor/lib-vendor/d3-timer/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "lib-vendor/d3-timer/LICENSE",
           "copiedPath": "packages/victory-vendor@37.4.1--4b9e789614/lib-vendor/d3-timer/LICENSE",
           "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee",
           "bytes": 731
         },
         {
           "sourcePath": "node_modules/victory-vendor/lib-vendor/d3-voronoi/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "lib-vendor/d3-voronoi/LICENSE",
           "copiedPath": "packages/victory-vendor@37.4.1--4b9e789614/lib-vendor/d3-voronoi/LICENSE",
           "sha256": "ad6cf57648385d6c40a29f73c55e42922dd793823df5ea265ccd834873bf09b9",
           "bytes": 2656
         },
         {
           "sourcePath": "node_modules/victory-vendor/lib-vendor/internmap/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "lib-vendor/internmap/LICENSE",
           "copiedPath": "packages/victory-vendor@37.4.1--4b9e789614/lib-vendor/internmap/LICENSE",
           "sha256": "9ea8903938dab5f12c4572d60725069bec2d1b0dc3bcc210b09bae946a5ebb1f",
           "bytes": 726
@@ -2046,10 +2362,192 @@
       "warnings": []
     },
     {
+      "name": "vite",
+      "version": "8.3.6",
+      "lockPath": "node_modules/vite",
+      "direct": false,
+      "selectionReasons": [
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [
+        {
+          "target": "extension",
+          "id": "\u0000vite/modulepreload-polyfill.js",
+          "emittedPositiveLength": true,
+          "attribution": "Vite-generated browser runtime virtual module."
+        },
+        {
+          "target": "extension",
+          "id": "\u0000vite/preload-helper.js",
+          "emittedPositiveLength": true,
+          "attribution": "Vite-generated browser runtime virtual module."
+        },
+        {
+          "target": "preview",
+          "id": "\u0000vite/modulepreload-polyfill.js",
+          "emittedPositiveLength": true,
+          "attribution": "Vite-generated browser runtime virtual module."
+        },
+        {
+          "target": "preview",
+          "id": "\u0000vite/preload-helper.js",
+          "emittedPositiveLength": true,
+          "attribution": "Vite-generated browser runtime virtual module."
+        }
+      ],
+      "devOptional": false,
+      "optional": false,
+      "declaredLicense": "MIT",
+      "installedLicense": "MIT",
+      "licenseTextStatus": "collected_original_files",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/vitejs/vite.git",
+        "directory": "packages/vite"
+      },
+      "resolved": "https://registry.npmjs.org/vite/-/vite-8.3.6.tgz",
+      "integrity": "sha512-UI7dK29NnS54Fk+mmo7o+jI6U8Fp7hDl+X5Q1k45WH+d4dSlbLVUETGQ+hfkNgvLQGyoElPj837nZyv4MBc0VA==",
+      "files": [
+        {
+          "sourcePath": "node_modules/vite/LICENSE.md",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE.md",
+          "copiedPath": "packages/vite@8.3.6--bae5313630/LICENSE.md",
+          "sha256": "a22152baa1aef74402443008e767e7c689a524c0909d19b0431d97f5ab066a13",
+          "bytes": 98196
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "name": "wxt",
+      "version": "0.21.5",
+      "lockPath": "node_modules/wxt",
+      "direct": false,
+      "selectionReasons": [
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [
+        {
+          "target": "extension",
+          "id": "\u0000virtual:wxt-background-entrypoint?<mvp>/entrypoints/background.ts",
+          "emittedPositiveLength": true,
+          "attribution": "WXT virtual entrypoint template or plugin loader runtime."
+        },
+        {
+          "target": "extension",
+          "id": "\u0000virtual:wxt-plugins?entrypoint=background",
+          "emittedPositiveLength": true,
+          "attribution": "WXT virtual entrypoint template or plugin loader runtime."
+        }
+      ],
+      "devOptional": false,
+      "optional": false,
+      "declaredLicense": "MIT",
+      "installedLicense": "MIT",
+      "licenseTextStatus": "collected_version_matched_source_files",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/wxt-dev/wxt.git"
+      },
+      "resolved": "https://registry.npmjs.org/wxt/-/wxt-0.21.5.tgz",
+      "integrity": "sha512-naPKDK3LlU0M2LFJO3udw8ZEAB7DVQCGo26wllvSJQRVd3VaL9kiChjP8zWiVqm851uYkQ5pVI51hA5wjssO4g==",
+      "files": [
+        {
+          "sourcePath": "scripts/license-sources/wxt-0.21.5/LICENSE",
+          "sourceKind": "version_matched_upstream",
+          "packagePath": "recovered-source/LICENSE",
+          "copiedPath": "packages/wxt@0.21.5--d17685d467/recovered-source/LICENSE",
+          "sha256": "7b0b00fcdbc6a036078aad84d0bc0fae240ac67144b86c911149c2daa37c9f85",
+          "bytes": 1062
+        }
+      ],
+      "warnings": [],
+      "sourceRecoveryReview": {
+        "name": "wxt",
+        "version": "0.21.5",
+        "integrity": "sha512-naPKDK3LlU0M2LFJO3udw8ZEAB7DVQCGo26wllvSJQRVd3VaL9kiChjP8zWiVqm851uYkQ5pVI51hA5wjssO4g==",
+        "declaredLicense": "MIT",
+        "repository": "https://github.com/wxt-dev/wxt",
+        "sourceCommit": "24ee2417d3a9c85ceb2b1cdf76184f6c6cb3e2af",
+        "sourceUrl": "https://raw.githubusercontent.com/wxt-dev/wxt/24ee2417d3a9c85ceb2b1cdf76184f6c6cb3e2af/LICENSE",
+        "sourcePath": "scripts/license-sources/wxt-0.21.5/LICENSE",
+        "sha256": "7b0b00fcdbc6a036078aad84d0bc0fae240ac67144b86c911149c2daa37c9f85",
+        "bytes": 1062,
+        "npmMetadataUrl": "https://registry.npmjs.org/wxt/0.21.5",
+        "npmProvenanceUrl": "https://registry.npmjs.org/-/npm/v1/attestations/wxt@0.21.5",
+        "provenanceStatement": {
+          "_type": "https://in-toto.io/Statement/v1",
+          "subject": [
+            {
+              "name": "pkg:npm/wxt@0.21.5",
+              "digest": {
+                "sha512": "9da3ca0cadcb954d0cd8b1493b7b9dc3c644001ec3550086a36eb0965bd225045577755a2fd9220a18cff335a256a9bce75b98910e69548e75840e708ecb0ee2"
+              }
+            }
+          ],
+          "predicateType": "https://slsa.dev/provenance/v1",
+          "predicate": {
+            "buildDefinition": {
+              "buildType": "https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1",
+              "externalParameters": {
+                "workflow": {
+                  "ref": "refs/heads/main",
+                  "repository": "https://github.com/wxt-dev/wxt",
+                  "path": ".github/workflows/release.yml"
+                }
+              },
+              "internalParameters": {
+                "github": {
+                  "event_name": "workflow_dispatch",
+                  "repository_id": "658389713",
+                  "repository_owner_id": "144182268"
+                }
+              },
+              "resolvedDependencies": [
+                {
+                  "uri": "git+https://github.com/wxt-dev/wxt@refs/heads/main",
+                  "digest": {
+                    "gitCommit": "24ee2417d3a9c85ceb2b1cdf76184f6c6cb3e2af"
+                  }
+                }
+              ]
+            },
+            "runDetails": {
+              "builder": {
+                "id": "https://github.com/actions/runner/github-hosted"
+              },
+              "metadata": {
+                "invocationId": "https://github.com/wxt-dev/wxt/actions/runs/40250866272/attempts/1"
+              }
+            }
+          }
+        },
+        "verification": "Registry provenance statement subject SHA-512 matched the npm artifact integrity and downloaded tarball bytes; source LICENSE fetched at its resolved immutable commit. DSSE/Sigstore cryptographic signature and transparency proof were not independently verified."
+      }
+    },
+    {
       "name": "zod",
       "version": "4.6.7",
       "lockPath": "node_modules/zod",
       "direct": true,
+      "selectionReasons": [
+        "production_lock",
+        "emitted_runtime"
+      ],
+      "bundledTargets": [
+        "extension",
+        "preview"
+      ],
+      "runtimeAttributions": [],
       "devOptional": false,
       "optional": false,
       "declaredLicense": "MIT",
@@ -2064,6 +2562,8 @@
       "files": [
         {
           "sourcePath": "node_modules/zod/LICENSE",
+          "sourceKind": "installed_package",
+          "packagePath": "LICENSE",
           "copiedPath": "packages/zod@4.6.7--1a876f5989/LICENSE",
           "sha256": "3f1189b28e3866e0d979968d466b78f813f76827cfdca1fbb124cc0a5c8841f8",
           "bytes": 1072
@@ -2072,28 +2572,17 @@
       "warnings": []
     }
   ],
-  "warnings": [
-    "react-remove-scroll-bar@2.3.8: No conventionally named LICENSE/LICENCE/COPYING file found in the installed package; declared metadata is not a substitute."
-  ],
+  "warnings": [],
   "managedFiles": [
     "THIRD-PARTY-NOTICES.md",
     "manifest.json",
-    "packages/_radix-ui_primitive@1.2.0--993c4510bd/LICENSE",
-    "packages/_radix-ui_react-compose-refs@1.1.5--a935db1b45/LICENSE",
-    "packages/_radix-ui_react-context@1.3.0--0f9925decc/LICENSE",
-    "packages/_radix-ui_react-dialog@1.3.1--4ba0125d4d/LICENSE",
-    "packages/_radix-ui_react-dismissable-layer@1.2.1--9af7fcf675/LICENSE",
-    "packages/_radix-ui_react-focus-guards@1.2.0--b35b96d032/LICENSE",
-    "packages/_radix-ui_react-focus-scope@1.3.1--ec4be12860/LICENSE",
-    "packages/_radix-ui_react-id@1.1.4--face9df97e/LICENSE",
-    "packages/_radix-ui_react-portal@1.2.0--73946d39db/LICENSE",
-    "packages/_radix-ui_react-presence@1.1.11--e10f4d5f82/LICENSE",
-    "packages/_radix-ui_react-primitive@2.2.0--f385af645e/LICENSE",
-    "packages/_radix-ui_react-slot@1.5.0--ebfaab3df9/LICENSE",
-    "packages/_radix-ui_react-use-callback-ref@1.1.5--fe2bf6d042/LICENSE",
-    "packages/_radix-ui_react-use-controllable-state@1.3.0--71d97e90de/LICENSE",
-    "packages/_radix-ui_react-use-effect-event@0.0.5--aee140787a/LICENSE",
-    "packages/_radix-ui_react-use-layout-effect@1.1.4--80355f5894/LICENSE",
+    "packages/_babel_runtime@8.1.0--b0d8c4c357/LICENSE",
+    "packages/_base-ui_react@1.9.0--41c28eb6e0/LICENSE",
+    "packages/_base-ui_utils@0.5.0--9f5284f7e3/LICENSE",
+    "packages/_floating-ui_core@1.8.0--46ec348427/LICENSE",
+    "packages/_floating-ui_dom@1.8.0--f505c35819/LICENSE",
+    "packages/_floating-ui_react-dom@2.1.9--1a54005a71/LICENSE",
+    "packages/_floating-ui_utils@0.2.12--09bd0df886/LICENSE",
     "packages/_reduxjs_toolkit@2.14.0--d453c64d3c/LICENSE",
     "packages/_standard-schema_spec@1.1.0--2840a25bcf/LICENSE",
     "packages/_standard-schema_utils@0.3.0--80f6130165/LICENSE",
@@ -2106,10 +2595,9 @@
     "packages/_types_d3-shape@3.2.0--8da0dd2230/LICENSE",
     "packages/_types_d3-time@3.0.4--1552732410/LICENSE",
     "packages/_types_d3-timer@3.0.2--2d61d765d9/LICENSE",
-    "packages/_types_react-dom@19.3.0--278d2b698c/LICENSE",
     "packages/_types_react@19.3.0--2300dff8f1/LICENSE",
     "packages/_types_use-sync-external-store@0.0.6--4ad17bb940/LICENSE",
-    "packages/aria-hidden@1.2.6--b337ebd897/LICENSE",
+    "packages/_wxt-dev_browser@0.3.7--9295ae4ea0/recovered-source/LICENSE",
     "packages/clsx@2.1.1--d66d255412/license",
     "packages/csstype@3.2.3--8c4a8a7665/LICENSE",
     "packages/d3-array@3.2.5--f1e9a8fff8/LICENSE",
@@ -2124,35 +2612,28 @@
     "packages/d3-time@3.1.1--f4e6430694/LICENSE",
     "packages/d3-timer@3.0.2--5d08ea60b0/LICENSE",
     "packages/decimal.js-light@2.5.1--8fc0c987c5/LICENCE.md",
-    "packages/detect-node-es@1.1.0--14390e4b58/LICENSE",
     "packages/dexie-react-hooks@4.4.0--70f231f5f6/LICENSE",
     "packages/dexie@4.4.7--3d64eccf53/LICENSE",
     "packages/dexie@4.4.7--3d64eccf53/NOTICE",
     "packages/es-toolkit@1.53.2--096564addc/LICENSE",
     "packages/es-toolkit@1.53.2--096564addc/NOTICE",
     "packages/eventemitter3@5.0.4--e9eb74a1ee/LICENSE",
-    "packages/get-nonce@1.0.1--6bca10a68f/LICENSE",
     "packages/immer@11.2.9--c2c91cd705/LICENSE",
     "packages/internmap@2.0.3--2b3d70aa25/LICENSE",
     "packages/lucide-react@1.70.0--005b3cad11/LICENSE",
-    "packages/lucide-react@1.70.0--005b3cad11/dist/esm/icons/copyright.mjs",
-    "packages/lucide-react@1.70.0--005b3cad11/dist/esm/icons/copyright.mjs.map",
     "packages/react-dom@19.3.1--d5a4b102c0/LICENSE",
     "packages/react-is@19.3.1--083c4f82ea/LICENSE",
     "packages/react-redux@9.3.1--0e5546be9f/LICENSE.md",
-    "packages/react-remove-scroll@2.7.2--e27e925afd/LICENSE",
-    "packages/react-style-singleton@2.2.3--45445eedd5/LICENSE",
     "packages/react@19.3.1--c32755efed/LICENSE",
     "packages/recharts@3.10.1--7dee638522/LICENSE",
     "packages/redux-thunk@3.1.0--c150edba31/LICENSE.md",
     "packages/redux@5.0.1--7d985dd44d/LICENSE.md",
     "packages/reselect@5.2.0--f833ca6162/LICENSE",
+    "packages/reselect@5.3.0--ada53a4851/LICENSE",
+    "packages/rolldown@1.2.16--e21b483fd2/LICENSE",
+    "packages/rolldown@1.2.16--e21b483fd2/THIRD-PARTY-LICENSE",
     "packages/scheduler@0.28.0--7bf6cc1c4f/LICENSE",
     "packages/tiny-invariant@1.3.3--6671cdc598/LICENSE",
-    "packages/tslib@2.9.1--7e89d502d0/CopyrightNotice.txt",
-    "packages/tslib@2.9.1--7e89d502d0/LICENSE.txt",
-    "packages/use-callback-ref@1.3.3--f4dde66954/LICENSE",
-    "packages/use-sidecar@1.1.3--1d5d0ccb32/LICENSE",
     "packages/use-sync-external-store@1.7.0--6ea4d325df/LICENSE",
     "packages/victory-vendor@37.4.1--4b9e789614/LICENSE.txt",
     "packages/victory-vendor@37.4.1--4b9e789614/lib-vendor/d3-array/LICENSE",
@@ -2168,6 +2649,8 @@
     "packages/victory-vendor@37.4.1--4b9e789614/lib-vendor/d3-timer/LICENSE",
     "packages/victory-vendor@37.4.1--4b9e789614/lib-vendor/d3-voronoi/LICENSE",
     "packages/victory-vendor@37.4.1--4b9e789614/lib-vendor/internmap/LICENSE",
+    "packages/vite@8.3.6--bae5313630/LICENSE.md",
+    "packages/wxt@0.21.5--d17685d467/recovered-source/LICENSE",
     "packages/zod@4.6.7--1a876f5989/LICENSE"
   ]
 }

@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "packages": [
+    {
+      "name": "wxt",
+      "version": "0.21.5",
+      "integrity": "sha512-naPKDK3LlU0M2LFJO3udw8ZEAB7DVQCGo26wllvSJQRVd3VaL9kiChjP8zWiVqm851uYkQ5pVI51hA5wjssO4g==",
+      "declaredLicense": "MIT",
+      "repository": "https://github.com/wxt-dev/wxt",
+      "sourceCommit": "24ee2417d3a9c85ceb2b1cdf76184f6c6cb3e2af",
+      "sourceUrl": "https://raw.githubusercontent.com/wxt-dev/wxt/24ee2417d3a9c85ceb2b1cdf76184f6c6cb3e2af/LICENSE",
+      "sourcePath": "wxt-0.21.5/LICENSE",
+      "sha256": "7b0b00fcdbc6a036078aad84d0bc0fae240ac67144b86c911149c2daa37c9f85",
+      "bytes": 1062,
+      "npmMetadataUrl": "https://registry.npmjs.org/wxt/0.21.5",
+      "npmProvenanceUrl": "https://registry.npmjs.org/-/npm/v1/attestations/wxt@0.21.5",
+      "provenanceStatement": {
+        "_type": "https://in-toto.io/Statement/v1",
+        "subject": [
+          {
+            "name": "pkg:npm/wxt@0.21.5",
+            "digest": {
+              "sha512": "9da3ca0cadcb954d0cd8b1493b7b9dc3c644001ec3550086a36eb0965bd225045577755a2fd9220a18cff335a256a9bce75b98910e69548e75840e708ecb0ee2"
+            }
+          }
+        ],
+        "predicateType": "https://slsa.dev/provenance/v1",
+        "predicate": {
+          "buildDefinition": {
+            "buildType": "https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1",
+            "externalParameters": {
+              "workflow": {
+                "ref": "refs/heads/main",
+                "repository": "https://github.com/wxt-dev/wxt",
+                "path": ".github/workflows/release.yml"
+              }
+            },
+            "internalParameters": {
+              "github": {
+                "event_name": "workflow_dispatch",
+                "repository_id": "658389713",
+                "repository_owner_id": "144182268"
+              }
+            },
+            "resolvedDependencies": [
+              {
+                "uri": "git+https://github.com/wxt-dev/wxt@refs/heads/main",
+                "digest": {
+                  "gitCommit": "24ee2417d3a9c85ceb2b1cdf76184f6c6cb3e2af"
+                }
+              }
+            ]
+          },
+          "runDetails": {
+            "builder": {
+              "id": "https://github.com/actions/runner/github-hosted"
+            },
+            "metadata": {
+              "invocationId": "https://github.com/wxt-dev/wxt/actions/runs/40250866272/attempts/1"
+            }
+          }
+        }
+      },
+      "verification": "Registry provenance statement subject SHA-512 matched the npm artifact integrity and downloaded tarball bytes; source LICENSE fetched at its resolved immutable commit. DSSE/Sigstore cryptographic signature and transparency proof were not independently verified."
+    },
+    {
+      "name": "@wxt-dev/browser",
+      "version": "0.3.7",
+      "integrity": "sha512-TCBcayayb2mycJxt9X3kTq3QZerqltx/I4FW1WVTafBcqQC6vUaDz5Sboummy0rVsSMbYzyKnS5118VTw0dt4A==",
+      "declaredLicense": "MIT",
+      "repository": "https://github.com/wxt-dev/wxt",
+      "sourceCommit": "f5386b496d28ca66baa1efc5ae6e49f85f5d8d2d",
+      "sourceUrl": "https://raw.githubusercontent.com/wxt-dev/wxt/f5386b496d28ca66baa1efc5ae6e49f85f5d8d2d/LICENSE",
+      "sourcePath": "wxt-dev-browser-0.3.7/LICENSE",
+      "sha256": "7b0b00fcdbc6a036078aad84d0bc0fae240ac67144b86c911149c2daa37c9f85",
+      "bytes": 1062,
+      "npmMetadataUrl": "https://registry.npmjs.org/@wxt-dev%2fbrowser/0.3.7",
+      "npmProvenanceUrl": "https://registry.npmjs.org/-/npm/v1/attestations/@wxt-dev%2fbrowser@0.3.7",
+      "provenanceStatement": {
+        "_type": "https://in-toto.io/Statement/v1",
+        "subject": [
+          {
+            "name": "pkg:npm/%40wxt-dev/browser@0.3.7",
+            "digest": {
+              "sha512": "4c205c6b26b26f69b2709c6df57de44eadd065eaea96dc7f238156d5655369f05ca900babd4683cf949ba2e9a6cb4ad5b1231b633c8a9d2e75d7c553c3476de0"
+            }
+          }
+        ],
+        "predicateType": "https://slsa.dev/provenance/v1",
+        "predicate": {
+          "buildDefinition": {
+            "buildType": "https://slsa-framework.github.io/github-actions-buildtypes/workflow/v1",
+            "externalParameters": {
+              "workflow": {
+                "ref": "refs/heads/main",
+                "repository": "https://github.com/wxt-dev/wxt",
+                "path": ".github/workflows/update-browser-package.yml"
+              }
+            },
+            "internalParameters": {
+              "github": {
+                "event_name": "schedule",
+                "repository_id": "658389713",
+                "repository_owner_id": "144182268"
+              }
+            },
+            "resolvedDependencies": [
+              {
+                "uri": "git+https://github.com/wxt-dev/wxt@refs/heads/main",
+                "digest": {
+                  "gitCommit": "f5386b496d28ca66baa1efc5ae6e49f85f5d8d2d"
+                }
+              }
+            ]
+          },
+          "runDetails": {
+            "builder": {
+              "id": "https://github.com/actions/runner/github-hosted"
+            },
+            "metadata": {
+              "invocationId": "https://github.com/wxt-dev/wxt/actions/runs/40635157359/attempts/1"
+            }
+          }
+        }
+      },
+      "verification": "Registry provenance statement subject SHA-512 matched the npm artifact integrity and downloaded tarball bytes; source LICENSE fetched at its resolved immutable commit. DSSE/Sigstore cryptographic signature and transparency proof were not independently verified."
+    }
+  ]
+}

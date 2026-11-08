@@ -3,10 +3,19 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { runInNewContext } from 'node:vm';
 import { parseHTML } from 'linkedom';
-import { BundleSchema, ListingSchema, MAX_LISTINGS, avitoSource, defaultBrief, draft, eligibility, estimate, latestListings, manualListing, mergeListings, normalizeListing, type Listing } from '../src/domain.ts';
-import { demoListings } from '../src/demo.ts';
-import { WorkspaceDB } from '../src/db.ts';
-import { extractVisibleListing } from '../src/extract.ts';
+import { act, createElement } from 'react';
+import { ListingSchema, MAX_LISTINGS, avitoSource, createManualListing, latestListings, mergeListings, normalizeListing, type Listing } from '../src/domain/listing.ts';
+import { defaultBrief, type Brief } from '../src/domain/brief.ts';
+import { BundleSchema } from '../src/domain/transfer.ts';
+import { draft } from '../src/domain/negotiation.ts';
+import { eligibility, estimate } from '../src/domain/evaluation.ts';
+import { demoListings } from '../src/data/demo-listings.ts';
+import { WorkspaceDB } from '../src/data/workspace-db.ts';
+import { extractVisibleListing } from '../src/integrations/avito/extract.ts';
+import { manualListing } from '../src/application/listing-factory.ts';
+import { readWorkspaceFile } from '../src/application/workspace-transfer.ts';
+import { pruneSelection, toggleSelectedId } from '../src/application/workspace-selection.ts';
+import { useWorkspace, type WorkspaceController } from '../src/application/useWorkspace.ts';
 
 test('unknown or inferred critical fields cannot pass eligibility', () => {
   const unknown = manualListing('test', 42000, null, 'Недостаточно сведений');
@@ -131,6 +140,7 @@ test('deleted/challenge pages, mismatched or absent IDs, and recommendation-only
   assert.throws(() => extractFixture({ id: null }), /ID карточки/);
   assert.throws(() => extractFixture({ omitPrice: true, extra: '<aside><meta itemprop="price" content="1000"></aside>' }), /цену карточки/);
   assert.throws(() => extractFixture({ url: 'https://www.avito.ru/profile/person_1234' }), /отдельная карточка/);
+  assert.throws(() => extractFixture({ url: 'https://www.avito.ru/PROFILE/person_1234' }), /отдельная карточка/);
   assert.throws(() => extractFixture({ extra: '<div data-marker="item-view/item-price">40 000 ₽</div>' }), /несколько разных цен/);
 });
 
@@ -201,4 +211,142 @@ test('import coalesces snapshots by item ID and preserves the latest record with
   await workspace.saveListing(realListing(9400, 99000));
   assert.equal((await workspace.listings.get('avito:9400'))?.askingPrice, 40000);
   assert.equal(normalizeListing(current).sourceUrl, 'https://www.avito.ru/moskva/new_slug_9400');
+});
+
+test('pure listing factory uses supplied identity and time while preserving nullable evidence', () => {
+  const input = {
+    id: 'local-supplied-id',
+    capturedAt: '2026-11-06T09:00:00.000Z',
+    title: 'Сведения пока неизвестны',
+    askingPrice: 42000,
+    sourceUrl: null,
+    rawText: '',
+  };
+  const created = createManualListing(input);
+  assert.equal(created.id, input.id);
+  assert.equal(created.capturedAt, input.capturedAt);
+  assert.deepEqual(created.wheel, { value: null, status: 'unknown', sourceRefs: [] });
+  assert.deepEqual(created.frame, { value: null, status: 'unknown', sourceRefs: [] });
+  assert.equal(eligibility(created, defaultBrief).status, 'needs_clarification');
+});
+
+test('selection reconciliation removes deleted IDs and prevents stale selections consuming the four slots', () => {
+  const listings = Array.from({ length: 5 }, (_, index) => localListing('selection-' + index));
+  const selected = ['removed-id', listings[0]!.id, listings[0]!.id];
+  assert.deepEqual(pruneSelection(selected, listings), [listings[0]!.id]);
+  assert.deepEqual(toggleSelectedId(selected, listings[1]!.id, listings), [listings[0]!.id, listings[1]!.id]);
+  const full = listings.slice(0, 4).map(listing => listing.id);
+  assert.deepEqual(toggleSelectedId(full, listings[4]!.id, listings), full);
+  assert.deepEqual(toggleSelectedId(full, 'missing-id', listings), full);
+  assert.deepEqual(toggleSelectedId(full, listings[0]!.id, listings), full.slice(1));
+});
+
+test('workspace file parsing rejects oversized input before reading and propagates invalid JSON', async () => {
+  let reads = 0;
+  await assert.rejects(() => readWorkspaceFile({ size: 5_000_001, text: async () => { reads += 1; return '{}'; } }), /5 МБ/);
+  assert.equal(reads, 0);
+  await assert.rejects(() => readWorkspaceFile({ size: 1, text: async () => '{' }), SyntaxError);
+  assert.deepEqual(await readWorkspaceFile({ size: 7, text: async () => '{"a":1}' }), { a: 1 });
+});
+
+test('workspace export preserves version-one JSON and reads the persisted brief with its listings', async t => {
+  const workspace = new WorkspaceDB('export-' + crypto.randomUUID());
+  t.after(() => workspace.delete());
+  const brief = { ...defaultBrief, height: 190 };
+  await workspace.importBundle(bundle([realListing(9500)], brief));
+  const exported = await workspace.exportBundle();
+  assert.deepEqual(Object.keys(exported).sort(), ['brief', 'listings', 'schemaVersion']);
+  assert.equal(exported.schemaVersion, 1);
+  assert.deepEqual(exported.brief, brief);
+  assert.equal(exported.listings[0]?.id, 'avito:9500');
+  assert.equal(BundleSchema.safeParse(JSON.parse(JSON.stringify(exported))).success, true);
+});
+
+function deferred<T>() {
+  let resolve!: (value: T) => void;
+  let reject!: (error: Error) => void;
+  const promise = new Promise<T>((accept, fail) => { resolve = accept; reject = fail; });
+  return { promise, resolve, reject };
+}
+
+class DelayedBriefDB extends WorkspaceDB {
+  readonly initialBrief = deferred<Brief>();
+  override loadBrief(): Promise<Brief> { return this.initialBrief.promise; }
+}
+
+async function mountWorkspace(workspace: WorkspaceDB) {
+  const { document, window } = parseHTML('<!doctype html><html><body><div id="root"></div></body></html>');
+  const globals = { document, window, HTMLElement: window.HTMLElement, Node: window.Node, IS_REACT_ACT_ENVIRONMENT: true };
+  const previous = new Map(Object.keys(globals).map(key => [key, Object.getOwnPropertyDescriptor(globalThis, key)]));
+  for (const [key, value] of Object.entries(globals)) Object.defineProperty(globalThis, key, { configurable: true, writable: true, value });
+  const { createRoot } = await import('react-dom/client');
+  const root = createRoot(document.getElementById('root')!);
+  let controller!: WorkspaceController;
+  function Harness() { controller = useWorkspace(workspace); return null; }
+  await act(async () => { root.render(createElement(Harness)); });
+  return {
+    get current() { return controller; },
+    async settle(predicate: () => boolean) {
+      const deadline = Date.now() + 2000;
+      while (!predicate() && Date.now() < deadline) await act(async () => { await new Promise(resolve => setTimeout(resolve, 5)); });
+      assert.ok(predicate(), 'Workspace state did not settle');
+    },
+    async unmount() {
+      await act(async () => { root.unmount(); });
+      for (const [key, descriptor] of previous) {
+        if (descriptor) Object.defineProperty(globalThis, key, descriptor);
+        else Reflect.deleteProperty(globalThis, key);
+      }
+    },
+  };
+}
+
+test('late initial brief values or failures cannot replace a successful user save', async () => {
+  for (const outcome of ['value', 'failure']) {
+    const workspace = new DelayedBriefDB('brief-race-' + crypto.randomUUID());
+    const hook = await mountWorkspace(workspace);
+    try {
+      const updated = { ...defaultBrief, height: 190, maxPrice: 55000 };
+      await act(async () => { await hook.current.saveBrief(updated); });
+      await act(async () => {
+        if (outcome === 'value') workspace.initialBrief.resolve(defaultBrief);
+        else workspace.initialBrief.reject(new Error('stale-initial-read-failure'));
+      });
+      await hook.settle(() => !hook.current.isLoading);
+      assert.deepEqual(hook.current.brief, updated);
+      assert.deepEqual((await workspace.settings.get('brief'))?.value, updated);
+      assert.equal(hook.current.error, '');
+      assert.match(hook.current.notice, /Требования сохранены/);
+    } finally {
+      await hook.unmount();
+      await workspace.delete();
+    }
+  }
+});
+
+test('late initial brief reads cannot overwrite import, while failed import leaves the current workspace intact', async () => {
+  const workspace = new DelayedBriefDB('import-race-' + crypto.randomUUID());
+  const hook = await mountWorkspace(workspace);
+  try {
+    const importedBrief = { ...defaultBrief, height: 192 };
+    await act(async () => { await hook.current.importData(bundle([realListing(9600)], importedBrief)); });
+    await act(async () => { workspace.initialBrief.resolve(defaultBrief); });
+    await hook.settle(() => !hook.current.isLoading && hook.current.listings.length === 1);
+    assert.deepEqual(hook.current.brief, importedBrief);
+    assert.equal(hook.current.focusedListing?.id, 'avito:9600');
+    await act(async () => { hook.current.toggleSelection('avito:9600'); });
+    await assert.rejects(() => hook.current.importData(bundle([{ ...realListing(9601), askingPrice: -1 }])));
+    assert.deepEqual(hook.current.brief, importedBrief);
+    assert.deepEqual(hook.current.selectedIds, ['avito:9600']);
+    assert.equal(await workspace.listings.count(), 1);
+    await assert.rejects(() => hook.current.capture(), /установленном расширении/);
+    assert.equal(await workspace.listings.count(), 1);
+    await act(async () => { await hook.current.deleteListing('avito:9600'); });
+    await hook.settle(() => hook.current.listings.length === 0);
+    assert.deepEqual(hook.current.selectedIds, []);
+    assert.equal(hook.current.focusedListing, undefined);
+  } finally {
+    await hook.unmount();
+    await workspace.delete();
+  }
 });

@@ -1,109 +1,145 @@
-import { useEffect, useLayoutEffect, useRef, useState, type FormEvent } from 'react';
-import { useLiveQuery } from 'dexie-react-hooks';
-import * as Dialog from '@radix-ui/react-dialog';
-import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { ArrowDownToLine, ArrowRight, ArrowUpRight, Bike, Check, CheckCheck, CircleHelp, Compass, Copy, FileText, GitCompareArrows, Layers3, MapPin, MessageSquareText, Plus, Radar, ScanLine, Search, ShieldCheck, SlidersHorizontal, Sparkles, Trash2, Upload, X } from 'lucide-react';
-import { db, importBundle, loadBrief, saveBrief } from './db';
-import { BriefSchema, BundleSchema, defaultBrief, draft, eligibility, estimate, manualListing, type Brief, type Listing } from './domain';
-import { demoListings } from './demo';
-import { FactsEditor } from './FactsEditor';
-
-type View = 'radar' | 'compare' | 'market' | 'draft' | 'brief';
-const views = [
-  { id: 'radar', name: 'Мой радар', icon: Radar }, { id: 'compare', name: 'Сравнение', icon: GitCompareArrows },
-  { id: 'market', name: 'Ценовые ориентиры', icon: Layers3 }, { id: 'draft', name: 'Подготовка торга', icon: MessageSquareText },
-  { id: 'brief', name: 'Задача поиска', icon: SlidersHorizontal },
-] as const;
-const money = (v: number) => `${v.toLocaleString('ru-RU')} ₽`;
-const statusNames: Record<string, string> = { pass: 'Параметры совпали', fail: 'Есть несоответствия', needs_clarification: 'Нужно уточнить' };
-const fieldLabels: Record<string, string> = { observed: 'На странице', seller_claim: 'Заявлено', inferred: 'Предположение', unknown: 'Неизвестно', missing: 'Не указано', needs_inspection: 'Нужен осмотр' };
+import { useRef, useState } from "react";
+import { X } from "lucide-react";
+import { useWorkspace } from "./application/useWorkspace";
+import type { Listing } from "./domain/listing";
+import {
+  WorkspaceLayout,
+  type View,
+} from "./components/layout/WorkspaceLayout";
+import { Alert } from "./components/ui/Alert";
+import { IconButton } from "./components/ui/IconButton";
+import { RadarPage } from "./features/listings/RadarPage";
+import { ListingImportDialog } from "./features/listings/ListingImportDialog";
+import { ListingDetailDialog } from "./features/listings/ListingDetailDialog";
+import { ComparisonPage } from "./features/comparison/ComparisonPage";
+import { MarketPage } from "./features/market/MarketPage";
+import { NegotiationPage } from "./features/negotiation/NegotiationPage";
+import { BriefPage } from "./features/brief/BriefPage";
 
 export function App() {
-  const [view, setView] = useState<View>('radar');
-  const listings = useLiveQuery(() => db.listings.toArray(), []);
-  const [brief, setBrief] = useState<Brief>(defaultBrief);
-  const [selected, setSelected] = useState<string[]>([]);
-  const [focusId, setFocusId] = useState('');
-  const [query, setQuery] = useState('');
-  const [filter, setFilter] = useState('all');
-  const [notice, setNotice] = useState('');
-  const [error, setError] = useState('');
-  const [detail, setDetail] = useState<Listing | null>(null);
-  const [offer, setOffer] = useState('');
-  const [editText, setEditText] = useState('');
-  const [importOpen, setImportOpen] = useState(false);
-  const [importError, setImportError] = useState('');
-  const addButtonRef = useRef<HTMLButtonElement>(null);
-  const detailOpenerRef = useRef<HTMLButtonElement | null>(null);
-  const isExtension = 'chrome' in globalThis && Boolean((globalThis as { chrome?: { runtime?: { id?: string } } }).chrome?.runtime?.id);
-  useEffect(() => { loadBrief().then(setBrief).catch(e => setError(String(e))); }, []);
-  const items = listings || [];
-  const chosen = items.filter(x => selected.includes(x.id));
-  const focused = items.find(x => x.id === focusId) || chosen[0] || items[0];
-  const focusedKey = focused ? JSON.stringify(focused) : '';
-  useLayoutEffect(() => { setEditText(''); setOffer(''); }, [focusedKey]);
-  const shown = items.filter(x => x.title.toLowerCase().includes(query.toLowerCase()) && (filter === 'all' || eligibility(x, brief).status === filter));
-  const count = items.filter(x => eligibility(x, brief).status === 'pass').length;
-  const pending = items.filter(x => eligibility(x, brief).status === 'needs_clarification').length;
-  const market = focused ? estimate(focused, items) : null;
-  function report(e: unknown) { setNotice(''); setError(e instanceof Error ? e.message : String(e)); }
-  async function loadDemo() {
-    try { await db.saveListings(demoListings); setSelected(demoListings.slice(0, 3).map(x => x.id)); setFocusId(demoListings[0]?.id || ''); setNotice('Добавлено 6 вымышленных примеров. Реальные объявления не загружались.'); setError(''); }
-    catch (e) { report(e); }
+  const workspace = useWorkspace();
+  const [view, setView] = useState<View>("radar");
+  const [dialog, setDialog] = useState<"add" | "detail" | null>(null);
+  // Keep the modal host alive through deletion so Base UI can restore focus.
+  const [openedListing, setOpenedListing] = useState<Listing | null>(null);
+  const detailListing =
+    workspace.listings.find((item) => item.id === openedListing?.id) ??
+    openedListing;
+  const fileInput = useRef<HTMLInputElement>(null);
+  const returnFocus = useRef<HTMLElement | null>(null);
+  function openDialog(next: "add" | "detail", id?: string) {
+    returnFocus.current =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
+    if (id) {
+      workspace.setFocusedListing(id);
+      setOpenedListing(
+        workspace.listings.find((item) => item.id === id) ?? null,
+      );
+    }
+    setDialog(next);
   }
-  async function openWorkspace() {
-    try { const { browser } = await import('wxt/browser'); await browser.tabs.create({ url: browser.runtime.getURL('/workspace.html') }); } catch (e) { report(e); }
-  }
-  async function capture() {
-    try { if (!isExtension) throw new Error('Снимок доступен в установленном расширении. Здесь можно добавить карточку вручную или импортировать JSON.');
-      const { captureCurrentTab } = await import('./capture'); const listing = await captureCurrentTab(); await db.saveListing(listing); setNotice('Карточка сохранена. Колёса, раму и состояние нужно подтвердить отдельно.'); setError(''); }
-    catch (e) { report(e); }
-  }
-  function toggle(id: string) { setSelected(old => old.includes(id) ? old.filter(x => x !== id) : old.length < 4 ? [...old, id] : old); }
-  async function exportData() {
-    const data = BundleSchema.parse({ schemaVersion: 1, listings: items, brief });
-    const url = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }));
-    const a = document.createElement('a'); a.href = url; a.download = 'avitolog-workspace.json'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 5000);
-  }
-  function createDraft() {
-    if (!focused) return;
-    try { const amount = offer.trim() ? Number(offer) : null; if (amount !== null && amount + focused.repairReserve > brief.maxPrice) throw new Error('Предложение с заданным резервом выше вашего бюджета'); setEditText(draft(focused, amount).text); setError(''); }
-    catch (e) { report(e); }
-  }
-  async function submitBrief(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault(); const values = new FormData(event.currentTarget);
-    try { const next = BriefSchema.parse({ height: Number(values.get('height')), wheel: Number(values.get('wheel')), maxPrice: Number(values.get('maxPrice')) }); await saveBrief(next); setBrief(next); setNotice('Требования сохранены. Статусы карточек пересчитаны.'); setError(''); }
-    catch (e) { report(e); }
-  }
-  return <div className="app-shell">
-    <a className="skip-link" href="#main">К содержимому</a>
-    <aside className="sidebar"><a className="brand" href="#" onClick={() => setView('radar')}><span className="brand-mark"><Compass size={25}/></span><span>АВИТОЛОГ<small>ИНТЕЛЛЕКТ ПОКУПКИ</small></span></a>
-      <div className="workspace-tag"><span className="live-dot"/> Личная рабочая область <span className="version">0.1</span></div>
-      <p className="nav-caption">ПРОСТРАНСТВО ПОИСКА</p><nav aria-label="Разделы">{views.map(({ id, name, icon: Icon }) => <button className={`nav-item ${view === id ? 'active' : ''}`} key={id} onClick={() => setView(id)} aria-current={view === id ? 'page' : undefined}><Icon size={19}/>{name}{id === 'compare' && <span>{chosen.length}</span>}</button>)}</nav>
-      <div className="task-tile"><span className="eyebrow">АКТИВНАЯ ЗАДАЧА</span><Bike size={30}/><strong>Найти свой 29″</strong><p>{brief.height} см · до {money(brief.maxPrice)}</p><span className="tag">Москва · от Пролетарской</span><button className="text-button" onClick={() => setView('brief')}>Настроить требования <ArrowUpRight size={15}/></button></div>
-      <div className="sidebar-bottom"><ShieldCheck size={16}/><span>Данные в этом браузере</span><a href="https://cj-isus.github.io/avitolog/notes/mvp-architecture" target="_blank" rel="noreferrer">База знаний <ArrowUpRight size={13}/></a></div>
-    </aside>
-    <div className="main-shell"><header className="topbar"><div className="breadcrumb">Рабочая область <span>/</span> <strong>{views.find(x => x.id === view)?.name}</strong></div><div className="toolbar"><button className="icon-button" aria-label="Экспортировать JSON" title="Экспортировать JSON" onClick={() => exportData().catch(report)}><ArrowDownToLine size={18}/></button><button className="button secondary" ref={addButtonRef} onClick={() => { setImportError(''); setImportOpen(true); }}><Plus size={16}/>Добавить</button><span className="avatar">Я</span></div></header>
-      <main id="main"><div className="mode-note"><span className="live-dot"/> Локальный прототип <span>Демо-карточки вымышлены · ИИ и аккаунт не подключены</span>{isExtension && <button className="text-button" onClick={openWorkspace}>Открыть рабочую область <ArrowUpRight size={14}/></button>}</div>
-        <section className="page-heading"><div><span className="eyebrow">ПОКУПКА С ЯСНОЙ ГОЛОВОЙ</span><h1>{view === 'radar' ? <>Хорошая находка.<br/><em>Обоснованный выбор.</em></> : views.find(x => x.id === view)?.name}</h1><p>{view === 'radar' ? 'Сначала проверяем требования. Затем сравниваем цену и то, чего пока не знаем.' : 'Один контекст покупки. Источники, ограничения и следующий шаг рядом.'}</p></div><button className="button primary" onClick={capture}><ScanLine size={17}/>Сохранить открытую карточку</button></section>
-        <div role="status" className={notice ? 'notice' : ''}>{notice}</div><div role="alert" className={error ? 'error' : ''}>{error}</div>
-        {view === 'radar' && <><div className="stats-grid"><Stat label="В рабочей области" value={String(items.length)} note="Сохранённые карточки"/><Stat label="Параметры совпали" value={String(count)} note="По заявленным данным"/><Stat label="Нужно уточнить" value={String(pending)} note="Не хватает важных фактов"/><Stat label="На сравнение" value={`${chosen.length} / 4`} note="Выберите разные варианты"/></div>
-          <div className="section-bar"><div><span className="section-kicker">01 / РАДАР</span><h2>Ваши кандидаты</h2></div><button className="text-button" onClick={loadDemo}><Sparkles size={16}/>Загрузить демо</button></div>
-          <div className="filter-row"><label className="search-input"><Search size={17}/><input aria-label="Поиск в карточках" placeholder="Модель или слово в названии" value={query} onChange={e => setQuery(e.target.value)}/></label><select aria-label="Фильтр пригодности" value={filter} onChange={e => setFilter(e.target.value)}><option value="all">Все статусы</option><option value="pass">Параметры совпали</option><option value="needs_clarification">Нужно уточнить</option><option value="fail">Есть несоответствия</option></select><button className="button secondary" onClick={() => setView('compare')}>Сравнить {chosen.length}<ArrowRight size={16}/></button></div>
-          {listings === undefined ? <div className="empty">Открываем локальную базу…</div> : shown.length === 0 ? <div className="empty"><Radar size={38}/><h3>{items.length ? 'Совпадений нет' : 'Начните с одной находки'}</h3><p>{items.length ? 'Измените запрос или фильтр.' : 'Добавьте карточку вручную или посмотрите, как работает сравнение на вымышленных данных.'}</p><button className="button primary" onClick={loadDemo}>Посмотреть демо</button></div> : <div className="listing-grid">{shown.map((listing, index) => { const fit = eligibility(listing, brief); return <article className={`listing-card ${selected.includes(listing.id) ? 'selected' : ''}`} key={listing.id}><div className={`bike-stage bike-stage-${index % 3}`}><span className="photo-label">{listing.sourceKind === 'demo' ? 'ДЕМО · ИЛЛЮСТРАЦИЯ' : 'БЕЗ ФОТО'}</span><BikeArt/><label className="select-card"><input type="checkbox" checked={selected.includes(listing.id)} onChange={() => toggle(listing.id)} aria-label={`Сравнить ${listing.title}`}/><span><Check size={14}/></span></label><span className="source-badge">{listing.sourceKind === 'demo' ? 'Вымышленный пример' : 'Сохранённая карточка'}</span></div><div className="card-content"><div className="card-price">{money(listing.askingPrice)}<span className={`fit-badge ${fit.status}`} title={[...fit.reasons, ...fit.missing].join('; ')}>{statusNames[fit.status]}</span></div><h3>{listing.title}</h3><div className="card-location"><MapPin size={13}/>{listing.location}</div><div className="spec-chips"><span>{listing.wheel.value ? `${listing.wheel.value}″` : 'Колёса ?'}</span><span>Рама {listing.frame.value || '?'}</span><span>{listing.components.value !== null && ['observed', 'seller_claim'].includes(listing.components.status) ? 'Обвес заявлен' : 'Обвес требует проверки'}</span></div><p className="card-reason">{fit.reasons[0] || fit.missing[0] || 'Размеры заявлены. Посадка и состояние требуют осмотра.'}</p><button className="card-link" onClick={e => { detailOpenerRef.current = e.currentTarget; setDetail(listing); }}>Разобрать объявление <ArrowUpRight size={16}/></button></div></article>; })}</div>}
-        </>}
-        {view === 'compare' && <><div className="section-bar"><div><span className="section-kicker">02 / СРАВНЕНИЕ</span><h2>Различия, которые имеют значение</h2></div><span className="tag">До четырёх кандидатов</span></div>{!chosen.length ? <EmptyAction onClick={() => setView('radar')} text="Выберите карточки в радаре"/> : <div className="table-scroll" role="region" aria-label="Сравнение кандидатов" tabIndex={0}><table><thead><tr><th scope="col">Что сравниваем</th>{chosen.map(x => <th scope="col" key={x.id}>{x.title}<small>{x.sourceKind === 'demo' ? 'Вымышленный пример' : 'Сохранённая карточка'}</small></th>)}</tr></thead><tbody>{[['Цена объявления', (x: Listing) => money(x.askingPrice)], ['Колёса', (x: Listing) => x.wheel.value ? `${x.wheel.value}″ · ${fieldLabels[x.wheel.status]}` : 'Неизвестно'], ['Рама', (x: Listing) => x.frame.value || 'Неизвестно'], ['Рост по заявлению', (x: Listing) => x.heightMin.value && x.heightMax.value && ['observed', 'seller_claim'].includes(x.heightMin.status) && ['observed', 'seller_claim'].includes(x.heightMax.status) ? `${x.heightMin.value}–${x.heightMax.value} см` : 'Уточнить'], ['Обвес', (x: Listing) => x.components.value || 'Неизвестно'], ['Резерв пользователя', (x: Listing) => x.repairReserve ? money(x.repairReserve) : 'Не задан'], ['Статус', (x: Listing) => statusNames[eligibility(x, brief).status]]].map(([label, fn]) => <tr key={String(label)}><th scope="row">{String(label)}</th>{chosen.map(x => <td key={x.id}>{(fn as (x: Listing) => string)(x)}</td>)}</tr>)}<tr><th scope="row">Следующий шаг</th>{chosen.map(x => <td key={x.id}><button className="button secondary" onClick={() => { setFocusId(x.id); setView('draft'); setEditText(''); setOffer(''); }}>Подготовить вопросы</button></td>)}</tr></tbody></table></div>}<div className="insight"><CircleHelp size={20}/><p>Совпадение размеров — предварительный фильтр. Обозначение XL не заменяет геометрию, а состояние по тексту продавца не равно результату осмотра.</p></div></>}
-        {view === 'market' && <><FocusSelect items={items} value={focused?.id || ''} onChange={setFocusId}/><div className="analysis-grid"><section className="panel"><span className="section-kicker">03 / АНАЛОГИ</span><h2>Цены похожих предложений</h2><p>Одинаковая группа, колёса и маркировка рамы. Демонстрационные и реальные данные разделены.</p>{focused && market?.range ? <><div className="range-value">{money(market.range[0])}<span>—</span>{money(market.range[1])}</div><span className="tag">{market.comparableIds.length} аналогов · цены предложений</span><p className="fine-print">Медиана выбранных предложений: {market.median === null ? 'не рассчитана' : money(market.median)}. Каждая колонка — отдельное объявление.</p><div className="chart" aria-label="Цены сопоставимых объявлений"><ResponsiveContainer width="100%" height={230}><BarChart data={items.filter(x => market.comparableIds.includes(x.id)).map((x, i) => ({ name: `№${i + 1}`, price: x.askingPrice }))}><CartesianGrid stroke="#263538" vertical={false}/><XAxis dataKey="name" stroke="#9baeb1"/><YAxis stroke="#9baeb1" width={60}/><Tooltip contentStyle={{ background: '#132025', border: '1px solid #3b555b' }}/><Bar dataKey="price" name="Цена предложения" fill="#a7f86b" radius={[5,5,0,0]}/></BarChart></ResponsiveContainer></div></> : <div className="empty compact"><CircleHelp/><strong>Недостаточно сопоставимых данных</strong><p>Нужно минимум три других карточки с совпадающими признаками. Число само по себе не доказывает качество оценки.</p></div>}</section><section className="panel"><span className="section-kicker">ПРЕДЕЛЫ ОЦЕНКИ</span><h2>Что мы пока не знаем</h2><ul className="evidence-list"><li>Цены состоявшихся сделок</li><li>Фактический износ и стоимость ремонта</li><li>Точную геометрию и посадку</li><li>Достоверность комплектации и отсутствие скрытых повреждений</li></ul><p>Этот диапазон показывает цены выбранных предложений. Он не назначает справедливую цену и не обещает выгоду.</p></section></div></>}
-        {view === 'draft' && <><FocusSelect items={items} value={focused?.id || ''} onChange={id => { setFocusId(id); setEditText(''); setOffer(''); }}/>{focused ? <div className="analysis-grid"><section className="panel"><span className="section-kicker">04 / ПОДГОТОВКА</span><h2>Сначала вопросы. Затем цена.</h2><p>{focused.title} · {money(focused.askingPrice)}</p><ol className="question-list"><li>Размер рамы и геометрия</li><li>Обслуживание и известные дефекты</li></ol><label className="field">Ваше предложение, ₽<input aria-label="Сумма предложения" inputMode="numeric" type="number" min="1" max={focused.askingPrice} placeholder="Необязательно" value={offer} onChange={e => setOffer(e.target.value)}/></label><button className="button primary" onClick={createDraft}><FileText size={16}/>Собрать черновик</button><p className="fine-print">Сумму задаёте вы. Условие об осмотре остаётся в тексте.</p></section><section className="panel"><div className="section-bar"><h2>Черновик сообщения</h2><span className="tag">Вы редактируете</span></div><textarea className="draft-text" aria-label="Черновик сообщения" placeholder="Соберите черновик, затем при необходимости измените текст." value={editText} onChange={e => setEditText(e.target.value)}/><button className="button secondary" disabled={!editText} onClick={() => navigator.clipboard.writeText(editText).then(() => setNotice('Текст скопирован. Отправка остаётся за вами.')).catch(report)}><Copy size={16}/>Копировать текст</button><p className="fine-print">Сообщение не отправляется. Проверьте карточку и адресата перед отправкой в Avito.</p></section></div> : <EmptyAction onClick={() => setView('radar')} text="Сначала добавьте кандидата"/>}</>}
-        {view === 'brief' && <div className="analysis-grid"><form className="panel" onSubmit={submitBrief} key={JSON.stringify(brief)}><span className="section-kicker">05 / ВАШИ УСЛОВИЯ</span><h2>Что обязательно подходит</h2><label className="field">Рост, см<input name="height" defaultValue={brief.height} type="number" min="120" max="220" required/></label><label className="field">Диаметр колёс, дюймы<select name="wheel" defaultValue={brief.wheel}><option value="29">29</option><option value="27.5">27.5</option><option value="26">26</option></select></label><label className="field">Бюджет с заданным резервом, ₽<input name="maxPrice" type="number" min="1" max="1000000" defaultValue={brief.maxPrice} required/></label><button className="button primary" type="submit"><CheckCheck size={16}/>Сохранить требования</button></form><section className="panel"><span className="section-kicker">ДАЛЬШЕ В MVP</span><h2>Рамки первого этапа</h2><p>Сейчас работают сохранение, импорт, фильтр требований, сравнение, ориентиры по выбранным предложениям и черновик.</p><p>Радиус от Пролетарской, поиск по всему Avito, анализ фотографий, LLM и наблюдение за новыми объявлениями — следующие отдельные адаптеры. Они ещё не подключены.</p><a className="text-button" href="https://cj-isus.github.io/avitolog/notes/mvp-architecture" target="_blank" rel="noreferrer">Открыть архитектуру <ArrowUpRight size={16}/></a></section></div>}
-        <footer className="app-footer"><span>АВИТОЛОГ / 2026</span><span>Проверяем факты. Сохраняем неизвестное.</span></footer>
-      </main>
-    </div>
-    <Dialog.Root open={Boolean(detail)} onOpenChange={open => { if (!open) setDetail(null); }}><Dialog.Portal><Dialog.Overlay className="dialog-overlay"/><Dialog.Content className="dialog-content" onCloseAutoFocus={e => { e.preventDefault(); (detailOpenerRef.current?.isConnected ? detailOpenerRef.current : addButtonRef.current)?.focus(); }}><Dialog.Title>{detail?.title || 'Карточка'}</Dialog.Title><Dialog.Description>Сохранённый источник и поля. Редактирование не меняет объявление на Avito.</Dialog.Description><Dialog.Close className="dialog-close" aria-label="Закрыть"><X size={20}/></Dialog.Close>{detail && <><div className="detail-price">{money(detail.askingPrice)} <span className="tag">{detail.sourceKind}</span></div><dl>{(['wheel', 'frame', 'components', 'condition'] as const).map(key => <div key={key}><dt>{{ wheel: 'Колёса', frame: 'Рама', components: 'Обвес', condition: 'Состояние' }[key]}</dt><dd>{detail[key].value ?? 'Неизвестно'} <small>{fieldLabels[detail[key].status]}</small></dd></div>)}</dl><FactsEditor listing={detail} onSave={setDetail}/><h3>Снимок текста</h3><pre className="raw-text">{detail.rawText}</pre>{detail.sourceUrl && <a className="button secondary" href={detail.sourceUrl} target="_blank" rel="noreferrer">Открыть источник <ArrowUpRight size={15}/></a>}<button className="button danger" onClick={() => db.listings.delete(detail.id).then(() => { setSelected(old => old.filter(x => x !== detail.id)); setDetail(null); }).catch(report)}><Trash2 size={15}/>Удалить из рабочей области</button></>}</Dialog.Content></Dialog.Portal></Dialog.Root>
-    <Dialog.Root open={importOpen} onOpenChange={open => { setImportOpen(open); setImportError(''); }}><Dialog.Portal><Dialog.Overlay className="dialog-overlay"/><Dialog.Content className="dialog-content" onCloseAutoFocus={e => { e.preventDefault(); addButtonRef.current?.focus(); }}><Dialog.Title>Добавить карточку</Dialog.Title><Dialog.Description>Ручные данные сохраняются локально. Неизвестные характеристики останутся неизвестными.</Dialog.Description><Dialog.Close className="dialog-close" aria-label="Закрыть"><X size={20}/></Dialog.Close><form onSubmit={async e => { e.preventDefault(); const data = new FormData(e.currentTarget); try { await db.saveListing(manualListing(String(data.get('title')), Number(data.get('price')), String(data.get('url')).trim() || null, String(data.get('text')))); setImportOpen(false); setNotice('Карточка добавлена. Характеристики пока не подтверждены.'); setError(''); } catch (e) { setImportError(e instanceof Error ? e.message : String(e)); } }}><label className="field">Название<input name="title" maxLength={240} required/></label><label className="field">Цена объявления, ₽<input name="price" type="number" min="1" required/></label><label className="field">Ссылка Avito, если есть<input name="url" type="url" placeholder="https://www.avito.ru/…"/></label><label className="field">Описание<textarea name="text" maxLength={18000}/></label><button className="button primary" type="submit">Сохранить карточку</button></form>{importError && <p className="error" role="alert">{importError}</p>}<div className="import-divider">или восстановить рабочую область</div><label className="button secondary file-input"><Upload size={16}/>Импорт JSON<input type="file" accept="application/json,.json" onChange={async e => { try { const file = e.target.files?.[0]; if (!file) return; if (file.size > 5000000) throw new Error('Файл больше 5 МБ'); const imported = await importBundle(JSON.parse(await file.text())); setBrief(imported.brief); setImportOpen(false); setNotice(`Импортировано карточек: ${imported.listings.length}`); setError(''); } catch (e) { setImportError(e instanceof Error ? e.message : String(e)); } }}/></label></Dialog.Content></Dialog.Portal></Dialog.Root>
-  </div>;
+  const run = (action: () => Promise<unknown>) => {
+    void action().catch(workspace.reportError);
+  };
+  return (
+    <WorkspaceLayout
+      view={view}
+      onViewChange={setView}
+      selectedCount={workspace.selectedIds.length}
+      isExtension={workspace.isExtension}
+      onExport={() => run(workspace.exportData)}
+      onImport={() => fileInput.current?.click()}
+      onOpenWorkspace={() => run(workspace.openWorkspace)}
+    >
+      <input
+        hidden
+        ref={fileInput}
+        type="file"
+        accept=".json,application/json"
+        aria-label="Импорт JSON рабочей области"
+        onChange={(event) => {
+          const file = event.target.files?.[0];
+          if (file) run(() => workspace.importFile(file));
+          event.target.value = "";
+        }}
+      />
+      {(workspace.notice || workspace.error) && (
+        <Alert
+          className="workspace-notice"
+          tone={workspace.error ? "error" : "success"}
+        >
+          <span>{workspace.error || workspace.notice}</span>
+          <IconButton
+            label="Скрыть уведомление"
+            size="sm"
+            onClick={workspace.resetNotice}
+          >
+            <X size={16} />
+          </IconButton>
+        </Alert>
+      )}
+      {view === "radar" && (
+        <RadarPage
+          workspace={workspace}
+          busy={workspace.isLoading}
+          onAdd={() => openDialog("add")}
+          onOpen={(id) => openDialog("detail", id)}
+          onCompare={() => setView("compare")}
+          onBrief={() => setView("brief")}
+        />
+      )}
+      {view === "compare" && (
+        <ComparisonPage
+          listings={workspace.selectedListings}
+          brief={workspace.brief}
+        />
+      )}
+      {view === "market" && (
+        <MarketPage
+          listing={workspace.focusedListing}
+          listings={workspace.listings}
+        />
+      )}
+      {view === "draft" && (
+        <NegotiationPage
+          listing={workspace.focusedListing}
+          brief={workspace.brief}
+        />
+      )}
+      {view === "brief" && (
+        <BriefPage
+          key={JSON.stringify(workspace.brief)}
+          brief={workspace.brief}
+          onSave={workspace.saveBrief}
+        />
+      )}
+      <ListingImportDialog
+        open={dialog === "add"}
+        onOpenChange={(open) => {
+          if (!open) setDialog(null);
+        }}
+        onSave={workspace.saveListing}
+        returnFocus={returnFocus}
+      />
+      {detailListing && (
+        <ListingDetailDialog
+          listing={detailListing}
+          brief={workspace.brief}
+          open={dialog === "detail"}
+          onOpenChange={(open) => {
+            if (!open) setDialog(null);
+          }}
+          returnFocus={returnFocus}
+          onSave={workspace.saveListing}
+          onDelete={workspace.deleteListing}
+          onNegotiate={() => {
+            setDialog(null);
+            setView("draft");
+          }}
+        />
+      )}
+    </WorkspaceLayout>
+  );
 }
-function Stat({ label, value, note }: { label: string; value: string; note: string }) { return <section className="stat"><span>{label}</span><strong>{value}</strong><small>{note}</small></section>; }
-function EmptyAction({ text, onClick }: { text: string; onClick: () => void }) { return <div className="empty"><GitCompareArrows size={38}/><h3>{text}</h3><button className="button primary" onClick={onClick}>В радар <ArrowRight size={16}/></button></div>; }
-function FocusSelect({ items, value, onChange }: { items: Listing[]; value: string; onChange: (v: string) => void }) { return <label className="focus-select">Кандидат<select value={value} onChange={e => onChange(e.target.value)} aria-label="Кандидат">{!items.length && <option value="">Нет карточек</option>}{items.map(x => <option key={x.id} value={x.id}>{x.title}</option>)}</select></label>; }
-function BikeArt() { return <svg className="bike-art" viewBox="0 0 400 220" aria-hidden="true"><defs><linearGradient id="frame" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#d4ee9f"/><stop offset="1" stopColor="#719e67"/></linearGradient></defs><ellipse cx="200" cy="196" rx="161" ry="12" fill="#050c0d" opacity=".5"/><g fill="none" stroke="#7a9695" strokeWidth="2"><circle cx="87" cy="139" r="62"/><circle cx="310" cy="139" r="62"/></g><g fill="none" stroke="#152b2b" strokeWidth="8"><circle cx="87" cy="139" r="60"/><circle cx="310" cy="139" r="60"/></g><g fill="none" stroke="#8eaaa3" strokeWidth="1" opacity=".55">{Array.from({ length: 12 }, (_, i) => { const angle = i * Math.PI / 6; return <g key={i}><path d={`M87 139 L${87 + 57 * Math.cos(angle)} ${139 + 57 * Math.sin(angle)}`}/><path d={`M310 139 L${310 + 57 * Math.cos(angle)} ${139 + 57 * Math.sin(angle)}`}/></g>; })}</g><path d="M87 139 L164 65 L201 139 Z M164 65 L277 57 L201 139 M277 57 L310 139" fill="none" stroke="url(#frame)" strokeWidth="10" strokeLinejoin="round"/><path d="M164 65 L158 43 M146 42 L178 42 M277 57 L270 32 L293 27 M201 139 L219 149 L235 148" fill="none" stroke="#c1cdca" strokeWidth="6" strokeLinecap="round"/><circle cx="201" cy="139" r="14" fill="#233e3b" stroke="#94a89e" strokeWidth="3"/></svg>; }
